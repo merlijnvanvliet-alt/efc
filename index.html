@@ -895,22 +895,45 @@
     }
 
     .tp-link:hover { color: var(--green); }
-
     .tp-link svg { transition: transform 0.2s; }
     .tp-link:hover svg { transform: translateX(3px); }
 
+    .tp-group-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tp-group-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
     .tp-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 2px;
       background: var(--border);
       border: 1px solid var(--border);
+      margin-bottom: 2px;
     }
+
+    .tp-grid-3 { grid-template-columns: repeat(3, 1fr); }
 
     .tp-card {
       background: var(--white);
       display: flex;
       flex-direction: column;
+      align-items: center;
+      padding-bottom: 24px;
       transition: background 0.25s;
       text-decoration: none;
       color: inherit;
@@ -918,15 +941,13 @@
 
     .tp-card:hover { background: #eceef2; }
 
-    .tp-card:hover .tp-photo img { transform: scale(1.04); }
-
     .tp-photo {
-      width: 100px;
-      height: 100px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
       overflow: hidden;
       background: var(--border);
-      margin: 28px auto 0;
+      margin: 24px auto 0;
       border: 3px solid var(--border);
       transition: border-color 0.3s;
       flex-shrink: 0;
@@ -946,21 +967,21 @@
     .tp-card:hover .tp-photo img { transform: scale(1.06); }
 
     .tp-info {
-      padding: 16px 20px 24px;
+      padding: 14px 16px 0;
       text-align: center;
     }
 
     .tp-role {
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--green);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .tp-name {
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--dark);
       letter-spacing: -0.2px;
@@ -997,7 +1018,8 @@
 
       .km-grid,
       .member-grid,
-      .tp-grid { grid-template-columns: 1fr; }
+      .tp-grid,
+      .tp-grid-3 { grid-template-columns: 1fr 1fr; }
 
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .hero-content { padding: 0 28px 64px; }
@@ -1177,37 +1199,44 @@
           <h2>The team behind EFC</h2>
         </div>
         <a href="team.html" class="tp-link">
-          Meet the full team
+          Full bios &amp; advisors
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
+
+      <div class="tp-group-label reveal">Board</div>
+      <div class="tp-grid tp-grid-3 stagger">
+        <a href="team.html" class="tp-card">
+          <div class="tp-photo"><img src="images/JurendeJong.jpg" alt="Jurjen de Jong" /></div>
+          <div class="tp-info"><div class="tp-role">Chairman</div><div class="tp-name">Jurjen de Jong</div></div>
+        </a>
+        <a href="team.html" class="tp-card">
+          <div class="tp-photo"><img src="images/gerbengroothuis.jpeg" alt="Gerben Groothuis" /></div>
+          <div class="tp-info"><div class="tp-role">Secretary</div><div class="tp-name">Gerben Groothuis</div></div>
+        </a>
+        <a href="team.html" class="tp-card">
+          <div class="tp-photo"><img src="images/MerlijnvanVliet.jpg" alt="Merlijn van Vliet" /></div>
+          <div class="tp-info"><div class="tp-role">Treasurer</div><div class="tp-name">Merlijn van Vliet</div></div>
+        </a>
+      </div>
+
+      <div class="tp-group-label reveal" style="margin-top:24px;">Board Advisors</div>
       <div class="tp-grid stagger">
         <a href="team.html" class="tp-card">
-          <div class="tp-photo">
-            <img src="images/JurendeJong.jpg" alt="Jurjen de Jong" />
-          </div>
-          <div class="tp-info">
-            <div class="tp-role">Chairman</div>
-            <div class="tp-name">Jurjen de Jong</div>
-          </div>
+          <div class="tp-photo"><img src="images/MaartenSteinbuch.jpg" alt="Maarten Steinbuch" /></div>
+          <div class="tp-info"><div class="tp-role">Advisor</div><div class="tp-name">Maarten Steinbuch</div></div>
         </a>
         <a href="team.html" class="tp-card">
-          <div class="tp-photo">
-            <img src="images/gerbengroothuis.jpeg" alt="Gerben Groothuis" />
-          </div>
-          <div class="tp-info">
-            <div class="tp-role">Secretary</div>
-            <div class="tp-name">Gerben Groothuis</div>
-          </div>
+          <div class="tp-photo"><img src="images/bastiaandebruijne.jpeg" alt="Bastiaan de Buijne" /></div>
+          <div class="tp-info"><div class="tp-role">Advisor</div><div class="tp-name">Bastiaan de Buijne</div></div>
         </a>
         <a href="team.html" class="tp-card">
-          <div class="tp-photo">
-            <img src="images/MerlijnvanVliet.jpg" alt="Merlijn van Vliet" />
-          </div>
-          <div class="tp-info">
-            <div class="tp-role">Treasurer</div>
-            <div class="tp-name">Merlijn van Vliet</div>
-          </div>
+          <div class="tp-photo"><img src="images/nickwaterdrinker.jpeg" alt="Nick Waterdrinker" /></div>
+          <div class="tp-info"><div class="tp-role">Advisor</div><div class="tp-name">Nick Waterdrinker</div></div>
+        </a>
+        <a href="team.html" class="tp-card">
+          <div class="tp-photo"><img src="images/gijsvrenken.jpeg" alt="Gijs Vrenken" /></div>
+          <div class="tp-info"><div class="tp-role">Advisor</div><div class="tp-name">Gijs Vrenken</div></div>
         </a>
       </div>
     </div>

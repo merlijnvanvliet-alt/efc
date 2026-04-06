@@ -38,10 +38,55 @@
     ::-webkit-scrollbar-track { background: var(--navy); }
     ::-webkit-scrollbar-thumb { background: var(--green); }
 
+    /* ── TICKER ── */
+    .ticker-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 101;
+      background: var(--green);
+      color: var(--navy);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .ticker-label {
+      flex-shrink: 0;
+      padding: 0 16px;
+      font-size: 0.62rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: var(--dark);
+      color: var(--green);
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker-track { flex: 1; overflow: hidden; }
+
+    .ticker-inner {
+      display: flex;
+      gap: 80px;
+      white-space: nowrap;
+      animation: ticker 22s linear infinite;
+    }
+
+    .ticker-inner span::before { content: '●'; margin-right: 10px; opacity: 0.5; }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
     /* ── NAV ── */
     nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 32px; left: 0; right: 0;
       z-index: 100;
       display: flex;
       align-items: center;
@@ -91,7 +136,7 @@
     /* ── PAGE HEADER ── */
     .page-header {
       background: var(--navy);
-      padding: 160px 64px 90px;
+      padding: 192px 64px 90px;
       position: relative;
       overflow: hidden;
     }
@@ -448,6 +493,17 @@
   </style>
 </head>
 <body>
+
+  <!-- TICKER -->
+  <div class="ticker-bar">
+    <div class="ticker-label">News</div>
+    <div class="ticker-track">
+      <div class="ticker-inner">
+        <span>Beta Technologies is coming to the Netherlands for demonstration flights with E-Smart Avia on May 28th &amp; 29th — Stay tuned</span>
+        <span>Beta Technologies is coming to the Netherlands for demonstration flights with E-Smart Avia on May 28th &amp; 29th — Stay tuned</span>
+      </div>
+    </div>
+  </div>
 
   <!-- NAV -->
   <nav id="navbar">

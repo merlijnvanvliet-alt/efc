@@ -52,7 +52,10 @@
       display: flex;
       align-items: center;
       overflow: hidden;
+      transition: transform 0.4s ease;
     }
+
+    .ticker-bar.hidden { transform: translateY(-100%); }
 
     .ticker-label {
       flex-shrink: 0;
@@ -866,6 +869,102 @@
     .ci-val a { color: var(--green); text-decoration: none; }
     .ci-val a:hover { text-decoration: underline; }
 
+    /* ── TEAM PREVIEW ── */
+    #team-preview { background: var(--off); }
+
+    .tp-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      gap: 24px;
+    }
+
+    .tp-header h2 { margin-bottom: 0; }
+
+    .tp-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--dark);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .tp-link:hover { color: var(--green); }
+
+    .tp-link svg { transition: transform 0.2s; }
+    .tp-link:hover svg { transform: translateX(3px); }
+
+    .tp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .tp-card {
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      transition: background 0.25s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .tp-card:hover { background: #eceef2; }
+
+    .tp-card:hover .tp-photo img { transform: scale(1.04); }
+
+    .tp-photo {
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+      background: var(--border);
+      position: relative;
+    }
+
+    .tp-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .tp-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(48,41,127,0.25), transparent 55%);
+    }
+
+    .tp-info {
+      padding: 22px 24px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .tp-role {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+
+    .tp-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -0.2px;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: #070518;
@@ -896,7 +995,8 @@
       .members-header { grid-template-columns: 1fr; gap: 36px; }
 
       .km-grid,
-      .member-grid { grid-template-columns: 1fr; }
+      .member-grid,
+      .tp-grid { grid-template-columns: 1fr; }
 
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .hero-content { padding: 0 28px 64px; }
@@ -1067,6 +1167,51 @@
     </div>
   </section>
 
+  <!-- TEAM PREVIEW -->
+  <section id="team-preview">
+    <div class="section-inner">
+      <div class="tp-header reveal">
+        <div>
+          <div class="eyebrow">Our People</div>
+          <h2>The team behind EFC</h2>
+        </div>
+        <a href="team.html" class="tp-link">
+          Meet the full team
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="tp-grid stagger">
+        <a href="team.html" class="tp-card">
+          <div class="tp-photo">
+            <img src="images/JurendeJong.jpg" alt="Jurjen de Jong" />
+          </div>
+          <div class="tp-info">
+            <div class="tp-role">Chairman</div>
+            <div class="tp-name">Jurjen de Jong</div>
+          </div>
+        </a>
+        <a href="team.html" class="tp-card">
+          <div class="tp-photo">
+            <img src="images/gerbengroothuis.jpeg" alt="Gerben Groothuis" />
+          </div>
+          <div class="tp-info">
+            <div class="tp-role">Secretary</div>
+            <div class="tp-name">Gerben Groothuis</div>
+          </div>
+        </a>
+        <a href="team.html" class="tp-card">
+          <div class="tp-photo">
+            <img src="images/MerlijnvanVliet.jpg" alt="Merlijn van Vliet" />
+          </div>
+          <div class="tp-info">
+            <div class="tp-role">Treasurer</div>
+            <div class="tp-name">Merlijn van Vliet</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- MEMBERS -->
   <section id="members">
     <div class="section-inner">
@@ -1151,10 +1296,13 @@
   </footer>
 
   <script>
-    // Navbar scroll
+    // Navbar + ticker scroll
     const nav = document.getElementById('navbar');
+    const ticker = document.querySelector('.ticker-bar');
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
+      const scrolled = window.scrollY > 50;
+      nav.classList.toggle('scrolled', scrolled);
+      ticker.classList.toggle('hidden', scrolled);
     }, { passive: true });
 
     // Reveal on scroll

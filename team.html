@@ -219,18 +219,19 @@
 
     .card-photo-wrap {
       position: relative;
-      aspect-ratio: 4 / 3;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
       overflow: hidden;
       background: var(--border);
+      margin: 32px auto 0;
+      flex-shrink: 0;
+      border: 3px solid var(--border);
+      transition: border-color 0.3s;
     }
 
-    .card-photo-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(48,41,127,0.35), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s;
+    .member-card:hover .card-photo-wrap {
+      border-color: var(--green);
     }
 
     .card-photo-wrap img {
@@ -243,7 +244,7 @@
     }
 
     .member-card:hover .card-photo-wrap img {
-      transform: scale(1.03);
+      transform: scale(1.06);
     }
 
     /* Placeholder when image missing */
@@ -253,18 +254,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.5);
       background: linear-gradient(135deg, var(--dark), var(--darker));
       letter-spacing: -1px;
     }
 
     .card-body {
-      padding: 28px 28px 24px;
+      padding: 20px 28px 28px;
       flex: 1;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
     .card-role {
@@ -273,7 +276,7 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--green);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .card-name {
@@ -289,15 +292,17 @@
       color: var(--muted);
       line-height: 1.75;
       flex: 1;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .card-footer {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 12px;
       padding-top: 16px;
       border-top: 1px solid var(--border);
+      width: 100%;
     }
 
     .card-footer span {
@@ -479,7 +484,7 @@
         <!-- Jurjen de Jong -->
         <div class="member-card">
           <div class="card-photo-wrap">
-            <img src="images/dejong.jpg" alt="Jurjen de Jong"
+            <img src="images/JurendeJong.jpg" alt="Jurjen de Jong"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="initials" style="display:none">JdJ</div>
           </div>
@@ -499,7 +504,7 @@
         <!-- Gerben Groothuis -->
         <div class="member-card">
           <div class="card-photo-wrap">
-            <img src="images/groothuis.jpg" alt="Gerben Groothuis"
+            <img src="images/gerbengroothuis.jpeg" alt="Gerben Groothuis"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="initials" style="display:none">GG</div>
           </div>
@@ -519,7 +524,7 @@
         <!-- Merlijn van Vliet -->
         <div class="member-card">
           <div class="card-photo-wrap">
-            <img src="images/vanvliet.jpg" alt="Merlijn van Vliet"
+            <img src="images/MerlijnvanVliet.jpg" alt="Merlijn van Vliet"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="initials" style="display:none">MvV</div>
           </div>
@@ -552,7 +557,7 @@
         <!-- Maarten Steinbuch -->
         <div class="member-card">
           <div class="card-photo-wrap">
-            <img src="images/steinbuch.jpg" alt="Maarten Steinbuch"
+            <img src="images/MaartenSteinbuch.jpg" alt="Maarten Steinbuch"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="initials" style="display:none">MS</div>
           </div>
@@ -572,7 +577,7 @@
         <!-- Bastiaan de Buijne -->
         <div class="member-card">
           <div class="card-photo-wrap">
-            <img src="images/debuijne.jpg" alt="Bastiaan de Buijne"
+            <img src="images/bastiaandebruijne.jpeg" alt="Bastiaan de Buijne"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="initials" style="display:none">BdB</div>
           </div>
@@ -592,7 +597,7 @@
         <!-- Nick Waterdrinker -->
         <div class="member-card">
           <div class="card-photo-wrap">
-            <img src="images/waterdrinker.jpg" alt="Nick Waterdrinker"
+            <img src="images/nickwaterdrinker.jpeg" alt="Nick Waterdrinker"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="initials" style="display:none">NW</div>
           </div>
@@ -612,7 +617,7 @@
         <!-- Gijs Vrenken -->
         <div class="member-card">
           <div class="card-photo-wrap">
-            <img src="images/vrenken.jpg" alt="Gijs Vrenken"
+            <img src="images/gijsvrenken.jpeg" alt="Gijs Vrenken"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="initials" style="display:none">GV</div>
           </div>

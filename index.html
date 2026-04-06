@@ -108,7 +108,6 @@
     }
 
     nav.scrolled {
-      top: 0;
       padding: 14px 64px;
       background: rgba(13, 11, 46, 0.97);
       backdrop-filter: blur(16px);
@@ -922,11 +921,18 @@
     .tp-card:hover .tp-photo img { transform: scale(1.04); }
 
     .tp-photo {
-      aspect-ratio: 3 / 2;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
       overflow: hidden;
       background: var(--border);
-      position: relative;
+      margin: 28px auto 0;
+      border: 3px solid var(--border);
+      transition: border-color 0.3s;
+      flex-shrink: 0;
     }
+
+    .tp-card:hover .tp-photo { border-color: var(--green); }
 
     .tp-photo img {
       width: 100%;
@@ -937,16 +943,11 @@
       transition: transform 0.5s ease;
     }
 
-    .tp-photo::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(48,41,127,0.25), transparent 55%);
-    }
+    .tp-card:hover .tp-photo img { transform: scale(1.06); }
 
     .tp-info {
-      padding: 22px 24px 24px;
-      border-top: 1px solid var(--border);
+      padding: 16px 20px 24px;
+      text-align: center;
     }
 
     .tp-role {
@@ -1296,13 +1297,10 @@
   </footer>
 
   <script>
-    // Navbar + ticker scroll
+    // Navbar scroll
     const nav = document.getElementById('navbar');
-    const ticker = document.querySelector('.ticker-bar');
     window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY > 50;
-      nav.classList.toggle('scrolled', scrolled);
-      ticker.classList.toggle('hidden', scrolled);
+      nav.classList.toggle('scrolled', window.scrollY > 50);
     }, { passive: true });
 
     // Reveal on scroll

@@ -91,14 +91,26 @@
       overflow: hidden;
     }
 
-    #hero video {
+    .yt-bg {
       position: absolute;
       inset: 0;
       width: 100%;
-      height: 110%;
-      object-fit: cover;
-      transform: translateY(0);
-      will-change: transform;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .yt-bg iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      /* keep 16:9 and cover the viewport */
+      width: 177.78vh;  /* 100vh * 16/9 */
+      height: 56.25vw;  /* 100vw * 9/16 */
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      border: none;
     }
 
     .hero-overlay {
@@ -767,9 +779,14 @@
 
   <!-- HERO -->
   <section id="hero">
-    <video id="heroVideo" autoplay muted loop playsinline>
-      <source src="video/BackgroundvideoEFCsite.mp4" type="video/mp4" />
-    </video>
+    <div class="yt-bg">
+      <iframe
+        src="https://www.youtube.com/embed/TJCNyKefX0Y?autoplay=1&mute=1&loop=1&playlist=TJCNyKefX0Y&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+        title="EFC background video">
+      </iframe>
+    </div>
     <div class="hero-grid"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -968,12 +985,6 @@
       navbar.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    // ── Parallax hero video ──
-    const heroVideo = document.getElementById('heroVideo');
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      heroVideo.style.transform = `translateY(${y * 0.3}px)`;
-    }, { passive: true });
 
     // ── Intersection Observer for reveal animations ──
     const observer = new IntersectionObserver((entries) => {

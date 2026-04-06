@@ -1002,35 +1002,101 @@
     footer p { color: rgba(255,255,255,0.25); font-size: 0.78rem; }
 
     /* ── RESPONSIVE ── */
+    /* ── TABLET ── */
     @media (max-width: 960px) {
-      section { padding: 80px 28px; }
-      #mission, #vision, #philosophy, #contact { padding: 80px 28px; }
-      nav { padding: 16px 28px; }
+      section { padding: 72px 28px; }
+      #mission, #vision, #philosophy, #contact { padding: 72px 28px; }
+
+      nav { padding: 16px 28px; top: 32px; }
       nav.scrolled { padding: 12px 28px; }
-      nav ul { gap: 24px; }
+      nav ul { gap: 20px; }
 
       .mission-inner,
       .vision-inner,
       .philosophy-inner,
       .contact-inner,
       .km-header,
-      .members-header { grid-template-columns: 1fr; gap: 36px; }
+      .members-header { grid-template-columns: 1fr; gap: 32px; }
 
-      .km-grid,
-      .member-grid,
-      .tp-grid,
-      .tp-grid-3 { grid-template-columns: 1fr 1fr; }
-
+      .km-grid { grid-template-columns: 1fr 1fr; }
+      .member-grid { grid-template-columns: 1fr; }
+      .tp-grid { grid-template-columns: 1fr 1fr; }
+      .tp-grid-3 { grid-template-columns: repeat(3, 1fr); }
       .stats-grid { grid-template-columns: 1fr 1fr; }
-      .hero-content { padding: 0 28px 64px; }
+
+      .hero-content { padding: 0 28px 72px; }
+      .hero-content h1 { font-size: 2.6rem; }
+
+      .mission-quote-col blockquote { font-size: 1.4rem; padding-left: 20px; }
+
       footer { flex-direction: column; text-align: center; padding: 24px 28px; }
     }
 
+    /* ── MOBILE ── */
     @media (max-width: 600px) {
-      nav ul { display: none; }
-      .hero-content h1 { font-size: 2.2rem; letter-spacing: -1px; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .pv-row { flex-direction: column; }
+      section { padding: 60px 20px; }
+      #mission, #vision, #philosophy, #contact { padding: 60px 20px; }
+
+      nav { padding: 14px 20px; top: 32px; }
+      nav.scrolled { padding: 10px 20px; }
+
+      /* hide all nav links except CTA on mobile */
+      nav ul li:not(:last-child) { display: none; }
+
+      .section-inner { max-width: 100%; }
+
+      .hero-content { padding: 0 20px 60px; }
+      .hero-content h1 { font-size: 2rem; letter-spacing: -0.5px; }
+      .hero-content p { font-size: 0.95rem; }
+      .hero-tag { font-size: 0.65rem; }
+      .hero-buttons { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .btn { width: 100%; justify-content: center; }
+
+      .mission-inner { gap: 24px; }
+      .mission-label-col { display: none; }
+      .mission-quote-col blockquote { font-size: 1.25rem; padding-left: 16px; }
+
+      .km-grid { grid-template-columns: 1fr; }
+      .km-num { font-size: 2.2rem; }
+
+      .vision-inner { gap: 32px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+      .stat-num { font-size: 1.6rem; }
+
+      .philosophy-inner { gap: 32px; }
+      .pv-row { flex-direction: column; gap: 2px; }
+      .pv-box { padding: 20px 20px; }
+
+      .tp-grid { grid-template-columns: 1fr 1fr; }
+      .tp-grid-3 { grid-template-columns: 1fr 1fr; }
+      .tp-photo { width: 72px; height: 72px; margin-top: 20px; }
+      .tp-info { padding: 10px 12px 0; }
+      .tp-name { font-size: 0.82rem; }
+
+      .member-card { padding: 28px 24px; }
+      .tag-list { gap: 4px; }
+      .tag { font-size: 0.7rem; padding: 3px 10px; }
+
+      .contact-inner { gap: 32px; }
+      .ci { padding: 16px 20px; gap: 16px; }
+
+      h2 { font-size: 1.7rem; }
+      .tp-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+
+      footer { flex-direction: column; text-align: center; padding: 24px 20px; }
+    }
+
+    /* ── TICKER MOBILE ── */
+    @media (max-width: 600px) {
+      .ticker-label { padding: 0 10px; font-size: 0.58rem; }
+      .ticker-bar { font-size: 0.68rem; }
+    }
+
+    /* ── SMALL PHONES ── */
+    @media (max-width: 390px) {
+      .hero-content h1 { font-size: 1.75rem; }
+      .tp-grid, .tp-grid-3 { grid-template-columns: 1fr 1fr; }
+      .km-num { font-size: 1.9rem; }
     }
   </style>
 </head>

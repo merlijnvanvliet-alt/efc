@@ -1808,37 +1808,63 @@
     }
 
     .event-location {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 72px 32px 40px;
+      border-radius: 20px;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
-    .denhelder { border-top: 2px solid var(--green); }
-    .lelystad  { border-top: 2px solid var(--blue); }
+    .denhelder {
+      background: linear-gradient(160deg, rgba(0,218,157,0.12) 0%, rgba(13,11,46,0.6) 55%);
+      box-shadow: 0 0 40px rgba(0,218,157,0.08);
+    }
+
+    .lelystad {
+      background: linear-gradient(160deg, rgba(0,165,255,0.12) 0%, rgba(13,11,46,0.6) 55%);
+      box-shadow: 0 0 40px rgba(0,165,255,0.08);
+    }
 
     .event-loc-header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 12px;
-      margin-bottom: 28px;
-      padding-bottom: 20px;
+      padding: 28px 32px 24px;
       border-bottom: 1px solid rgba(255,255,255,0.07);
     }
 
+    .event-loc-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .event-loc-dot {
-      width: 10px; height: 10px;
+      width: 12px; height: 12px;
       border-radius: 50%;
       flex-shrink: 0;
     }
 
-    .denhelder .event-loc-dot { background: var(--green); box-shadow: 0 0 8px rgba(0,218,157,0.6); }
-    .lelystad  .event-loc-dot { background: var(--blue);  box-shadow: 0 0 8px rgba(0,165,255,0.6); }
+    .denhelder .event-loc-dot { background: var(--green); box-shadow: 0 0 10px rgba(0,218,157,0.8); }
+    .lelystad  .event-loc-dot { background: var(--blue);  box-shadow: 0 0 10px rgba(0,165,255,0.8); }
 
     .event-loc-name {
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--white);
+    }
+
+    .event-loc-logo {
+      height: 32px;
+      width: auto;
+      max-width: 100px;
+      object-fit: contain;
+      opacity: 0.8;
+    }
+
+    .event-loc-body {
+      padding: 28px 32px 36px;
     }
 
     /* Flight connector between two locations */
@@ -1918,13 +1944,15 @@
     .lelystad  .ev-dot { background: var(--blue);  box-shadow: 0 0 6px rgba(0,165,255,0.5); }
 
     .event-time {
-      font-size: 0.76rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: rgba(255,255,255,0.35);
       text-align: right;
       padding-top: 1px;
       font-variant-numeric: tabular-nums;
     }
+
+    .denhelder .event-time { color: rgba(0,218,157,0.7); }
+    .lelystad  .event-time { color: rgba(0,165,255,0.7); }
 
     .event-sched-label {
       font-size: 0.88rem;
@@ -2224,23 +2252,28 @@
 
         <div class="event-location denhelder">
           <div class="event-loc-header">
-            <div class="event-loc-dot"></div>
-            <div class="event-loc-name">Den Helder Airport</div>
+            <div class="event-loc-header-left">
+              <div class="event-loc-dot"></div>
+              <div class="event-loc-name">Den Helder Airport</div>
+            </div>
+            <img class="event-loc-logo" src="images/den%20helder%20logo.png" alt="Den Helder Airport">
           </div>
-          <div class="event-sched-item">
-            <div class="event-time">08:30</div>
-            <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-            <div><div class="event-sched-label">Event opens</div><div class="event-sched-sub">Doors open to the public</div></div>
-          </div>
-          <div class="event-sched-item">
-            <div class="event-time">10:30</div>
-            <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-            <div><div class="event-sched-label">Arrival of Beta CX300</div><div class="event-sched-sub">Landing at Den Helder Airport</div></div>
-          </div>
-          <div class="event-sched-item">
-            <div class="event-time">12:00</div>
-            <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-            <div><div class="event-sched-label">Departure of Beta CX300</div><div class="event-sched-sub">Departing to Lelystad Airport</div></div>
+          <div class="event-loc-body">
+            <div class="event-sched-item">
+              <div class="event-time">08:30</div>
+              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
+              <div><div class="event-sched-label">Event opens</div><div class="event-sched-sub">Doors open to the public</div></div>
+            </div>
+            <div class="event-sched-item">
+              <div class="event-time">10:30</div>
+              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
+              <div><div class="event-sched-label">Arrival of Beta CX300</div><div class="event-sched-sub">Landing at Den Helder Airport</div></div>
+            </div>
+            <div class="event-sched-item">
+              <div class="event-time">12:00</div>
+              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
+              <div><div class="event-sched-label">Departure of Beta CX300</div><div class="event-sched-sub">Departing to Lelystad Airport</div></div>
+            </div>
           </div>
         </div>
 
@@ -2253,23 +2286,28 @@
 
         <div class="event-location lelystad">
           <div class="event-loc-header">
-            <div class="event-loc-dot"></div>
-            <div class="event-loc-name">Lelystad Airport</div>
+            <div class="event-loc-header-left">
+              <div class="event-loc-dot"></div>
+              <div class="event-loc-name">Lelystad Airport</div>
+            </div>
+            <img class="event-loc-logo" src="images/members/lelystadairport.png" alt="Lelystad Airport">
           </div>
-          <div class="event-sched-item">
-            <div class="event-time">11:00</div>
-            <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-            <div><div class="event-sched-label">Event opens</div><div class="event-sched-sub">Doors open to the public</div></div>
-          </div>
-          <div class="event-sched-item">
-            <div class="event-time">12:45</div>
-            <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-            <div><div class="event-sched-label">Arrival Beta CX300</div><div class="event-sched-sub">Landing at Lelystad Airport</div></div>
-          </div>
-          <div class="event-sched-item">
-            <div class="event-time">14:15</div>
-            <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-            <div><div class="event-sched-label">Departure of Beta CX300</div><div class="event-sched-sub">End of demonstration flight</div></div>
+          <div class="event-loc-body">
+            <div class="event-sched-item">
+              <div class="event-time">11:00</div>
+              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
+              <div><div class="event-sched-label">Event opens</div><div class="event-sched-sub">Doors open to the public</div></div>
+            </div>
+            <div class="event-sched-item">
+              <div class="event-time">12:45</div>
+              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
+              <div><div class="event-sched-label">Arrival Beta CX300</div><div class="event-sched-sub">Landing at Lelystad Airport</div></div>
+            </div>
+            <div class="event-sched-item">
+              <div class="event-time">14:15</div>
+              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
+              <div><div class="event-sched-label">Departure of Beta CX300</div><div class="event-sched-sub">End of demonstration flight</div></div>
+            </div>
           </div>
         </div>
 

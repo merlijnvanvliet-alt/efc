@@ -1542,12 +1542,77 @@
 
     /* Countdown bar below hero */
     .event-cd-bar {
-      background: rgba(255,255,255,0.03);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      padding: 32px 64px;
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 64px;
     }
 
     .event-cd-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .event-cd-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      white-space: nowrap;
+    }
+
+    .event-countdown {
+      display: flex;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .cd-unit {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      padding: 0;
+      background: none;
+      border: none;
+      min-width: 0;
+    }
+
+    .cd-num {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: -0.5px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      display: inline;
+    }
+
+    .cd-lbl {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: lowercase;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .cd-unit:not(:last-child)::after {
+      content: '·';
+      color: rgba(255,255,255,0.15);
+      margin-left: 6px;
+      font-size: 0.9rem;
+    }
+
+    /* Partners logo strip — white bar */
+    .event-partners-bar {
+      background: var(--white);
+      padding: 28px 64px;
+    }
+
+    .event-partners {
       max-width: 1120px;
       margin: 0 auto;
       display: flex;
@@ -1556,81 +1621,26 @@
       flex-wrap: wrap;
     }
 
-    .event-cd-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      white-space: nowrap;
-    }
-
-    .event-countdown {
-      display: flex;
-      gap: 12px;
-      flex: 1;
-    }
-
-    .cd-unit {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 12px;
-      padding: 16px 20px;
-      text-align: center;
-      min-width: 72px;
-    }
-
-    .cd-num {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: -1px;
-      line-height: 1;
-      font-variant-numeric: tabular-nums;
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .cd-lbl {
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-    }
-
-    /* Partners logo strip */
-    .event-partners {
-      padding: 36px 64px;
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
     .event-partners-label {
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      margin-right: 8px;
+      color: var(--muted);
       white-space: nowrap;
     }
 
     .event-partner-logo {
-      height: 40px;
+      height: 36px;
       width: auto;
       max-width: 120px;
       object-fit: contain;
-      opacity: 0.7;
-      filter: grayscale(1) brightness(2.5) contrast(0.8);
+      opacity: 0.6;
+      filter: grayscale(1);
       transition: opacity 0.2s, filter 0.2s;
     }
 
-    .event-partner-logo:hover { opacity: 1; filter: grayscale(0) brightness(1) contrast(1); }
+    .event-partner-logo:hover { opacity: 1; filter: grayscale(0); }
 
     /* Schedule section */
     .event-schedule-section {
@@ -1780,12 +1790,9 @@
 
     @media (max-width: 860px) {
       .event-hero-content { padding: 48px 28px; }
-      .event-cd-bar { padding: 28px; }
-      .event-cd-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .event-countdown { width: 100%; }
-      .cd-unit { flex: 1; padding: 14px 8px; min-width: 0; }
-      .cd-num { font-size: 1.6rem; }
-      .event-partners { padding: 28px; }
+      .event-cd-bar { padding: 16px 28px; }
+      .event-partners-bar { padding: 24px 28px; }
+      .event-partners { gap: 20px; }
       .event-schedule-section { padding: 0 28px 56px; }
       .event-journey { grid-template-columns: 1fr; }
       .event-connector { flex-direction: row; padding: 16px 0; gap: 12px; }
@@ -2049,12 +2056,14 @@
     </div>
 
     <!-- Partner logos -->
+    <div class="event-partners-bar">
     <div class="event-partners reveal">
       <span class="event-partners-label">Partners</span>
       <img class="event-partner-logo" src="images/members/lelystadairport.png"           alt="Lelystad Airport">
       <img class="event-partner-logo" src="images/den%20helder%20logo.png"                alt="Den Helder Airport">
       <img class="event-partner-logo" src="images/members/provincienoordholland.jpg"      alt="Provincie Noord-Holland">
       <img class="event-partner-logo" src="images/members/provincieflevoland.png"         alt="Provincie Flevoland">
+    </div>
     </div>
 
     <!-- Schedule -->

@@ -1444,7 +1444,7 @@
     .event-hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url('images/beta2.jpg');
+      background-image: url('images/beta_background.webp');
       background-size: cover;
       background-position: center 40%;
     }
@@ -1577,16 +1577,16 @@
     }
 
     .event-partner-logo {
-      height: 36px;
+      height: 40px;
       width: auto;
-      max-width: 110px;
+      max-width: 120px;
       object-fit: contain;
-      opacity: 0.55;
-      filter: brightness(0) invert(1);
-      transition: opacity 0.2s;
+      opacity: 0.7;
+      filter: grayscale(1) brightness(2.5) contrast(0.8);
+      transition: opacity 0.2s, filter 0.2s;
     }
 
-    .event-partner-logo:hover { opacity: 0.9; }
+    .event-partner-logo:hover { opacity: 1; filter: grayscale(0) brightness(1) contrast(1); }
 
     /* Schedule section */
     .event-schedule-section {
@@ -1595,10 +1595,11 @@
       margin: 0 auto;
     }
 
-    .event-schedule-grid {
+    .event-journey {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
+      align-items: start;
     }
 
     .event-location {
@@ -1608,11 +1609,14 @@
       padding: 32px;
     }
 
+    .denhelder { border-top: 2px solid var(--green); }
+    .lelystad  { border-top: 2px solid var(--blue); }
+
     .event-loc-header {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
       padding-bottom: 20px;
       border-bottom: 1px solid rgba(255,255,255,0.07);
     }
@@ -1632,37 +1636,50 @@
       color: var(--white);
     }
 
+    /* Flight connector between two locations */
+    .event-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 20px 0;
+      gap: 8px;
+    }
+
+    .event-connector-line {
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--green), var(--blue));
+      opacity: 0.3;
+    }
+
+    .event-connector-plane {
+      color: rgba(255,255,255,0.4);
+      font-size: 1.1rem;
+      line-height: 1;
+      transform: rotate(90deg);
+    }
+
+    .event-connector-dist {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.25);
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* Schedule items */
     .event-sched-item {
       display: grid;
-      grid-template-columns: 44px 16px 1fr;
+      grid-template-columns: 46px 14px 1fr;
       gap: 0 14px;
       align-items: start;
       position: relative;
-      padding-bottom: 28px;
+      padding-bottom: 24px;
     }
 
     .event-sched-item:last-child { padding-bottom: 0; }
-
-    /* vertical line between items */
-    .event-sched-item:not(:last-child) .ev-dot-wrap::after {
-      content: '';
-      position: absolute;
-      top: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1px;
-      height: calc(100% + 28px - 18px);
-      background: rgba(255,255,255,0.08);
-    }
-
-    .event-time {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.4);
-      text-align: right;
-      padding-top: 1px;
-      font-variant-numeric: tabular-nums;
-    }
 
     .ev-dot-wrap {
       display: flex;
@@ -1670,27 +1687,51 @@
       position: relative;
     }
 
+    .ev-dot-wrap::after {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      bottom: calc(-24px);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .event-sched-item:last-child .ev-dot-wrap::after { display: none; }
+
     .ev-dot {
       width: 10px; height: 10px;
       border-radius: 50%;
       margin-top: 3px;
       flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .denhelder .ev-dot { background: var(--green); box-shadow: 0 0 6px rgba(0,218,157,0.5); }
     .lelystad  .ev-dot { background: var(--blue);  box-shadow: 0 0 6px rgba(0,165,255,0.5); }
 
+    .event-time {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.35);
+      text-align: right;
+      padding-top: 1px;
+      font-variant-numeric: tabular-nums;
+    }
+
     .event-sched-label {
       font-size: 0.88rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.8);
-      line-height: 1.4;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.35;
     }
 
     .event-sched-sub {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.35);
-      margin-top: 2px;
+      font-size: 0.73rem;
+      color: rgba(255,255,255,0.32);
+      margin-top: 3px;
     }
 
     @media (max-width: 860px) {
@@ -1702,7 +1743,9 @@
       .cd-num { font-size: 1.6rem; }
       .event-partners { padding: 28px; }
       .event-schedule-section { padding: 0 28px 56px; }
-      .event-schedule-grid { grid-template-columns: 1fr; }
+      .event-journey { grid-template-columns: 1fr; }
+      .event-connector { flex-direction: row; padding: 16px 0; gap: 12px; }
+      .event-connector-line { width: 40px; height: 2px; }
     }
 
     /* ── RESPONSIVE ── */
@@ -1965,14 +2008,14 @@
     <div class="event-partners reveal">
       <span class="event-partners-label">Partners</span>
       <img class="event-partner-logo" src="images/members/lelystadairport.png"           alt="Lelystad Airport">
-      <img class="event-partner-logo" src="images/members/denhelderairport.png"           alt="Den Helder Airport">
+      <img class="event-partner-logo" src="images/den%20helder%20logo.png"                alt="Den Helder Airport">
       <img class="event-partner-logo" src="images/members/provincienoordholland.jpg"      alt="Provincie Noord-Holland">
       <img class="event-partner-logo" src="images/members/provincieflevoland.png"         alt="Provincie Flevoland">
     </div>
 
     <!-- Schedule -->
     <div class="event-schedule-section">
-      <div class="event-schedule-grid stagger">
+      <div class="event-journey stagger">
 
         <div class="event-location denhelder">
           <div class="event-loc-header">
@@ -1992,8 +2035,15 @@
           <div class="event-sched-item">
             <div class="event-time">12:00</div>
             <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-            <div><div class="event-sched-label">Departure of Beta CX300</div><div class="event-sched-sub">Departure to Lelystad Airport</div></div>
+            <div><div class="event-sched-label">Departure of Beta CX300</div><div class="event-sched-sub">Departing to Lelystad Airport</div></div>
           </div>
+        </div>
+
+        <div class="event-connector">
+          <div class="event-connector-line"></div>
+          <div class="event-connector-plane">✈</div>
+          <div class="event-connector-line"></div>
+          <div class="event-connector-dist">~130 km</div>
         </div>
 
         <div class="event-location lelystad">

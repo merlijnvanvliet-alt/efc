@@ -70,6 +70,8 @@
     }
 
     .ticker-bar.hidden { transform: translateY(-100%); }
+    a.ticker-bar { text-decoration: none; cursor: pointer; }
+    a.ticker-bar:hover { background: #00c48d; }
 
     .ticker-label {
       flex-shrink: 0;
@@ -2009,7 +2011,7 @@
 <body>
 
   <!-- TICKER -->
-  <div class="ticker-bar">
+  <a href="#event" class="ticker-bar">
     <div class="ticker-label">News</div>
     <div class="ticker-track">
       <div class="ticker-inner">
@@ -2017,7 +2019,7 @@
         <span>Beta Technologies is coming to the Netherlands for demonstration flights with E-Smart Avia on May 28th &amp; 29th — Stay tuned</span>
       </div>
     </div>
-  </div>
+  </a>
 
   <!-- NAV -->
   <nav id="navbar">

@@ -1267,7 +1267,7 @@
 
     .tl-header {
       text-align: center;
-      margin-bottom: 80px;
+      margin-bottom: 72px;
       padding: 0 24px;
     }
 
@@ -1275,189 +1275,151 @@
     .tl-header h2       { color: var(--white); margin-bottom: 12px; }
     .tl-header p        { color: rgba(255,255,255,0.45); font-size: 0.95rem; max-width: 480px; margin: 0 auto; line-height: 1.7; }
 
+    /* ── track: 4-col grid ── */
     .tl-track {
-      position: relative;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      max-width: 1120px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 64px;
+      padding: 0 48px;
+      gap: 0;
     }
 
-    .tl-track::before {
-      content: '';
-      position: absolute;
-      top: 18px;
-      left: calc(64px + 12.5%);
-      right: calc(64px + 12.5%);
-      height: 1px;
-      background: rgba(255,255,255,0.12);
-    }
-
-    .tl-item {
-      padding: 0 16px;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
-    }
-
-    .tl-item.tl-visible { opacity: 1; transform: translateY(0); }
-    .tl-item:nth-child(1) { transition-delay: 0s; }
-    .tl-item:nth-child(2) { transition-delay: 0.12s; }
-    .tl-item:nth-child(3) { transition-delay: 0.24s; }
-    .tl-item:nth-child(4) { transition-delay: 0.36s; }
-
-    .tl-node {
+    /* ── each column ── */
+    .tl-col {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 28px;
+      padding: 0 14px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .tl-dot {
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      border: 2px solid var(--navy);
-      flex-shrink: 0;
-      margin-bottom: 12px;
-      position: relative;
-      z-index: 1;
-    }
+    .tl-col.tl-visible { opacity: 1; transform: translateY(0); }
+    .tl-col:nth-child(1) { transition-delay: 0s; }
+    .tl-col:nth-child(2) { transition-delay: 0.1s; }
+    .tl-col:nth-child(3) { transition-delay: 0.2s; }
+    .tl-col:nth-child(4) { transition-delay: 0.3s; }
 
-    .tl-dot::after {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      opacity: 0.25;
-    }
-
-    .tl-dot.live   { background: var(--green); }
-    .tl-dot.soon   { background: var(--blue); }
-    .tl-dot.dev    { background: #c86dc2; }
-    .tl-dot.future { background: rgba(255,255,255,0.35); }
-
-    .tl-dot.live::after   { background: var(--green); }
-    .tl-dot.soon::after   { background: var(--blue); }
-    .tl-dot.dev::after    { background: var(--purple); }
-    .tl-dot.future::after { background: rgba(255,255,255,0.2); }
-
-    .tl-years {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: rgba(255,255,255,0.35);
-      text-transform: uppercase;
-    }
-
-    .tl-card {
-      background: rgba(255,255,255,0.04);
+    /* ── photo ── */
+    .tl-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 18px;
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 28px 22px;
-      transition: background 0.25s, border-color 0.25s;
     }
 
-    .tl-card:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.15);
+    .tl-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
     }
 
-    .tl-status {
-      display: inline-block;
-      font-size: 0.6rem;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 20px;
-    }
+    .tl-col:hover .tl-photo img { transform: scale(1.04); }
 
-    .tl-status.live   { background: rgba(0,218,157,0.15); color: var(--green); }
-    .tl-status.soon   { background: rgba(0,165,255,0.15);  color: var(--blue); }
-    .tl-status.dev    { background: rgba(176,61,170,0.2);   color: #d06eca; }
-    .tl-status.future { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.45); }
-
-    .tl-aircraft-name {
-      font-size: 1.15rem;
+    /* ── year label ── */
+    .tl-year {
+      font-size: 1.5rem;
       font-weight: 800;
       color: var(--white);
-      letter-spacing: -0.3px;
-      line-height: 1.25;
-      margin-bottom: 4px;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
     }
 
-    .tl-aircraft-type {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.38);
-      margin-bottom: 22px;
+    /* ── dot row (line runs through here) ── */
+    .tl-dot-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 20px;
+      margin-bottom: 24px;
+    }
+
+    /* line segment: each col gets a full-width line behind the dot */
+    .tl-dot-row::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 0; right: 0;
+      height: 2px;
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    .tl-col:nth-child(1) .tl-dot-row::before { left: 50%;  background: rgba(255,255,255,0.15); }
+    .tl-col:nth-child(2) .tl-dot-row::before {             background: rgba(255,255,255,0.15); }
+    .tl-col:nth-child(3) .tl-dot-row::before {             background: rgba(255,255,255,0.15); }
+    .tl-col:nth-child(4) .tl-dot-row::before { right: 50%; background: rgba(255,255,255,0.15); }
+
+    .tl-dot {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 3px solid var(--navy);
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .tl-dot.live   { background: var(--green); box-shadow: 0 0 10px rgba(0,218,157,0.5); }
+    .tl-dot.soon   { background: var(--blue);  box-shadow: 0 0 10px rgba(0,165,255,0.5); }
+    .tl-dot.dev    { background: #c86dc2;       box-shadow: 0 0 10px rgba(176,61,170,0.5); }
+    .tl-dot.future { background: rgba(255,255,255,0.3); }
+
+    /* ── specs table ── */
+    .tl-specs {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .tl-spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      gap: 8px;
+    }
+
+    .tl-spec-row:last-child { border-bottom: none; }
+
+    .tl-spec-key {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      font-weight: 500;
+      white-space: nowrap;
     }
 
     .tl-spec-val {
-      font-size: 1.8rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      line-height: 1;
-      margin-bottom: 3px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: right;
     }
 
-    .tl-spec-lbl {
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      margin-bottom: 18px;
-    }
+    .tl-col:nth-child(1) .tl-spec-val { color: var(--green); }
+    .tl-col:nth-child(2) .tl-spec-val { color: var(--blue); }
+    .tl-col:nth-child(3) .tl-spec-val { color: #c86dc2; }
+    .tl-col:nth-child(4) .tl-spec-val { color: rgba(255,255,255,0.55); }
 
-    .tl-desc {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.4);
-      line-height: 1.65;
-    }
-
-    .tl-member-logo {
-      height: 22px;
-      width: auto;
-      margin-top: 20px;
-      opacity: 0.5;
-      filter: brightness(0) invert(1);
-      display: block;
-    }
-
-    /* Mobile: vertical */
+    /* ── mobile: horizontal scroll ── */
     @media (max-width: 860px) {
       .tl-track {
-        grid-template-columns: 1fr;
-        padding: 0 24px 0 56px;
+        grid-template-columns: repeat(4, 240px);
+        overflow-x: auto;
+        padding: 0 24px;
+        gap: 0;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
       }
-
-      .tl-track::before {
-        top: 0; bottom: 0;
-        left: 31px;
-        right: auto;
-        width: 1px;
-        height: auto;
-      }
-
-      .tl-item {
-        position: relative;
-        padding: 0 0 40px 24px;
-      }
-
-      .tl-node {
-        position: absolute;
-        left: -38px;
-        top: 4px;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 0;
-      }
-
-      .tl-dot { margin-bottom: 0; }
-      .tl-years { font-size: 0.62rem; }
+      .tl-track::-webkit-scrollbar { display: none; }
+      .tl-col { padding: 0 10px; }
     }
 
     /* ── RESPONSIVE ── */
@@ -1717,76 +1679,74 @@
   <!-- AIRCRAFT TIMELINE -->
   <section id="aircraft-timeline">
     <div class="tl-header reveal">
-      <div class="eyebrow">The Roadmap</div>
+      <div class="eyebrow">Electric Aircraft Development &amp; Energy Need</div>
       <h2>Four generations of electric flight</h2>
       <p>From training aircraft flying today to 90-seat airliners on the horizon — electric aviation is scaling fast.</p>
     </div>
 
     <div class="tl-track">
 
-      <!-- Gen 1 -->
-      <div class="tl-item">
-        <div class="tl-node">
-          <div class="tl-dot live"></div>
-          <div class="tl-years">Now — 2026</div>
+      <!-- Now — Pipistrel -->
+      <div class="tl-col">
+        <div class="tl-photo">
+          <img src="images/Plane_1_pipistrel.jpg" alt="Pipistrel Velis Electro">
         </div>
-        <div class="tl-card">
-          <span class="tl-status live">Live today</span>
-          <div class="tl-aircraft-name">Pipistrel<br>Velis Electro</div>
-          <div class="tl-aircraft-type">2-seat electric trainer</div>
-          <div class="tl-spec-val" style="color:var(--green)">22 <span style="font-size:1rem;font-weight:600">kWh</span></div>
-          <div class="tl-spec-lbl">Battery capacity</div>
-          <div class="tl-desc">Certified electric trainer already in operation across Europe. Proving the technology works — today.</div>
-        </div>
-      </div>
-
-      <!-- Gen 2 -->
-      <div class="tl-item">
-        <div class="tl-node">
-          <div class="tl-dot soon"></div>
-          <div class="tl-years">2025 — 2028</div>
-        </div>
-        <div class="tl-card">
-          <span class="tl-status soon">Entering service</span>
-          <div class="tl-aircraft-name">Vaeridion<br>M9</div>
-          <div class="tl-aircraft-type">9-seat commuter</div>
-          <div class="tl-spec-val" style="color:var(--blue)">200 <span style="font-size:1rem;font-weight:600">kWh</span></div>
-          <div class="tl-spec-lbl">Battery capacity</div>
-          <div class="tl-desc">All-electric 9-seater targeting regional routes up to 200 km. Designed for airport-to-airport efficiency.</div>
-          <img class="tl-member-logo" src="images/members/vaeridion.jpg" alt="VAERIDION">
+        <div class="tl-year">Now</div>
+        <div class="tl-dot-row"><div class="tl-dot live"></div></div>
+        <div class="tl-specs">
+          <div class="tl-spec-row"><span class="tl-spec-key">Passengers</span><span class="tl-spec-val">2 pax</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Range</span><span class="tl-spec-val">100 km</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Battery</span><span class="tl-spec-val">22 kWh</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Connector</span><span class="tl-spec-val">GB/T</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Charging power</span><span class="tl-spec-val">30 kW</span></div>
         </div>
       </div>
 
-      <!-- Gen 3 -->
-      <div class="tl-item">
-        <div class="tl-node">
-          <div class="tl-dot dev"></div>
-          <div class="tl-years">2028 — 2033</div>
+      <!-- 2027 — Beta -->
+      <div class="tl-col">
+        <div class="tl-photo">
+          <img src="images/Plane_2_Beta.jpg" alt="Beta ALIA">
         </div>
-        <div class="tl-card">
-          <span class="tl-status dev">In development</span>
-          <div class="tl-aircraft-name">Elysian<br>E9X</div>
-          <div class="tl-aircraft-type">90-seat regional airliner</div>
-          <div class="tl-spec-val" style="color:#d06eca">3.5 <span style="font-size:1rem;font-weight:600">MWh</span></div>
-          <div class="tl-spec-lbl">Battery capacity</div>
-          <div class="tl-desc">Full-size electric airliner targeting routes under 500 km. The first aircraft to challenge fossil fuels at scale.</div>
-          <img class="tl-member-logo" src="images/members/elysian.jpg" alt="Elysian">
+        <div class="tl-year">2027</div>
+        <div class="tl-dot-row"><div class="tl-dot soon"></div></div>
+        <div class="tl-specs">
+          <div class="tl-spec-row"><span class="tl-spec-key">Passengers</span><span class="tl-spec-val">5 pax</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Range</span><span class="tl-spec-val">300 km</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Battery</span><span class="tl-spec-val">250 kWh</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Connector</span><span class="tl-spec-val">CCS</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Charging power</span><span class="tl-spec-val">330 kW</span></div>
         </div>
       </div>
 
-      <!-- Gen 4 -->
-      <div class="tl-item">
-        <div class="tl-node">
-          <div class="tl-dot future"></div>
-          <div class="tl-years">2033 +</div>
+      <!-- 2030 — Vaeridion -->
+      <div class="tl-col">
+        <div class="tl-photo">
+          <img src="images/Plane_3_Vaeridion.jpg" alt="Vaeridion M9">
         </div>
-        <div class="tl-card">
-          <span class="tl-status future">Future fleet</span>
-          <div class="tl-aircraft-name">Next<br>Generation</div>
-          <div class="tl-aircraft-type">Short-haul mainstream</div>
-          <div class="tl-spec-val" style="color:rgba(255,255,255,0.5)">15 <span style="font-size:1rem;font-weight:600">MWh+</span></div>
-          <div class="tl-spec-lbl">Battery capacity</div>
-          <div class="tl-desc">As battery energy density scales, electric flight becomes the default for all routes under 1,000 km across Europe.</div>
+        <div class="tl-year">2030</div>
+        <div class="tl-dot-row"><div class="tl-dot dev"></div></div>
+        <div class="tl-specs">
+          <div class="tl-spec-row"><span class="tl-spec-key">Passengers</span><span class="tl-spec-val">9 pax</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Range</span><span class="tl-spec-val">400 km</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Battery</span><span class="tl-spec-val">100–700 kWh</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Connector</span><span class="tl-spec-val">CCS/MCS</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Charging power</span><span class="tl-spec-val">1 MW</span></div>
+        </div>
+      </div>
+
+      <!-- 2033 — Elysian -->
+      <div class="tl-col">
+        <div class="tl-photo">
+          <img src="images/Plane_4_Elysian.jpg" alt="Elysian E9X">
+        </div>
+        <div class="tl-year">2033</div>
+        <div class="tl-dot-row"><div class="tl-dot future"></div></div>
+        <div class="tl-specs">
+          <div class="tl-spec-row"><span class="tl-spec-key">Passengers</span><span class="tl-spec-val">90 pax</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Range</span><span class="tl-spec-val">800 km</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Battery</span><span class="tl-spec-val">11 MWh</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Connector</span><span class="tl-spec-val">MCS</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Charging power</span><span class="tl-spec-val">15 MW</span></div>
         </div>
       </div>
 
@@ -2066,7 +2026,7 @@
         }
       });
     }, { threshold: 0.15 });
-    document.querySelectorAll('.tl-item').forEach(el => tlObserver.observe(el));
+    document.querySelectorAll('.tl-col').forEach(el => tlObserver.observe(el));
 
     // Mobile video autoplay fallback
     const efcVid = document.getElementById('efc-logo-video');

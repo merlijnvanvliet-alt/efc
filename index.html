@@ -793,6 +793,7 @@
 
     .showcase-intro video {
       width: 300px;
+      max-width: 80vw;
       height: auto;
       display: block;
       margin-bottom: 32px;
@@ -1318,7 +1319,7 @@
   <section class="members-showcase">
 
     <div class="showcase-intro reveal">
-      <video autoplay muted playsinline loop>
+      <video autoplay muted playsinline webkit-playsinline loop poster="images/01_EFC-logo-diap-RGB.png" id="efc-logo-video">
         <source src="video/electric-flying-logo.mp4" type="video/mp4">
       </video>
       <div class="eyebrow">Our Members</div>
@@ -1632,6 +1633,17 @@
 
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger')
       .forEach(el => io.observe(el));
+
+    // Mobile video autoplay fallback
+    const efcVid = document.getElementById('efc-logo-video');
+    if (efcVid) {
+      const p = efcVid.play();
+      if (p !== undefined) {
+        p.catch(() => {
+          document.addEventListener('touchstart', () => efcVid.play(), { once: true });
+        });
+      }
+    }
 
     // Member filter
     const mfBtns  = document.querySelectorAll('.mf-btn');

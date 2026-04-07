@@ -115,8 +115,8 @@
       box-shadow: 0 2px 32px rgba(0,0,0,0.3);
     }
 
-    nav img { height: 36px; transition: height 0.4s; }
-    nav.scrolled img { height: 30px; }
+    nav img, nav video { height: 36px; width: auto; transition: height 0.4s; display: block; }
+    nav.scrolled img, nav.scrolled video { height: 30px; }
 
     nav ul { list-style: none; display: flex; gap: 40px; align-items: center; }
 
@@ -776,6 +776,171 @@
       color: #007a57;
     }
 
+    /* ── MEMBERS FILTERABLE GRID ── */
+    .members-showcase {
+      background: var(--off);
+      padding: 0;
+    }
+
+    .showcase-intro {
+      background: var(--navy);
+      padding: 80px 24px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .showcase-intro video {
+      width: 300px;
+      height: auto;
+      display: block;
+      margin-bottom: 32px;
+    }
+
+    .showcase-intro .eyebrow {
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+
+    .showcase-intro h2 {
+      color: var(--white);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+
+    .showcase-intro p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 460px;
+      margin-bottom: 44px;
+    }
+
+    .showcase-intro .mf-filters { margin-bottom: 0; }
+
+    .showcase-intro .mf-btn {
+      background: transparent;
+      border-color: rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.55);
+    }
+
+    .showcase-intro .mf-btn:hover {
+      border-color: rgba(255,255,255,0.55);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    .showcase-intro .mf-btn.active {
+      background: var(--green);
+      border-color: var(--green);
+      color: var(--navy);
+    }
+
+    .showcase-grid-wrap {
+      padding-top: 48px;
+      padding-bottom: 80px;
+    }
+
+    .mf-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .mf-btn {
+      padding: 8px 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 32px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      background: var(--white);
+      color: var(--muted);
+      font-family: inherit;
+      transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.15s;
+    }
+
+    .mf-btn:hover {
+      border-color: var(--dark);
+      color: var(--dark);
+      transform: translateY(-1px);
+    }
+
+    .mf-btn.active {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: var(--white);
+    }
+
+    .mf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+      gap: 14px;
+    }
+
+    .mf-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 16px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      cursor: default;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      animation: mf-appear 0.3s ease both;
+    }
+
+    .mf-card:hover {
+      border-color: var(--green);
+      box-shadow: 0 6px 24px rgba(0,218,157,0.13);
+      transform: translateY(-3px);
+    }
+
+    .mf-card img {
+      max-height: 44px;
+      max-width: 120px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .mf-cat-tag {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.65;
+    }
+
+    @keyframes mf-appear {
+      from { opacity: 0; transform: scale(0.88) translateY(10px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* ── PHILOSOPHY LOGO VIDEO ── */
+    .philosophy-logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .philosophy-logo-wrap video {
+      width: 100%;
+      max-width: 380px;
+      height: auto;
+      border-radius: 16px;
+      opacity: 0.92;
+    }
+
     .btn-dark {
       background: var(--dark);
       color: var(--white);
@@ -1149,6 +1314,59 @@
     <div class="hero-scroll">scroll<span></span></div>
   </section>
 
+  <!-- MEMBERS SHOWCASE -->
+  <section class="members-showcase">
+
+    <div class="showcase-intro reveal">
+      <video autoplay muted playsinline loop>
+        <source src="video/electric-flying-logo.mp4" type="video/mp4">
+      </video>
+      <div class="eyebrow">Our Members</div>
+      <h2>The ecosystem behind<br>electric aviation</h2>
+      <p>Airlines, airports, manufacturers, research institutes and innovators — working together.</p>
+      <div class="mf-filters">
+        <button class="mf-btn active" data-filter="all">All</button>
+        <button class="mf-btn" data-filter="oem">OEMs</button>
+        <button class="mf-btn" data-filter="airlines">Airlines</button>
+        <button class="mf-btn" data-filter="startups">Start-ups</button>
+        <button class="mf-btn" data-filter="airports">Airports</button>
+        <button class="mf-btn" data-filter="collectives">Collectives</button>
+        <button class="mf-btn" data-filter="government">Government</button>
+        <button class="mf-btn" data-filter="universities">Universities</button>
+      </div>
+    </div>
+
+    <div class="showcase-grid-wrap section-inner">
+      <div class="mf-grid">
+        <div class="mf-card" data-cat="oem">        <img src="images/members/elysian.jpg"                  alt="Elysian"><span class="mf-cat-tag">OEM</span></div>
+        <div class="mf-card" data-cat="oem">        <img src="images/members/maeve.png"                    alt="Maeve"><span class="mf-cat-tag">OEM</span></div>
+        <div class="mf-card" data-cat="oem">        <img src="images/members/vaeridion.jpg"                alt="VAERIDION"><span class="mf-cat-tag">OEM</span></div>
+        <div class="mf-card" data-cat="oem">        <img src="images/members/hangarone.png"                alt="Hangar One"><span class="mf-cat-tag">OEM</span></div>
+        <div class="mf-card" data-cat="airlines">   <img src="images/members/transavia.png"                alt="Transavia"><span class="mf-cat-tag">Airline</span></div>
+        <div class="mf-card" data-cat="airlines">   <img src="images/members/vlindair.jpg"                 alt="Vlindair"><span class="mf-cat-tag">Airline</span></div>
+        <div class="mf-card" data-cat="startups">   <img src="images/members/eflight.webp"                 alt="eFlight Academy"><span class="mf-cat-tag">Start-up</span></div>
+        <div class="mf-card" data-cat="startups">   <img src="images/members/nrg2fly.png"                  alt="NRG2FLY"><span class="mf-cat-tag">Start-up</span></div>
+        <div class="mf-card" data-cat="startups">   <img src="images/members/skyzero.png"                  alt="SkyZero"><span class="mf-cat-tag">Start-up</span></div>
+        <div class="mf-card" data-cat="startups">   <img src="images/members/fimih.png"                    alt="FIMIH"><span class="mf-cat-tag">Start-up</span></div>
+        <div class="mf-card" data-cat="airports">   <img src="images/members/lelystadairport.png"           alt="Lelystad Airport"><span class="mf-cat-tag">Airport</span></div>
+        <div class="mf-card" data-cat="airports">   <img src="images/members/bredaairport.png"              alt="Breda Airport"><span class="mf-cat-tag">Airport</span></div>
+        <div class="mf-card" data-cat="airports">   <img src="images/members/eindhovenairport.png"          alt="Eindhoven Airport"><span class="mf-cat-tag">Airport</span></div>
+        <div class="mf-card" data-cat="airports">   <img src="images/members/droneport.png"                 alt="Droneport"><span class="mf-cat-tag">Airport</span></div>
+        <div class="mf-card" data-cat="collectives"><img src="images/members/powerup.png"                   alt="PowerUp"><span class="mf-cat-tag">Collective</span></div>
+        <div class="mf-card" data-cat="collectives"><img src="images/members/coasttocoast.png"               alt="Coast to Coast"><span class="mf-cat-tag">Collective</span></div>
+        <div class="mf-card" data-cat="collectives"><img src="images/members/nag.jpg"                       alt="NAG"><span class="mf-cat-tag">Collective</span></div>
+        <div class="mf-card" data-cat="government"> <img src="images/members/provincieflevoland.png"         alt="Provincie Flevoland"><span class="mf-cat-tag">Government</span></div>
+        <div class="mf-card" data-cat="government"> <img src="images/members/nlr.png"                       alt="NLR"><span class="mf-cat-tag">Government</span></div>
+        <div class="mf-card" data-cat="government"> <img src="images/members/bom.png"                       alt="BOM"><span class="mf-cat-tag">Government</span></div>
+        <div class="mf-card" data-cat="government"> <img src="images/members/provincienoordholland.jpg"      alt="Provincie Noord-Holland"><span class="mf-cat-tag">Government</span></div>
+        <div class="mf-card" data-cat="government"> <img src="images/members/platformduurzaamvliegen.png"    alt="Platform Duurzaam Vliegen"><span class="mf-cat-tag">Government</span></div>
+        <div class="mf-card" data-cat="universities"><img src="images/members/inholland.jpg"                 alt="Inholland"><span class="mf-cat-tag">University</span></div>
+        <div class="mf-card" data-cat="universities"><img src="images/members/tueindhoven.png"               alt="TU Eindhoven"><span class="mf-cat-tag">University</span></div>
+      </div>
+    </div><!-- /.showcase-grid-wrap -->
+
+  </section>
+
   <!-- MISSION -->
   <section id="mission">
     <div class="mission-inner">
@@ -1410,6 +1628,29 @@
 
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger')
       .forEach(el => io.observe(el));
+
+    // Member filter
+    const mfBtns  = document.querySelectorAll('.mf-btn');
+    const mfCards = document.querySelectorAll('.mf-card');
+
+    mfBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        mfBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        mfCards.forEach(card => {
+          const show = filter === 'all' || card.dataset.cat === filter;
+          if (show) {
+            card.style.display = 'flex';
+            card.style.animation = 'none';
+            card.offsetHeight; // trigger reflow
+            card.style.animation = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>

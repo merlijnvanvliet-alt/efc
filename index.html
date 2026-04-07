@@ -905,11 +905,10 @@
     }
 
     .mf-card img {
-      max-height: 44px;
-      max-width: 120px;
-      width: auto;
-      height: auto;
+      width: 100%;
+      height: 52px;
       object-fit: contain;
+      object-position: center;
       flex-shrink: 0;
     }
 
@@ -1190,7 +1189,7 @@
 
     .shop-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
 
@@ -1213,30 +1212,26 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: blur(3px) brightness(0.7);
-      transform: scale(1.04);
-      transition: filter 0.4s, transform 0.4s;
     }
 
     .shop-overlay {
       position: absolute;
       inset: 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 16px;
     }
 
     .shop-overlay span {
-      font-size: 1rem;
+      font-size: 0.65rem;
       font-weight: 800;
-      letter-spacing: 4px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--white);
-      border: 2px solid rgba(255,255,255,0.6);
-      padding: 12px 28px;
-      border-radius: 4px;
-      backdrop-filter: blur(4px);
-      background: rgba(255,255,255,0.08);
+      color: var(--navy);
+      background: var(--green);
+      padding: 6px 14px;
+      border-radius: 32px;
     }
 
     .shop-info {
@@ -1695,6 +1690,18 @@
         <div class="shop-card">
           <div class="shop-img-wrap">
             <img src="images/efcshop2.jpg" alt="EFC merchandise">
+            <div class="shop-overlay">
+              <span>Coming Soon</span>
+            </div>
+          </div>
+          <div class="shop-info">
+            <div class="shop-name">EFC Collection</div>
+            <div class="shop-price">— ,—</div>
+          </div>
+        </div>
+        <div class="shop-card">
+          <div class="shop-img-wrap">
+            <img src="images/efcshop3.jpg" alt="EFC mug">
             <div class="shop-overlay">
               <span>Coming Soon</span>
             </div>

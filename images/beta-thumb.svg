@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1460"/>
+      <stop offset="100%" stop-color="#0d0b2e"/>
+    </linearGradient>
+    <linearGradient id="greenBlue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00DA9D"/>
+      <stop offset="100%" stop-color="#00A5FF"/>
+    </linearGradient>
+    <linearGradient id="glowGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00DA9D" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#00DA9D" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glowBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00A5FF" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#00A5FF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow-green">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-blue">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="clip-left">
+      <rect x="64" y="160" width="490" height="310" rx="14"/>
+    </clipPath>
+    <clipPath id="clip-right">
+      <rect x="646" y="160" width="490" height="310" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle grid lines -->
+  <g opacity="0.04" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+  </g>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1200" height="4" fill="url(#greenBlue)"/>
+
+  <!-- Green glow top-left -->
+  <ellipse cx="200" cy="120" rx="280" ry="160" fill="url(#glowGreen)" opacity="0.6"/>
+  <!-- Blue glow bottom-right -->
+  <ellipse cx="1050" cy="520" rx="280" ry="160" fill="url(#glowBlue)" opacity="0.6"/>
+
+  <!-- ── LEFT CARD — Den Helder ── -->
+  <rect x="64" y="160" width="490" height="310" rx="14" fill="rgba(0,218,157,0.06)" stroke="rgba(0,218,157,0.22)" stroke-width="1.5"/>
+
+  <!-- Green dot + label -->
+  <circle cx="96" cy="195" r="6" fill="#00DA9D" filter="url(#glow-green)"/>
+  <text x="112" y="200" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#00DA9D" letter-spacing="2" text-decoration="none">DEN HELDER AIRPORT</text>
+
+  <!-- Day badge -->
+  <rect x="64" y="216" width="148" height="26" rx="13" fill="#00DA9D"/>
+  <text x="138" y="234" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#0d0b2e" text-anchor="middle" letter-spacing="1">29 MAY 2026</text>
+
+  <!-- Airport name -->
+  <text x="64" y="290" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" fill="#ffffff" letter-spacing="-0.5">Den Helder Airport</text>
+
+  <!-- Position tag -->
+  <text x="64" y="320" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="rgba(0,218,157,0.75)" letter-spacing="0.3">The Future Electric Vertiport of Europe</text>
+
+  <!-- Divider -->
+  <line x1="64" y1="340" x2="530" y2="340" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+
+  <!-- Schedule items -->
+  <circle cx="75" cy="368" r="4" fill="#00DA9D" opacity="0.8"/>
+  <text x="90" y="373" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="rgba(0,218,157,0.7)">08:30</text>
+  <text x="148" y="373" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.8)">Event opens</text>
+
+  <circle cx="75" cy="400" r="4" fill="#00DA9D" opacity="0.8"/>
+  <text x="90" y="405" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="rgba(0,218,157,0.7)">10:30</text>
+  <text x="148" y="405" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.8)">Arrival Beta ALIA CX300</text>
+
+  <circle cx="75" cy="432" r="4" fill="#00DA9D" opacity="0.8"/>
+  <text x="90" y="437" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="rgba(0,218,157,0.7)">12:00</text>
+  <text x="148" y="437" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.8)">Departure to Lelystad</text>
+
+  <!-- ── CONNECTOR ── -->
+  <line x1="572" y1="280" x2="618" y2="280" stroke="url(#greenBlue)" stroke-width="2" opacity="0.5"/>
+  <!-- Plane icon (simplified) -->
+  <text x="600" y="287" font-family="Arial" font-size="20" fill="rgba(255,255,255,0.35)" text-anchor="middle">✈</text>
+  <text x="600" y="308" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,0.2)" text-anchor="middle" letter-spacing="1">130 KM</text>
+
+  <!-- ── RIGHT CARD — Lelystad ── -->
+  <rect x="646" y="160" width="490" height="310" rx="14" fill="rgba(0,165,255,0.06)" stroke="rgba(0,165,255,0.22)" stroke-width="1.5"/>
+
+  <!-- Blue dot + label -->
+  <circle cx="678" cy="195" r="6" fill="#00A5FF" filter="url(#glow-blue)"/>
+  <text x="694" y="200" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#00A5FF" letter-spacing="2">LELYSTAD AIRPORT</text>
+
+  <!-- Day badge -->
+  <rect x="646" y="216" width="148" height="26" rx="13" fill="#00A5FF"/>
+  <text x="720" y="234" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#0d0b2e" text-anchor="middle" letter-spacing="1">29 MAY 2026</text>
+
+  <!-- Airport name -->
+  <text x="646" y="290" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" fill="#ffffff" letter-spacing="-0.5">Lelystad Airport</text>
+
+  <!-- Position tag -->
+  <text x="646" y="320" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="rgba(0,165,255,0.75)" letter-spacing="0.3">The Future Electric Airport of Europe</text>
+
+  <!-- Divider -->
+  <line x1="646" y1="340" x2="1112" y2="340" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+
+  <!-- Schedule items -->
+  <circle cx="657" cy="368" r="4" fill="#00A5FF" opacity="0.8"/>
+  <text x="672" y="373" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="rgba(0,165,255,0.7)">11:00</text>
+  <text x="730" y="373" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.8)">Event opens</text>
+
+  <circle cx="657" cy="400" r="4" fill="#00A5FF" opacity="0.8"/>
+  <text x="672" y="405" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="rgba(0,165,255,0.7)">12:45</text>
+  <text x="730" y="405" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.8)">Arrival Beta ALIA CX300</text>
+
+  <circle cx="657" cy="432" r="4" fill="#00A5FF" opacity="0.8"/>
+  <text x="672" y="437" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="rgba(0,165,255,0.7)">14:15</text>
+  <text x="730" y="437" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.8)">End of demonstration</text>
+
+  <!-- ── TOP HEADER ── -->
+  <!-- EFC label -->
+  <text x="64" y="72" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#00DA9D" letter-spacing="2.5">ELECTRIC FLYING CONNECTION</text>
+
+  <!-- Main title -->
+  <text x="64" y="118" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="800" fill="#ffffff" letter-spacing="-1.5">Beta Technologies</text>
+  <text x="64" y="155" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="800" letter-spacing="-1.5">
+    <tspan fill="#00DA9D">Demo Flights</tspan>
+    <tspan fill="rgba(255,255,255,0.4)" font-size="28" font-weight="400" dx="12" dy="4">Netherlands · 29 May 2026</tspan>
+  </text>
+
+  <!-- ── BOTTOM BAR ── -->
+  <rect x="0" y="560" width="1200" height="70" fill="rgba(0,0,0,0.35)"/>
+  <line x1="0" y1="560" x2="1200" y2="560" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+  <!-- URL -->
+  <text x="64" y="602" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="rgba(255,255,255,0.3)" letter-spacing="0.3">efc.aero/beta</text>
+
+  <!-- Partner dots -->
+  <circle cx="900" cy="595" r="4" fill="#00DA9D" opacity="0.6"/>
+  <text x="912" y="601" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.4)">EFC</text>
+
+  <circle cx="960" cy="595" r="4" fill="rgba(255,255,255,0.2)"/>
+  <text x="972" y="601" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.4)">Den Helder Airport</text>
+
+  <circle cx="1095" cy="595" r="4" fill="rgba(255,255,255,0.2)"/>
+  <text x="1107" y="601" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.4)">Lelystad Airport</text>
+
+</svg>

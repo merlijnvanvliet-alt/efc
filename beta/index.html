@@ -924,6 +924,54 @@
       line-height: 1.6;
     }
 
+    /* ── HUBSPOT FORM OVERRIDES ── */
+    .hs-form-frame,
+    .hs-form-frame iframe {
+      width: 100% !important;
+    }
+
+    .event-card-body .hs-form label,
+    .event-card-body .hs-form .hs-field-desc,
+    .event-card-body .hs-form legend {
+      color: rgba(255,255,255,0.85) !important;
+    }
+
+    .event-card-body .hs-form input[type="text"],
+    .event-card-body .hs-form input[type="email"],
+    .event-card-body .hs-form input[type="tel"],
+    .event-card-body .hs-form select,
+    .event-card-body .hs-form textarea {
+      background: rgba(255,255,255,0.07) !important;
+      border: 1px solid rgba(255,255,255,0.15) !important;
+      color: #ffffff !important;
+      border-radius: 8px !important;
+    }
+
+    .event-card-body .hs-form input::placeholder,
+    .event-card-body .hs-form textarea::placeholder {
+      color: rgba(255,255,255,0.3) !important;
+    }
+
+    .event-card-body .hs-form input[type="submit"],
+    .event-card-body .hs-form .hs-button {
+      background: var(--blue) !important;
+      border: none !important;
+      color: var(--navy) !important;
+      font-weight: 700 !important;
+      border-radius: 6px !important;
+      cursor: pointer !important;
+      transition: background 0.2s !important;
+    }
+
+    .event-card-body .hs-form input[type="submit"]:hover,
+    .event-card-body .hs-form .hs-button:hover {
+      background: #33b7ff !important;
+    }
+
+    .event-card-body .hs-form .hs-error-msgs label {
+      color: #ff6b6b !important;
+    }
+
     .hubspot-placeholder svg {
       display: block;
       margin: 0 auto 12px;

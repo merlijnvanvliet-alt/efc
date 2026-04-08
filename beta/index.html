@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beta Technologies Demo Flights — EFC</title>
+  <meta name="description" content="Beta Technologies brings its ALIA CX300 to the Netherlands for historic demonstration flights. Hosted by EFC at Den Helder Airport (28 May) and Lelystad Airport (29 May)." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Beta Technologies Demo Flights — EFC" />
+  <meta property="og:description" content="Historic demonstration flights of the Beta ALIA CX300 in the Netherlands — May 28 &amp; 29, 2026." />
+  <meta property="og:image" content="../images/beta_background.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:   #00DA9D;
+      --blue:    #00A5FF;
+      --purple:  #B03DAA;
+      --dark:    #30297F;
+      --darker:  #1a1460;
+      --navy:    #0d0b2e;
+      --white:   #ffffff;
+      --off:     #f4f5f7;
+      --muted:   #6b7280;
+      --border:  #e5e7eb;
+      --text:    #111827;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      background: var(--navy);
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--green); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 64px;
+      transition: padding 0.4s, background 0.4s, border-color 0.4s, box-shadow 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      padding: 14px 64px;
+      background: rgba(13, 11, 46, 0.97);
+      backdrop-filter: blur(16px);
+      border-bottom-color: rgba(255,255,255,0.06);
+      box-shadow: 0 2px 32px rgba(0,0,0,0.3);
+    }
+
+    nav img { height: 36px; width: auto; transition: height 0.4s; display: block; }
+    nav.scrolled img { height: 30px; }
+
+    nav ul { list-style: none; display: flex; gap: 40px; align-items: center; }
+
+    nav a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--white); }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.5) !important;
+      font-size: 0.8rem !important;
+    }
+
+    .nav-back:hover { color: var(--green) !important; }
+
+    .nav-cta {
+      color: var(--white) !important;
+      background: var(--dark);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 9px 22px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, border-color 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--green) !important;
+      border-color: var(--green) !important;
+      color: var(--navy) !important;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .yt-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .yt-bg iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 177.78vh;
+      height: 56.25vw;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      border: none;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(13,11,46,0.98) 0%, rgba(13,11,46,0.5) 50%, rgba(13,11,46,0.2) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 64px 80px;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s forwards;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--green);
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      color: var(--white);
+      letter-spacing: -1.5px;
+      max-width: 760px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.35s forwards;
+    }
+
+    .hero-content h1 em {
+      font-style: normal;
+      color: var(--green);
+    }
+
+    .hero-content p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.6);
+      max-width: 540px;
+      margin-bottom: 36px;
+      font-weight: 400;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.5s forwards;
+    }
+
+    .hero-date-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.6s forwards;
+    }
+
+    .date-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      border-radius: 32px;
+    }
+
+    .date-badge-green {
+      background: var(--green);
+      color: var(--navy);
+    }
+
+    .date-badge-blue {
+      background: var(--blue);
+      color: var(--navy);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.72s forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 30px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-decoration: none;
+      transition: all 0.22s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: var(--navy);
+      border-color: var(--green);
+    }
+
+    .btn-primary:hover {
+      background: #00f0ae;
+      border-color: #00f0ae;
+      transform: translateY(-2px);
+    }
+
+    .btn-blue {
+      background: var(--blue);
+      color: var(--navy);
+      border-color: var(--blue);
+    }
+
+    .btn-blue:hover {
+      background: #33b7ff;
+      border-color: #33b7ff;
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.75);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .btn-ghost:hover {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 0; right: 0;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: fadeUp 1s 1s both;
+    }
+
+    .hero-scroll span {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent);
+      animation: lineDown 2s ease-in-out infinite;
+    }
+
+    @keyframes lineDown {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── REVEAL ── */
+    .reveal, .reveal-left, .reveal-right {
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal       { transform: translateY(30px); }
+    .reveal-left  { transform: translateX(-30px); }
+    .reveal-right { transform: translateX(30px); }
+
+    .reveal.visible, .reveal-left.visible, .reveal-right.visible {
+      opacity: 1; transform: none;
+    }
+
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
+    .stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:0.12s; }
+    .stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:0.24s; }
+    .stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:0.36s; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    /* ── COUNTDOWN BAR ── */
+    .cd-bar {
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 64px;
+    }
+
+    .cd-bar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .cd-event {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .cd-event-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .cd-event-label.green { color: var(--green); }
+    .cd-event-label.blue  { color: var(--blue); }
+
+    .countdown {
+      display: flex;
+      gap: 6px;
+    }
+
+    .cd-unit {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .cd-num {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: -0.5px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cd-lbl {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: lowercase;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .cd-unit:not(:last-child)::after {
+      content: '·';
+      color: rgba(255,255,255,0.15);
+      margin-left: 6px;
+      font-size: 0.9rem;
+    }
+
+    .cd-divider {
+      width: 1px;
+      height: 32px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── PARTNER LOGOS ── */
+    .partners-bar {
+      background: var(--white);
+      padding: 18px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .partners-bar::before,
+    .partners-bar::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .partners-bar::before { left: 0; background: linear-gradient(to right, var(--white), transparent); }
+    .partners-bar::after  { right: 0; background: linear-gradient(to left, var(--white), transparent); }
+
+    .partners-track {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+      white-space: nowrap;
+      animation: partnerTicker 18s linear infinite;
+    }
+
+    .partners-track:hover { animation-play-state: paused; }
+
+    @keyframes partnerTicker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .partner-logo {
+      height: 38px;
+      width: auto;
+      max-width: 140px;
+      object-fit: contain;
+      flex-shrink: 0;
+      opacity: 0.85;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .partner-logo:hover { opacity: 1; transform: scale(1.08); }
+
+    /* ── ABOUT SECTION ── */
+    #about {
+      background: var(--darker);
+      padding: 100px 64px;
+    }
+
+    .about-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text h2 {
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.8px;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .about-text h2 em {
+      font-style: normal;
+      color: var(--green);
+    }
+
+    .about-text p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.97rem;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .about-text p strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+    .about-video {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    }
+
+    .about-video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ── AIRPORTS MAP SECTION ── */
+    #airports {
+      background: var(--navy);
+      padding: 100px 64px;
+    }
+
+    .airports-header {
+      max-width: 1120px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+
+    .airports-header h2 {
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.8px;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .airports-header p {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.97rem;
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .airports-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .airport-card {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .airport-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .airport-card.green-card {
+      box-shadow: 0 0 40px rgba(0,218,157,0.1);
+    }
+
+    .airport-card.green-card:hover {
+      box-shadow: 0 12px 60px rgba(0,218,157,0.18);
+    }
+
+    .airport-card.blue-card {
+      box-shadow: 0 0 40px rgba(0,165,255,0.1);
+    }
+
+    .airport-card.blue-card:hover {
+      box-shadow: 0 12px 60px rgba(0,165,255,0.18);
+    }
+
+    .airport-img-stack {
+      position: relative;
+      height: 320px;
+    }
+
+    .airport-img-stack img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.5s ease;
+    }
+
+    .airport-img-stack img:last-child {
+      opacity: 0;
+    }
+
+    .airport-card:hover .airport-img-stack img:first-child { opacity: 0; }
+    .airport-card:hover .airport-img-stack img:last-child  { opacity: 1; }
+
+    .airport-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(13,11,46,0.92) 100%);
+      z-index: 1;
+    }
+
+    .airport-img-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      padding: 20px 28px;
+    }
+
+    .airport-day-badge {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 32px;
+      margin-bottom: 10px;
+    }
+
+    .green-card .airport-day-badge { background: var(--green); color: var(--navy); }
+    .blue-card  .airport-day-badge { background: var(--blue);  color: var(--navy); }
+
+    .airport-img-label h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
+    }
+
+    .airport-img-label p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .airport-card-body {
+      padding: 28px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .airport-position-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .green-card .airport-position-tag { color: var(--green); }
+    .blue-card  .airport-position-tag { color: var(--blue); }
+
+    .airport-card-body p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+
+    .airport-stats {
+      display: flex;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .airport-stat { flex: 1; }
+
+    .airport-stat-num {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .green-card .airport-stat-num { color: var(--green); }
+    .blue-card  .airport-stat-num { color: var(--blue); }
+
+    .airport-stat-lbl {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.3;
+    }
+
+    /* ── SCHEDULE + REGISTRATION ── */
+    #schedule {
+      background: var(--darker);
+      padding: 100px 64px;
+    }
+
+    .schedule-header {
+      max-width: 1120px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+
+    .schedule-header h2 {
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.8px;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .schedule-header p {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.97rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .events-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .event-card {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .event-card-header {
+      padding: 28px 32px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .event-card.green-event { background: linear-gradient(160deg, rgba(0,218,157,0.1) 0%, rgba(13,11,46,0.4) 60%); }
+    .event-card.blue-event  { background: linear-gradient(160deg, rgba(0,165,255,0.1) 0%, rgba(13,11,46,0.4) 60%); }
+
+    .event-card-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .event-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .green-event .event-dot { background: var(--green); box-shadow: 0 0 10px rgba(0,218,157,0.8); }
+    .blue-event  .event-dot { background: var(--blue);  box-shadow: 0 0 10px rgba(0,165,255,0.8); }
+
+    .event-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .event-card-date {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 32px;
+    }
+
+    .green-event .event-card-date { background: rgba(0,218,157,0.15); color: var(--green); }
+    .blue-event  .event-card-date { background: rgba(0,165,255,0.15);  color: var(--blue); }
+
+    .event-loc-logo {
+      height: 28px;
+      width: auto;
+      max-width: 100px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.7;
+    }
+
+    .event-card-body {
+      padding: 28px 32px;
+    }
+
+    /* Schedule items */
+    .sched-item {
+      display: grid;
+      grid-template-columns: 48px 14px 1fr;
+      gap: 0 14px;
+      align-items: start;
+      padding-bottom: 22px;
+      position: relative;
+    }
+
+    .sched-item:last-of-type { padding-bottom: 0; }
+
+    .sched-dot-wrap {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .sched-dot-wrap::after {
+      content: '';
+      position: absolute;
+      top: 13px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      bottom: calc(-22px);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .sched-item:last-of-type .sched-dot-wrap::after { display: none; }
+
+    .sched-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      margin-top: 3px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .green-event .sched-dot { background: var(--green); box-shadow: 0 0 6px rgba(0,218,157,0.5); }
+    .blue-event  .sched-dot { background: var(--blue);  box-shadow: 0 0 6px rgba(0,165,255,0.5); }
+
+    .sched-time {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-align: right;
+      padding-top: 1px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .green-event .sched-time { color: rgba(0,218,157,0.7); }
+    .blue-event  .sched-time { color: rgba(0,165,255,0.7); }
+
+    .sched-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.35;
+    }
+
+    .sched-sub {
+      font-size: 0.73rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 3px;
+    }
+
+    /* Registration form area */
+    .reg-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin: 28px 0;
+    }
+
+    .reg-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .green-event .reg-label { color: var(--green); }
+    .blue-event  .reg-label { color: var(--blue); }
+
+    .hubspot-placeholder {
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    .hubspot-placeholder svg {
+      display: block;
+      margin: 0 auto 12px;
+      opacity: 0.3;
+    }
+
+    /* ── AIRCRAFT TIMELINE ── */
+    #aircraft-timeline {
+      background: var(--navy);
+      padding: 110px 0 120px;
+      overflow: hidden;
+    }
+
+    .tl-header {
+      text-align: center;
+      margin-bottom: 72px;
+      padding: 0 24px;
+    }
+
+    .tl-header .eyebrow { color: var(--green); }
+    .tl-header h2       { color: var(--white); margin-bottom: 12px; font-size: clamp(1.9rem, 3vw, 2.7rem); font-weight: 800; letter-spacing: -0.8px; }
+    .tl-header p        { color: rgba(255,255,255,0.45); font-size: 0.95rem; max-width: 480px; margin: 0 auto; line-height: 1.7; }
+
+    .tl-track {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+      gap: 0;
+    }
+
+    .tl-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 14px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .tl-col.tl-visible { opacity: 1; transform: translateY(0); }
+    .tl-col:nth-child(1) { transition-delay: 0s; }
+    .tl-col:nth-child(2) { transition-delay: 0.1s; }
+    .tl-col:nth-child(3) { transition-delay: 0.2s; }
+    .tl-col:nth-child(4) { transition-delay: 0.3s; }
+
+    .tl-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .tl-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .tl-col:hover .tl-photo img { transform: scale(1.04); }
+
+    .tl-year {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+
+    .tl-dot-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 20px;
+      margin-bottom: 24px;
+    }
+
+    .tl-dot-row::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 0; right: 0;
+      height: 2px;
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    .tl-col:nth-child(1) .tl-dot-row::before { left: 50%;  background: rgba(255,255,255,0.15); }
+    .tl-col:nth-child(2) .tl-dot-row::before {             background: rgba(255,255,255,0.15); }
+    .tl-col:nth-child(3) .tl-dot-row::before {             background: rgba(255,255,255,0.15); }
+    .tl-col:nth-child(4) .tl-dot-row::before { right: 50%; background: rgba(255,255,255,0.15); }
+
+    .tl-dot {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 3px solid var(--navy);
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .tl-dot.live   { background: var(--green); box-shadow: 0 0 10px rgba(0,218,157,0.5); }
+    .tl-dot.soon   { background: var(--blue);  box-shadow: 0 0 10px rgba(0,165,255,0.5); }
+    .tl-dot.dev    { background: #c86dc2;       box-shadow: 0 0 10px rgba(176,61,170,0.5); }
+    .tl-dot.future { background: rgba(255,255,255,0.3); }
+
+    .tl-specs {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tl-spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      gap: 8px;
+    }
+
+    .tl-spec-row:last-child { border-bottom: none; }
+
+    .tl-spec-key {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .tl-spec-val {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .tl-col:nth-child(1) .tl-spec-val { color: var(--green); }
+    .tl-col:nth-child(2) .tl-spec-val { color: var(--blue); }
+    .tl-col:nth-child(3) .tl-spec-val { color: #c86dc2; }
+    .tl-col:nth-child(4) .tl-spec-val { color: rgba(255,255,255,0.55); }
+
+    .tl-disclaimer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      max-width: 640px;
+      margin: 40px auto 0;
+      padding: 0 24px;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #070518;
+      padding: 28px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    footer img { height: 24px; opacity: 0.5; }
+    footer p { color: rgba(255,255,255,0.25); font-size: 0.78rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 16px 28px; }
+      nav.scrolled { padding: 12px 28px; }
+      nav ul { gap: 20px; }
+
+      #about { padding: 72px 28px; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .about-text { order: 2; }
+      .about-video { order: 1; }
+
+      #airports { padding: 72px 28px; }
+      .airports-grid { grid-template-columns: 1fr; }
+
+      #schedule { padding: 72px 28px; }
+      .events-grid { grid-template-columns: 1fr; }
+
+      #aircraft-timeline { padding: 72px 0 80px; }
+      .tl-track { grid-template-columns: 1fr 1fr; padding: 0 28px; gap: 32px 20px; }
+      .tl-col:nth-child(1) .tl-dot-row::before,
+      .tl-col:nth-child(3) .tl-dot-row::before { left: 50%; right: 0; }
+      .tl-col:nth-child(2) .tl-dot-row::before,
+      .tl-col:nth-child(4) .tl-dot-row::before { left: 0; right: 50%; }
+
+      footer { flex-direction: column; text-align: center; padding: 24px 28px; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      nav ul li:not(:last-child) { display: none; }
+
+      .hero-content { padding: 0 20px 60px; }
+      .hero-content h1 { font-size: 2rem; letter-spacing: -0.5px; }
+      .hero-content p { font-size: 0.95rem; }
+      .hero-buttons { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .btn { width: 100%; justify-content: center; }
+
+      .cd-bar { padding: 16px 20px; }
+      .cd-bar-inner { gap: 16px; }
+      .cd-divider { display: none; }
+
+      #about { padding: 60px 20px; }
+      #airports { padding: 60px 20px; }
+      #schedule { padding: 60px 20px; }
+
+      .event-card-header { padding: 20px 20px 16px; flex-wrap: wrap; }
+      .event-card-body { padding: 20px; }
+
+      .airport-img-stack { height: 240px; }
+
+      .tl-track { grid-template-columns: 1fr; padding: 0 20px; gap: 16px; }
+      .tl-col {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 16px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 14px;
+        padding: 16px;
+      }
+      .tl-photo { width: 110px; flex-shrink: 0; aspect-ratio: 4/3; margin-bottom: 0; border-radius: 10px; }
+      .tl-year { font-size: 1.1rem; margin-bottom: 8px; }
+      .tl-dot-row { display: none; }
+      .tl-specs { flex: 1; }
+      .tl-spec-row { padding: 4px 0; }
+      .tl-spec-key { font-size: 0.65rem; }
+      .tl-spec-val { font-size: 0.75rem; }
+
+      footer { flex-direction: column; text-align: center; padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="../" style="display:flex;align-items:center;line-height:0;"><img src="../images/01_EFC-logo-diap-RGB.png" alt="Electric Flying Connection" /></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#airports">Airports</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#aircraft-timeline">Fleet</a></li>
+      <li>
+        <a href="../" class="nav-back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to EFC
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="yt-bg">
+      <iframe
+        src="https://www.youtube.com/embed/k4E8s9emRUw?autoplay=1&mute=1&loop=1&playlist=k4E8s9emRUw&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&start=5"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+        title="Beta Technologies ALIA demonstration">
+      </iframe>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Electric Flying Connection × Beta Technologies</div>
+      <h1>Historic demonstration flights<br>of the <em>Beta ALIA CX300</em><br>in the Netherlands</h1>
+      <p>For the first time ever, a Beta ALIA CX300 will fly in the Netherlands. EFC is hosting two special events — at Den Helder Airport on 28 May and Lelystad Airport on 29 May 2026.</p>
+      <div class="hero-date-badges">
+        <div class="date-badge date-badge-green">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          28 May · Den Helder
+        </div>
+        <div class="date-badge date-badge-blue">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          29 May · Lelystad
+        </div>
+      </div>
+      <div class="hero-buttons">
+        <a href="#schedule" class="btn btn-primary">Register for Den Helder</a>
+        <a href="#schedule" class="btn btn-blue">Register for Lelystad</a>
+        <a href="#about" class="btn btn-ghost">Learn more</a>
+      </div>
+    </div>
+    <div class="hero-scroll">scroll<span></span></div>
+  </section>
+
+  <!-- COUNTDOWN BAR -->
+  <div class="cd-bar">
+    <div class="cd-bar-inner">
+      <div class="cd-event">
+        <div class="cd-event-label green">28 May · Den Helder</div>
+        <div class="countdown">
+          <div class="cd-unit"><span class="cd-num" id="cd1-days">--</span><span class="cd-lbl">d</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cd1-hours">--</span><span class="cd-lbl">h</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cd1-mins">--</span><span class="cd-lbl">m</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cd1-secs">--</span><span class="cd-lbl">s</span></div>
+        </div>
+      </div>
+      <div class="cd-divider"></div>
+      <div class="cd-event">
+        <div class="cd-event-label blue">29 May · Lelystad</div>
+        <div class="countdown">
+          <div class="cd-unit"><span class="cd-num" id="cd2-days">--</span><span class="cd-lbl">d</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cd2-hours">--</span><span class="cd-lbl">h</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cd2-mins">--</span><span class="cd-lbl">m</span></div>
+          <div class="cd-unit"><span class="cd-num" id="cd2-secs">--</span><span class="cd-lbl">s</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTNER LOGOS -->
+  <div class="partners-bar">
+    <div class="partners-track">
+      <img class="partner-logo" src="../images/01_EFC-logo-RGB.png" alt="Electric Flying Connection">
+      <img class="partner-logo" src="../images/den%20helder%20logo.png" alt="Den Helder Airport">
+      <img class="partner-logo" src="../images/members/lelystadairport.png" alt="Lelystad Airport">
+      <img class="partner-logo" src="../images/esmartavia.jpg" alt="eSmart Avia">
+      <img class="partner-logo" src="../images/members/provincienoordholland.jpg" alt="Provincie Noord-Holland">
+      <img class="partner-logo" src="../images/members/provincieflevoland.png" alt="Provincie Flevoland">
+      <!-- duplicate for seamless loop -->
+      <img class="partner-logo" src="../images/01_EFC-logo-RGB.png" alt="Electric Flying Connection">
+      <img class="partner-logo" src="../images/den%20helder%20logo.png" alt="Den Helder Airport">
+      <img class="partner-logo" src="../images/members/lelystadairport.png" alt="Lelystad Airport">
+      <img class="partner-logo" src="../images/esmartavia.jpg" alt="eSmart Avia">
+      <img class="partner-logo" src="../images/members/provincienoordholland.jpg" alt="Provincie Noord-Holland">
+      <img class="partner-logo" src="../images/members/provincieflevoland.png" alt="Provincie Flevoland">
+    </div>
+  </div>
+
+  <!-- ABOUT BETA -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-text reveal-left">
+        <div class="eyebrow">About Beta Technologies</div>
+        <h2>The world's most advanced<br><em>electric aircraft</em> is coming to the Netherlands</h2>
+        <p>Beta Technologies is a US-based electric aviation company that has developed the <strong>ALIA CX300</strong> — a fixed-wing electric aircraft with exceptional range, efficiency, and versatility.</p>
+        <p>With over <strong>3 million miles flown</strong> and a proven charging infrastructure network, Beta is at the forefront of making commercial electric aviation a reality. The ALIA CX300 can carry 5 passengers up to 600 km on a single charge.</p>
+        <p>These demonstration flights in the Netherlands — facilitated by <strong>eSmart Avia</strong> and hosted by <strong>EFC</strong> — mark a milestone moment for European electric aviation. For the first time, the Beta ALIA will operate from Dutch airports, demonstrating the readiness of both the aircraft and the infrastructure.</p>
+      </div>
+      <div class="about-video reveal-right">
+        <iframe
+          src="https://www.youtube.com/embed/k4E8s9emRUw?rel=0&modestbranding=1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          title="Beta Technologies ALIA CX300">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- AIRPORTS -->
+  <section id="airports">
+    <div class="airports-header reveal">
+      <div class="eyebrow">Two Locations · Two Milestones</div>
+      <h2>Where the future of flying lands</h2>
+      <p>Two iconic Dutch airports take centre stage as gateways for the electric aviation revolution in Europe.</p>
+    </div>
+
+    <div class="airports-grid stagger">
+
+      <!-- Den Helder -->
+      <div class="airport-card green-card">
+        <div class="airport-img-stack">
+          <img src="../images/Den%20Helder%20Airport%20Terminal%20.jpg" alt="Den Helder Airport Terminal">
+          <img src="../images/Den%20Helder%20Airport%20Airshot.jpg" alt="Den Helder Airport Aerial View">
+          <div class="airport-img-overlay"></div>
+          <div class="airport-img-label">
+            <div class="airport-day-badge">28 May 2026</div>
+            <h3>Den Helder Airport</h3>
+            <p>North Holland, The Netherlands</p>
+          </div>
+        </div>
+        <div class="airport-card-body">
+          <div class="airport-position-tag">The Future Electric Vertiport of Europe</div>
+          <p>Strategically positioned at the heart of North Sea operations, Den Helder Airport is pioneering the transition to electric regional aviation. As the first Dutch airport to welcome the Beta ALIA, Den Helder is positioning itself as Europe's leading electric vertiport — connecting offshore energy, logistics, and regional travel through zero-emission flight.</p>
+          <div class="airport-stats">
+            <div class="airport-stat">
+              <span class="airport-stat-num">130 km</span>
+              <span class="airport-stat-lbl">from Lelystad Airport</span>
+            </div>
+            <div class="airport-stat">
+              <span class="airport-stat-num">28 May</span>
+              <span class="airport-stat-lbl">Event date 2026</span>
+            </div>
+            <div class="airport-stat">
+              <span class="airport-stat-num">08:30</span>
+              <span class="airport-stat-lbl">Doors open</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lelystad -->
+      <div class="airport-card blue-card">
+        <div class="airport-img-stack">
+          <img src="../images/HeroHeader.jpeg" alt="Lelystad Airport">
+          <img src="../images/IMG_4789.jpeg" alt="Lelystad Airport Overview">
+          <div class="airport-img-overlay"></div>
+          <div class="airport-img-label">
+            <div class="airport-day-badge">29 May 2026</div>
+            <h3>Lelystad Airport</h3>
+            <p>Flevoland, The Netherlands</p>
+          </div>
+        </div>
+        <div class="airport-card-body">
+          <div class="airport-position-tag">The Future Electric Airport of Europe</div>
+          <p>At the centre of the Netherlands, Lelystad Airport is uniquely positioned to become the first fully electric commercial airport in Europe. With strong government backing from Province Flevoland and a growing network of EFC members, Lelystad is building the infrastructure, partnerships, and ecosystem to power the next generation of regional electric flights across the continent.</p>
+          <div class="airport-stats">
+            <div class="airport-stat">
+              <span class="airport-stat-num">130 km</span>
+              <span class="airport-stat-lbl">from Den Helder Airport</span>
+            </div>
+            <div class="airport-stat">
+              <span class="airport-stat-num">29 May</span>
+              <span class="airport-stat-lbl">Event date 2026</span>
+            </div>
+            <div class="airport-stat">
+              <span class="airport-stat-num">11:00</span>
+              <span class="airport-stat-lbl">Doors open</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCHEDULE + REGISTRATION -->
+  <section id="schedule">
+    <div class="schedule-header reveal">
+      <div class="eyebrow">Programme &amp; Registration</div>
+      <h2>Choose your event</h2>
+      <p>Register for one or both events. Each event includes live viewing of the Beta ALIA, panel discussions, and networking with Europe's electric aviation community.</p>
+    </div>
+
+    <div class="events-grid stagger">
+
+      <!-- Den Helder Event — 28 May -->
+      <div class="event-card green-event">
+        <div class="event-card-header">
+          <div class="event-card-header-left">
+            <div class="event-dot"></div>
+            <div class="event-card-title">Den Helder Airport</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="event-card-date">28 May 2026</div>
+            <img class="event-loc-logo" src="../images/den%20helder%20logo.png" alt="Den Helder Airport">
+          </div>
+        </div>
+        <div class="event-card-body">
+
+          <div class="sched-item">
+            <div class="sched-time">08:30</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Event opens</div>
+              <div class="sched-sub">Doors open — welcome coffee &amp; registration</div>
+            </div>
+          </div>
+          <div class="sched-item">
+            <div class="sched-time">09:15</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Opening programme</div>
+              <div class="sched-sub">Welcome by EFC &amp; Den Helder Airport</div>
+            </div>
+          </div>
+          <div class="sched-item">
+            <div class="sched-time">10:00</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Panel: The Future Electric Vertiport</div>
+              <div class="sched-sub">Discussion on the role of Den Helder in European electric aviation</div>
+            </div>
+          </div>
+          <div class="sched-item">
+            <div class="sched-time">10:30</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Arrival of Beta ALIA CX300</div>
+              <div class="sched-sub">Live landing at Den Helder Airport — viewing on the apron</div>
+            </div>
+          </div>
+          <div class="sched-item">
+            <div class="sched-time">10:45</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Aircraft viewing &amp; meet the pilot</div>
+              <div class="sched-sub">Up-close access to the Beta ALIA CX300</div>
+            </div>
+          </div>
+          <div class="sched-item">
+            <div class="sched-time">11:30</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Charging demonstration</div>
+              <div class="sched-sub">See the Beta charging infrastructure in action</div>
+            </div>
+          </div>
+          <div class="sched-item">
+            <div class="sched-time">12:00</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Departure to Lelystad Airport</div>
+              <div class="sched-sub">Historic 130 km electric inter-airport flight</div>
+            </div>
+          </div>
+
+          <hr class="reg-divider">
+          <div class="reg-label">Register for this event</div>
+          <!-- Replace this div with your HubSpot form embed code -->
+          <div class="hubspot-placeholder" id="hubspot-form-denhelder">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6M9 16h6M9 8h6M5 20h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
+            HubSpot registration form will appear here.<br>Paste your embed code inside this div.
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Lelystad Event — 29 May -->
+      <div class="event-card blue-event">
+        <div class="event-card-header">
+          <div class="event-card-header-left">
+            <div class="event-dot"></div>
+            <div class="event-card-title">Lelystad Airport</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="event-card-date">29 May 2026</div>
+            <img class="event-loc-logo" src="../images/members/lelystadairport.png" alt="Lelystad Airport">
+          </div>
+        </div>
+        <div class="event-card-body">
+
+          <div class="sched-item">
+            <div class="sched-time">11:00</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Event opens</div>
+              <div class="sched-sub">Doors open — welcome coffee &amp; registration</div>
+            </div>
+          </div>
+          <div class="sched-item">
+            <div class="sched-time">11:30</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Opening programme</div>
+              <div class="sched-sub">Welcome by EFC &amp; Lelystad Airport</div>
+            </div>
+          </div>
+          <div class="sched-item">
+            <div class="sched-time">12:00</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Panel: The Future Electric Airport</div>
+              <div class="sched-sub">Discussion on Lelystad as the electric airport hub of Europe</div>
+            </div>
+          </div>
+          <div class="sched-item">
+            <div class="sched-time">12:45</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Arrival of Beta ALIA CX300</div>
+              <div class="sched-sub">Live landing from Den Helder — viewing on the apron</div>
+            </div>
+          </div>
+          <div class="sched-item">
+            <div class="sched-time">13:00</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Aircraft viewing &amp; meet the pilot</div>
+              <div class="sched-sub">Up-close access to the Beta ALIA CX300</div>
+            </div>
+          </div>
+          <div class="sched-item">
+            <div class="sched-time">13:45</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Networking &amp; drinks</div>
+              <div class="sched-sub">Connect with the European electric aviation community</div>
+            </div>
+          </div>
+          <div class="sched-item">
+            <div class="sched-time">14:15</div>
+            <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
+            <div>
+              <div class="sched-label">Departure of Beta ALIA CX300</div>
+              <div class="sched-sub">End of the demonstration programme</div>
+            </div>
+          </div>
+
+          <hr class="reg-divider">
+          <div class="reg-label">Register for this event</div>
+          <!-- Replace this div with your HubSpot form embed code -->
+          <div class="hubspot-placeholder" id="hubspot-form-lelystad">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6M9 16h6M9 8h6M5 20h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
+            HubSpot registration form will appear here.<br>Paste your embed code inside this div.
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AIRCRAFT TIMELINE -->
+  <section id="aircraft-timeline">
+    <div class="tl-header reveal">
+      <div class="eyebrow">Electric Aircraft Development &amp; Energy Need</div>
+      <h2>Electric Aircraft Timeline</h2>
+      <p>From training aircraft flying today to 90-seat airliners on the horizon — electric aviation is scaling fast.</p>
+    </div>
+
+    <div class="tl-track">
+
+      <!-- Now — Pipistrel -->
+      <div class="tl-col">
+        <div class="tl-photo">
+          <img src="../images/Plane_1_pipistrel.jpg" alt="Pipistrel Velis Electro">
+        </div>
+        <div class="tl-year">Now</div>
+        <div class="tl-dot-row"><div class="tl-dot live"></div></div>
+        <div class="tl-specs">
+          <div class="tl-spec-row"><span class="tl-spec-key">Pilots</span><span class="tl-spec-val">1</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Passengers</span><span class="tl-spec-val">1 pax</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Range</span><span class="tl-spec-val">100 km</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Battery</span><span class="tl-spec-val">22 kWh</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Connector</span><span class="tl-spec-val">GB/T</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Energy &lt;45 min</span><span class="tl-spec-val">30 kW</span></div>
+        </div>
+      </div>
+
+      <!-- 2027 — Beta (highlighted) -->
+      <div class="tl-col" style="position:relative;">
+        <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--blue);color:var(--navy);font-size:0.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:32px;white-space:nowrap;z-index:2;">Flying here now</div>
+        <div class="tl-photo" style="border-color:rgba(0,165,255,0.3);box-shadow:0 0 24px rgba(0,165,255,0.15);">
+          <img src="../images/Plane_2_Beta.jpg" alt="Beta ALIA CX300">
+        </div>
+        <div class="tl-year">2027</div>
+        <div class="tl-dot-row"><div class="tl-dot soon"></div></div>
+        <div class="tl-specs">
+          <div class="tl-spec-row"><span class="tl-spec-key">Pilots</span><span class="tl-spec-val">1</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Passengers</span><span class="tl-spec-val">5 pax</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Range</span><span class="tl-spec-val">600 km</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Battery</span><span class="tl-spec-val">250 kWh</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Connector</span><span class="tl-spec-val">CCS</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Energy &lt;45 min</span><span class="tl-spec-val">330 kW</span></div>
+        </div>
+      </div>
+
+      <!-- 2030 — Vaeridion -->
+      <div class="tl-col">
+        <div class="tl-photo">
+          <img src="../images/Plane_3_Vaeridion.jpg" alt="Vaeridion M9">
+        </div>
+        <div class="tl-year">2030</div>
+        <div class="tl-dot-row"><div class="tl-dot dev"></div></div>
+        <div class="tl-specs">
+          <div class="tl-spec-row"><span class="tl-spec-key">Pilots</span><span class="tl-spec-val">2</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Passengers</span><span class="tl-spec-val">9 pax</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Range</span><span class="tl-spec-val">400 km</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Battery</span><span class="tl-spec-val">100–700 kWh</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Connector</span><span class="tl-spec-val">CCS/MCS</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Energy &lt;45 min</span><span class="tl-spec-val">1 MW</span></div>
+        </div>
+      </div>
+
+      <!-- 2033 — Elysian -->
+      <div class="tl-col">
+        <div class="tl-photo">
+          <img src="../images/Plane_4_Elysian.jpg" alt="Elysian E9X">
+        </div>
+        <div class="tl-year">2033</div>
+        <div class="tl-dot-row"><div class="tl-dot future"></div></div>
+        <div class="tl-specs">
+          <div class="tl-spec-row"><span class="tl-spec-key">Pilots</span><span class="tl-spec-val">2</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Passengers</span><span class="tl-spec-val">90 pax</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Range</span><span class="tl-spec-val">800 km</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Battery</span><span class="tl-spec-val">11 MWh</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Connector</span><span class="tl-spec-val">MCS</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Energy &lt;45 min</span><span class="tl-spec-val">15 MW</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="tl-disclaimer">Aircraft shown are indicative and represent a range of electric aircraft that will operate in each segment during that period.</p>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="../"><img src="../images/01_EFC-logo-diap-RGB.png" alt="Electric Flying Connection"></a>
+    <p>© 2026 Electric Flying Connection · Beta Technologies Demo Flights · 28–29 May 2026</p>
+    <a href="../" style="color:rgba(255,255,255,0.3);font-size:0.78rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#00DA9D'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">← Back to EFC</a>
+  </footer>
+
+  <script>
+    // ── NAV SCROLL ──
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // ── REVEAL ON SCROLL ──
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const staggerEls = document.querySelectorAll('.stagger');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => observer.observe(el));
+    staggerEls.forEach(el => observer.observe(el));
+
+    // ── AIRCRAFT TIMELINE REVEAL ──
+    const tlCols = document.querySelectorAll('.tl-col');
+    const tlObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('tl-visible');
+          tlObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    tlCols.forEach(col => tlObserver.observe(col));
+
+    // ── COUNTDOWN ──
+    function updateCountdown(targetDate, ids) {
+      const now = new Date();
+      const diff = targetDate - now;
+      if (diff <= 0) {
+        ids.forEach((id, i) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = '00';
+        });
+        return;
+      }
+      const days  = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins  = Math.floor((diff % 3600000) / 60000);
+      const secs  = Math.floor((diff % 60000) / 1000);
+
+      const vals = [
+        String(days).padStart(2,'0'),
+        String(hours).padStart(2,'0'),
+        String(mins).padStart(2,'0'),
+        String(secs).padStart(2,'0')
+      ];
+
+      ids.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = vals[i];
+      });
+    }
+
+    const event1 = new Date('2026-05-28T08:30:00');
+    const event2 = new Date('2026-05-29T11:00:00');
+
+    function tick() {
+      updateCountdown(event1, ['cd1-days','cd1-hours','cd1-mins','cd1-secs']);
+      updateCountdown(event2, ['cd2-days','cd2-hours','cd2-mins','cd2-secs']);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  </script>
+
+</body>
+</html>

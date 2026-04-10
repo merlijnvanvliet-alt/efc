@@ -2071,7 +2071,61 @@
       .tp-grid, .tp-grid-3 { grid-template-columns: 1fr 1fr; }
       .km-num { font-size: 1.9rem; }
     }
+
+    /* ── REGISTRATION FORM ── */
+    .reg-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin: 24px 0;
+    }
+
+    .reg-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      color: var(--green);
+    }
+
+    .hs-form-frame,
+    .hs-form-frame iframe { width: 100% !important; }
+
+    .event-loc-body .hs-form label,
+    .event-loc-body .hs-form .hs-field-desc,
+    .event-loc-body .hs-form legend { color: rgba(255,255,255,0.85) !important; }
+
+    .event-loc-body .hs-form input[type="text"],
+    .event-loc-body .hs-form input[type="email"],
+    .event-loc-body .hs-form input[type="tel"],
+    .event-loc-body .hs-form select,
+    .event-loc-body .hs-form textarea {
+      background: rgba(255,255,255,0.07) !important;
+      border: 1px solid rgba(255,255,255,0.15) !important;
+      color: #ffffff !important;
+      border-radius: 8px !important;
+    }
+
+    .event-loc-body .hs-form input::placeholder,
+    .event-loc-body .hs-form textarea::placeholder { color: rgba(255,255,255,0.3) !important; }
+
+    .event-loc-body .hs-form input[type="submit"],
+    .event-loc-body .hs-form .hs-button {
+      background: var(--green) !important;
+      border: none !important;
+      color: var(--navy) !important;
+      font-weight: 700 !important;
+      border-radius: 32px !important;
+      transition: background 0.2s !important;
+    }
+
+    .event-loc-body .hs-form input[type="submit"]:hover,
+    .event-loc-body .hs-form .hs-button:hover { background: #00f0ae !important; }
+
+    .event-loc-body .hs-form .hs-error-msgs label { color: #ff6b6b !important; }
+
   </style>
+  <script src="https://js-eu1.hsforms.net/forms/embed/26751098.js" defer></script>
 </head>
 <body>
 
@@ -2281,6 +2335,9 @@
               <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
               <div><div class="event-sched-label">Departure of Beta CX300</div><div class="event-sched-sub">Departing to Lelystad Airport</div></div>
             </div>
+            <hr class="reg-divider">
+            <div class="reg-label">Register for Den Helder Airport</div>
+            <div class="hs-form-frame" data-region="eu1" data-form-id="7b691da1-4d9c-4148-af76-1a225f6ecf7a" data-portal-id="26751098"></div>
           </div>
         </div>
 
@@ -2350,6 +2407,9 @@
               <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
               <div><div class="event-sched-label">Networking</div><div class="event-sched-sub">European electric aviation community &amp; regional partners</div></div>
             </div>
+            <hr class="reg-divider">
+            <div class="reg-label">Register for Lelystad Airport</div>
+            <div class="hs-form-frame" data-region="eu1" data-form-id="fd0ebce4-e275-468b-a8f6-577a545fb4dd" data-portal-id="26751098"></div>
           </div>
         </div>
 

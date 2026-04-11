@@ -140,6 +140,13 @@
       border: none;
     }
 
+    @media (max-width: 768px) {
+      .yt-bg iframe { display: none; }
+      .yt-bg {
+        background: url('../images/beta_background.webp') center center / cover no-repeat;
+      }
+    }
+
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -541,6 +548,38 @@
       aspect-ratio: 16/9;
       border: 1px solid rgba(255,255,255,0.1);
       box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    }
+
+    .about-video-thumb {
+      display: none;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+    }
+
+    .about-video-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-video-thumb::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px; height: 64px;
+      background: rgba(255,255,255,0.9) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF0000'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") center/40px no-repeat;
+      border-radius: 50%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .about-video iframe      { display: none; }
+      .about-video-thumb       { display: block; }
     }
 
     .about-video iframe {
@@ -1241,7 +1280,7 @@
     <div class="yt-bg">
       <iframe
         src="https://www.youtube.com/embed/k4E8s9emRUw?autoplay=1&mute=1&loop=1&playlist=k4E8s9emRUw&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&start=5"
-        allow="autoplay; encrypted-media"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
         title="Beta Technologies ALIA demonstration">
       </iframe>
@@ -1330,6 +1369,9 @@
           allowfullscreen
           title="Beta Technologies ALIA CX300">
         </iframe>
+        <a class="about-video-thumb" href="https://www.youtube.com/watch?v=k4E8s9emRUw" target="_blank" rel="noopener" aria-label="Bekijk Beta ALIA CX300 op YouTube">
+          <img src="https://img.youtube.com/vi/k4E8s9emRUw/maxresdefault.jpg" alt="Beta Technologies ALIA CX300">
+        </a>
       </div>
     </div>
   </section>

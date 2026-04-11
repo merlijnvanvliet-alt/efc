@@ -204,10 +204,8 @@
       object-fit: cover;
     }
 
-    @media (max-width: 768px) {
-      .yt-bg iframe { display: none; }
-      .yt-bg video  { display: block; }
-    }
+    .ios-fallback .yt-bg iframe { display: none; }
+    .ios-fallback .yt-bg video  { display: block; }
 
     .hero-overlay {
       position: absolute;
@@ -2800,6 +2798,17 @@
       });
     }, { threshold: 0.15 });
     document.querySelectorAll('.tl-col').forEach(el => tlObserver.observe(el));
+
+    // iOS hero background fallback: YouTube iframes don't autoplay on iOS, use native video instead
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      document.documentElement.classList.add('ios-fallback');
+      const heroVid = document.querySelector('.yt-bg video');
+      if (heroVid) {
+        heroVid.play().catch(() => {
+          document.addEventListener('touchstart', () => heroVid.play(), { once: true });
+        });
+      }
+    }
 
     // Mobile video autoplay fallback
     const efcVid = document.getElementById('efc-logo-video');

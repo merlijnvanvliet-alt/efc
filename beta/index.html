@@ -141,7 +141,6 @@
     }
 
     .yt-bg video {
-      display: none;
       position: absolute;
       top: 50%; left: 50%;
       width: 100%;
@@ -150,10 +149,14 @@
       min-height: 100%;
       transform: translate(-50%, -50%);
       object-fit: cover;
+      z-index: 1;
+    }
+
+    .yt-bg iframe {
+      z-index: 2;
     }
 
     .ios-fallback .yt-bg iframe { display: none; }
-    .ios-fallback .yt-bg video  { display: block; }
 
     .hero-overlay {
       position: absolute;

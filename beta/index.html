@@ -140,23 +140,10 @@
       border: none;
     }
 
-    .yt-bg video {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 100%;
-      height: 100%;
-      min-width: 100%;
-      min-height: 100%;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-      z-index: 1;
+    @media (max-width: 768px) {
+      .yt-bg iframe { display: none; }
+      #hero { background-color: #0d0b2e; }
     }
-
-    .yt-bg iframe {
-      z-index: 2;
-    }
-
-    .ios-fallback .yt-bg iframe { display: none; }
 
     .hero-overlay {
       position: absolute;
@@ -1295,9 +1282,6 @@
         allowfullscreen
         title="Beta Technologies ALIA demonstration">
       </iframe>
-      <video autoplay muted playsinline webkit-playsinline loop poster="../images/beta_background.webp">
-        <source src="../video/BackgroundvideoEFCsite.mp4" type="video/mp4">
-      </video>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -1826,17 +1810,6 @@
 
     tick();
     setInterval(tick, 1000);
-
-    // iOS hero background fallback: YouTube iframes don't autoplay on iOS, use native video instead
-    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-      document.documentElement.classList.add('ios-fallback');
-      const heroVid = document.querySelector('.yt-bg video');
-      if (heroVid) {
-        heroVid.play().catch(() => {
-          document.addEventListener('touchstart', () => heroVid.play(), { once: true });
-        });
-      }
-    }
   </script>
 
 </body>

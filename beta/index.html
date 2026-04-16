@@ -1323,7 +1323,6 @@
           <div class="cd-unit"><span class="cd-num" id="cd1-days">--</span><span class="cd-lbl">d</span></div>
           <div class="cd-unit"><span class="cd-num" id="cd1-hours">--</span><span class="cd-lbl">h</span></div>
           <div class="cd-unit"><span class="cd-num" id="cd1-mins">--</span><span class="cd-lbl">m</span></div>
-          <div class="cd-unit"><span class="cd-num" id="cd1-secs">--</span><span class="cd-lbl">s</span></div>
         </div>
       </div>
       <div class="cd-divider"></div>
@@ -1333,7 +1332,6 @@
           <div class="cd-unit"><span class="cd-num" id="cd2-days">--</span><span class="cd-lbl">d</span></div>
           <div class="cd-unit"><span class="cd-num" id="cd2-hours">--</span><span class="cd-lbl">h</span></div>
           <div class="cd-unit"><span class="cd-num" id="cd2-mins">--</span><span class="cd-lbl">m</span></div>
-          <div class="cd-unit"><span class="cd-num" id="cd2-secs">--</span><span class="cd-lbl">s</span></div>
         </div>
       </div>
     </div>
@@ -1793,13 +1791,11 @@
       const days  = Math.floor(diff / 86400000);
       const hours = Math.floor((diff % 86400000) / 3600000);
       const mins  = Math.floor((diff % 3600000) / 60000);
-      const secs  = Math.floor((diff % 60000) / 1000);
 
       const vals = [
         String(days).padStart(2,'0'),
         String(hours).padStart(2,'0'),
-        String(mins).padStart(2,'0'),
-        String(secs).padStart(2,'0')
+        String(mins).padStart(2,'0')
       ];
 
       ids.forEach((id, i) => {
@@ -1812,8 +1808,8 @@
     const event2 = new Date('2026-05-29T11:00:00');
 
     function tick() {
-      updateCountdown(event1, ['cd1-days','cd1-hours','cd1-mins','cd1-secs']);
-      updateCountdown(event2, ['cd2-days','cd2-hours','cd2-mins','cd2-secs']);
+      updateCountdown(event1, ['cd1-days','cd1-hours','cd1-mins']);
+      updateCountdown(event2, ['cd2-days','cd2-hours','cd2-mins']);
     }
 
     tick();

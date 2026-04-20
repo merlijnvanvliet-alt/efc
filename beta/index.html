@@ -1175,6 +1175,95 @@
       line-height: 1.6;
     }
 
+    /* ── ANNOUNCEMENT BAR ── */
+    .ann-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: linear-gradient(90deg, #d97706, #f59e0b 60%, #d97706);
+      color: #1a0900;
+      padding: 13px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-align: center;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.35);
+      flex-wrap: wrap;
+      line-height: 1.4;
+    }
+
+    .ann-bar strong { font-weight: 800; }
+
+    .ann-bar-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,0,0,0.15);
+      color: #1a0900 !important;
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 5px 14px;
+      border-radius: 32px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .ann-bar-cta:hover { background: rgba(0,0,0,0.25); }
+
+    @media (max-width: 600px) {
+      .ann-bar { padding: 10px 16px; font-size: 0.73rem; gap: 8px; }
+    }
+
+    /* ── REGISTRATION CLOSED ── */
+    .reg-closed {
+      background: rgba(239,68,68,0.05);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .reg-closed-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.25);
+      color: #f87171;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 32px;
+      margin-bottom: 10px;
+    }
+
+    .reg-closed p {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.6;
+    }
+
+    .event-full-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(239,68,68,0.15);
+      border: 1px solid rgba(239,68,68,0.3);
+      color: #f87171;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 32px;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: #070518;
@@ -1264,6 +1353,13 @@
 </head>
 <body>
 
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="ann-bar" id="ann-bar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Lelystad Airport is fully booked</strong> — registration is closed due to high demand. Spots are still available at Den Helder Airport.</span>
+    <a href="#schedule" class="ann-bar-cta">Register for Den Helder →</a>
+  </div>
+
   <!-- NAV -->
   <nav id="navbar">
     <a href="../" style="display:flex;align-items:center;line-height:0;"><img src="../images/01_EFC-logo-diap-RGB.png" alt="Electric Flying Connection" /></a>
@@ -1308,7 +1404,7 @@
       </div>
       <div class="hero-buttons">
         <a href="#schedule" class="btn btn-primary">Register for Den Helder Airport</a>
-        <a href="#schedule" class="btn btn-blue">Register for Lelystad Airport</a>
+        <span class="btn btn-ghost" style="opacity:0.45;cursor:default;text-decoration:line-through;">Lelystad Airport — fully booked</span>
       </div>
     </div>
     <div class="hero-scroll">scroll<span></span></div>
@@ -1550,8 +1646,12 @@
       <div class="event-card blue-event">
         <div class="event-card-header">
           <div class="event-card-header-left">
-            <div class="event-dot"></div>
+            <div class="event-dot" style="background:rgba(239,68,68,0.7);box-shadow:0 0 10px rgba(239,68,68,0.4);"></div>
             <div class="event-card-title">Lelystad Airport</div>
+            <span class="event-full-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Fully Booked
+            </span>
           </div>
           <div style="display:flex;align-items:center;gap:12px;">
             <div class="event-card-date">29 May 2026</div>
@@ -1641,8 +1741,14 @@
           </div>
 
           <hr class="reg-divider">
-          <div class="reg-label">Register for this event</div>
-          <div class="hs-form-frame" data-region="eu1" data-form-id="fd0ebce4-e275-468b-a8f6-577a545fb4dd" data-portal-id="26751098"></div>
+          <div class="reg-label" style="color:#f87171;">Lelystad Airport</div>
+          <div class="reg-closed">
+            <div class="reg-closed-badge">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Fully Booked
+            </div>
+            <p>Registration for Lelystad Airport is closed due to high demand.<br>Spots are still available at Den Helder Airport — register below.</p>
+          </div>
 
         </div>
       </div>
@@ -1743,6 +1849,17 @@
   </footer>
 
   <script>
+    // ── ANNOUNCEMENT BAR OFFSET ──
+    (function() {
+      const bar = document.getElementById('ann-bar');
+      const navbar = document.getElementById('navbar');
+      if (bar && navbar) {
+        function setOffset() { navbar.style.top = bar.offsetHeight + 'px'; }
+        setOffset();
+        window.addEventListener('resize', setOffset);
+      }
+    })();
+
     // ── NAV SCROLL ──
     const nav = document.getElementById('navbar');
     window.addEventListener('scroll', () => {

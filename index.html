@@ -1064,6 +1064,89 @@
       to   { opacity: 1; transform: scale(1) translateY(0); }
     }
 
+    /* ── NEWEST MEMBER BANNER ── */
+    .newest-member {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 24px;
+      margin-bottom: 28px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .newest-member:hover {
+      border-color: var(--green);
+      box-shadow: 0 6px 24px rgba(0,218,157,0.13);
+    }
+
+    .newest-member-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .newest-member-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(0,218,157,0.55);
+      animation: nm-pulse 1.8s ease-out infinite;
+    }
+
+    @keyframes nm-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(0,218,157,0.55); }
+      70%  { box-shadow: 0 0 0 10px rgba(0,218,157,0); }
+      100% { box-shadow: 0 0 0 0 rgba(0,218,157,0); }
+    }
+
+    .newest-member-logo {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .newest-member-text {
+      flex: 1;
+      font-size: 0.95rem;
+      color: var(--dark);
+      line-height: 1.4;
+    }
+
+    .newest-member-text strong {
+      font-weight: 700;
+    }
+
+    .newest-member-date {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 640px) {
+      .newest-member {
+        flex-wrap: wrap;
+        gap: 14px 18px;
+        padding: 16px 18px;
+      }
+      .newest-member-text { flex-basis: 100%; order: 3; font-size: 0.9rem; }
+      .newest-member-date { margin-left: auto; }
+    }
+
     /* ── PHILOSOPHY LOGO VIDEO ── */
     .philosophy-logo-wrap {
       display: flex;
@@ -2208,6 +2291,12 @@
     </div>
 
     <div class="showcase-grid-wrap section-inner">
+      <div class="newest-member reveal">
+        <span class="newest-member-badge">New Member</span>
+        <img class="newest-member-logo" src="images/members/denhelderairport.png" alt="Den Helder Airport">
+        <div class="newest-member-text">We welcome <strong>Den Helder Airport</strong> as our newest member.</div>
+        <span class="newest-member-date">May 2026</span>
+      </div>
       <div class="mf-grid">
         <div class="mf-card" data-cat="oem">        <img src="images/members/elysian.jpg"                  alt="Elysian"><span class="mf-cat-tag">OEM</span></div>
         <div class="mf-card" data-cat="oem">        <img src="images/members/maeve.png"                    alt="Maeve"><span class="mf-cat-tag">OEM</span></div>

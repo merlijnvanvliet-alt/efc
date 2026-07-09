@@ -2286,7 +2286,7 @@
       .join-modal-card { padding: 40px 24px 32px; }
     }
   </style>
-  <script src="https://js-eu1.hsforms.net/forms/embed/26751098.js" defer></script>
+  <script src="https://js-eu1.hsforms.net/forms/embed/v2.js" defer></script>
 </head>
 <body>
 
@@ -3013,11 +3013,29 @@
       const modal = document.getElementById('join-modal');
       if (!modal) return;
       const closeEls = modal.querySelectorAll('[data-join-close]');
+      let formLoaded = false;
+
+      function loadForm(attempt) {
+        if (formLoaded) return;
+        if (typeof hbspt === 'undefined' || !hbspt.forms) {
+          // HubSpot script not ready yet — retry briefly
+          if ((attempt || 0) < 40) setTimeout(() => loadForm((attempt || 0) + 1), 150);
+          return;
+        }
+        formLoaded = true;
+        hbspt.forms.create({
+          region: 'eu1',
+          portalId: '26751098',
+          formId: '88e465a5-aae4-459c-90b6-19dead7808b3',
+          target: '#join-form-target'
+        });
+      }
 
       function openModal(e) {
         if (e) e.preventDefault();
         modal.classList.add('open');
         document.body.classList.add('modal-open');
+        loadForm(); // render the HubSpot form now that its container is visible
       }
       function closeModal() {
         modal.classList.remove('open');
@@ -3049,7 +3067,7 @@
       <div class="join-modal-eyebrow">Membership</div>
       <h3 id="join-modal-title">Join the Electric Flying Connection</h3>
       <p>Leave your details and we'll get in touch about becoming part of the network shaping the future of electric aviation in Europe.</p>
-      <div class="hs-form-frame" data-region="eu1" data-portal-id="26751098" data-form-id="88e465a5-aae4-459c-90b6-19dead7808b3"></div>
+      <div id="join-form-target"></div>
     </div>
   </div>
 </body>

@@ -2212,6 +2212,44 @@
 
     .event-loc-body .hs-form .hs-error-msgs label { color: #ff6b6b !important; }
 
+    /* ── AGENDA ── */
+    #agenda { padding: 96px 40px; background: var(--off); }
+    .agenda-header { max-width: 1120px; margin: 0 auto 40px; }
+    .agenda-header .eyebrow { color: var(--green); }
+    .agenda-header h2 { font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; color: var(--navy); margin-bottom: 12px; }
+    .agenda-header p { font-size: 1rem; color: var(--muted); max-width: 620px; line-height: 1.6; }
+    .agenda-list { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+    .agenda-item {
+      display: flex; align-items: center; gap: 28px;
+      background: var(--white); border: 1px solid var(--border); border-radius: 6px;
+      padding: 26px 30px; text-decoration: none; transition: all 0.25s ease;
+    }
+    .agenda-item:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(13,11,46,0.08); }
+    .agenda-date {
+      flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      width: 96px; padding: 14px 8px; background: var(--navy); border-radius: 6px; color: var(--white);
+    }
+    .agenda-day { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1; text-align: center; }
+    .agenda-month { font-size: 0.68rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--green); margin-top: 6px; }
+    .agenda-body { flex: 1; min-width: 0; }
+    .agenda-badge {
+      display: inline-block; font-size: 0.64rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--green); background: rgba(0,218,157,0.12); padding: 4px 10px; border-radius: 100px; margin-bottom: 10px;
+    }
+    .agenda-body h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); letter-spacing: -0.3px; margin-bottom: 8px; }
+    .agenda-loc { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
+    .agenda-body > p { font-size: 0.88rem; color: var(--muted); line-height: 1.55; max-width: 560px; }
+    .agenda-logo-slot { flex-shrink: 0; display: flex; align-items: center; gap: 22px; }
+    .agenda-logo-slot img { max-height: 52px; max-width: 108px; object-fit: contain; }
+    .agenda-arrow { flex-shrink: 0; color: var(--muted); transition: all 0.25s ease; }
+    .agenda-item:hover .agenda-arrow { color: var(--green); transform: translateX(4px); }
+    @media (max-width: 720px) {
+      #agenda { padding: 64px 20px; }
+      .agenda-item { flex-wrap: wrap; gap: 16px 20px; padding: 22px; }
+      .agenda-arrow { display: none; }
+      .agenda-logo-slot { order: 5; }
+    }
+
     /* ── JOIN / MEMBERSHIP MODAL ── */
     .join-modal {
       position: fixed;
@@ -2291,12 +2329,12 @@
 <body>
 
   <!-- TICKER -->
-  <a href="beta/" class="ticker-bar">
+  <a href="#agenda" class="ticker-bar">
     <div class="ticker-label">News</div>
     <div class="ticker-track">
       <div class="ticker-inner">
-        <span>The Beta Demonstration Flights on 29 May were a great success — thank you to all participants at Den Helder Airport and Lelystad Airport!</span>
-        <span>The Beta Demonstration Flights on 29 May were a great success — thank you to all participants at Den Helder Airport and Lelystad Airport!</span>
+        <span>EFC is at the Farnborough International Airshow — 20–24 July 2026, Farnborough (UK). Come and meet us on-site!&nbsp;&nbsp;·&nbsp;&nbsp;The Beta Demonstration Flights on 29 May were a great success — thank you to all participants at Den Helder Airport and Lelystad Airport!</span>
+        <span>EFC is at the Farnborough International Airshow — 20–24 July 2026, Farnborough (UK). Come and meet us on-site!&nbsp;&nbsp;·&nbsp;&nbsp;The Beta Demonstration Flights on 29 May were a great success — thank you to all participants at Den Helder Airport and Lelystad Airport!</span>
       </div>
     </div>
   </a>
@@ -2307,6 +2345,7 @@
     <ul>
       <li><a href="#mission">Mission</a></li>
       <li><a href="#event">Events</a></li>
+      <li><a href="#agenda">Agenda</a></li>
       <li><a href="#aircraft-timeline">Aircraft Timeline</a></li>
       <li><a href="#vision">Vision</a></li>
       <li><a href="#team-preview">Team</a></li>
@@ -2320,7 +2359,7 @@
   <section id="hero">
     <div class="yt-bg">
       <iframe
-        src="https://www.youtube.com/embed/TJCNyKefX0Y?autoplay=1&mute=1&loop=1&playlist=TJCNyKefX0Y&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1"
+        src="https://www.youtube.com/embed/S07bdPcEPCM?autoplay=1&mute=1&loop=1&playlist=S07bdPcEPCM&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
         title="EFC background">
@@ -2403,6 +2442,41 @@
 
   </section>
 
+  <!-- AGENDA -->
+  <section id="agenda">
+    <div class="agenda-header reveal">
+      <div class="eyebrow">Agenda</div>
+      <h2>Where to find EFC</h2>
+      <p>Meet the Electric Flying Connection at upcoming industry events across Europe. Want to connect? Reach out and we'll arrange a meeting on-site.</p>
+    </div>
+    <div class="agenda-list stagger">
+
+      <a href="https://www.farnboroughairshow.com/" target="_blank" rel="noopener" class="agenda-item">
+        <div class="agenda-date">
+          <span class="agenda-day">20–24</span>
+          <span class="agenda-month">Jul 2026</span>
+        </div>
+        <div class="agenda-body">
+          <span class="agenda-badge">EFC present</span>
+          <h3>Farnborough International Airshow</h3>
+          <div class="agenda-loc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Farnborough, United Kingdom
+          </div>
+          <p>One of the world's leading aerospace events. Find EFC at the <strong>NAG (Netherlands Aerospace Group)</strong> stand to talk electric aviation, membership and the European value chain.</p>
+        </div>
+        <div class="agenda-logo-slot">
+          <img src="images/fanboroughlogo.webp" alt="Farnborough International Airshow">
+          <img src="images/NAG%20logo.jpg" alt="Netherlands Aerospace Group (NAG)">
+        </div>
+        <div class="agenda-arrow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
   <!-- MISSION -->
   <section id="mission">
     <div class="mission-inner">
@@ -2468,142 +2542,6 @@
         <img class="event-partner-logo" src="images/members/provincienoordholland.jpg"      alt="Provincie Noord-Holland">
         <img class="event-partner-logo" src="images/members/provincieflevoland.png"         alt="Provincie Flevoland">
         <img class="event-partner-logo" src="images/esmartavia.jpg"                         alt="eSmart Aviation">
-      </div>
-    </div>
-
-    <!-- Schedule -->
-    <div class="event-schedule-section">
-      <div class="event-journey stagger">
-
-        <div class="event-location denhelder">
-          <div class="event-loc-header">
-            <div class="event-loc-header-left">
-              <div class="event-loc-dot"></div>
-              <div class="event-loc-name">Den Helder Airport</div>
-            </div>
-            <img class="event-loc-logo" src="images/den%20helder%20logo.png" alt="Den Helder Airport">
-          </div>
-          <div class="event-loc-body">
-            <div class="event-sched-item">
-              <div class="event-time">08:30</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Event opens</div><div class="event-sched-sub">Doors open — welcome coffee &amp; registration</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">08:45</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Opening programme</div><div class="event-sched-sub">Welcome by EFC &amp; Den Helder Airport</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">09:00</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Panel: The Future Electric Vertiport</div><div class="event-sched-sub">Discussion on the role of Den Helder Airport in European electric aviation</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">10:00</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Arrival of Beta ALIA CX300</div><div class="event-sched-sub">Live landing at Den Helder Airport — viewing on the apron</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">10:45</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Aircraft viewing</div><div class="event-sched-sub">Up-close access to the Beta ALIA CX300, including Beta's CUBE — a portable, modular charging system</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">12:00</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Departure to Lelystad Airport</div><div class="event-sched-sub">72 km electric inter-airport flight</div></div>
-            </div>
-            <hr class="reg-divider">
-            <div class="reg-label" style="color:var(--green);">Den Helder Airport</div>
-            <div style="background:rgba(0,218,157,0.05);border:1px solid rgba(0,218,157,0.2);border-radius:12px;padding:24px 20px;text-align:center;">
-              <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,218,157,0.12);border:1px solid rgba(0,218,157,0.25);color:var(--green);font-size:0.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:32px;margin-bottom:10px;">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Event Completed
-              </div>
-              <p style="font-size:0.84rem;color:rgba(255,255,255,0.35);line-height:1.6;">The Den Helder Airport event on 29 May was a great success. Thank you to all attendees!</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="event-connector">
-          <div class="event-connector-line"></div>
-          <div class="event-connector-plane">✈</div>
-          <div class="event-connector-line"></div>
-          <div class="event-connector-dist">72 km</div>
-        </div>
-
-        <div class="event-location lelystad">
-          <div class="event-loc-header">
-            <div class="event-loc-header-left">
-              <div class="event-loc-dot"></div>
-              <div class="event-loc-name">Lelystad Airport</div>
-            </div>
-            <img class="event-loc-logo" src="images/members/lelystadairport.png" alt="Lelystad Airport">
-          </div>
-          <div class="event-loc-body">
-            <div class="event-sched-item">
-              <div class="event-time">11:00</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Event opens</div><div class="event-sched-sub">Doors open — welcome coffee &amp; registration</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">11:15</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Opening &amp; vision: LAIA</div><div class="event-sched-sub">Lelystad Airport &amp; Province Flevoland</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">11:30</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Building the Innovation Area</div><div class="event-sched-sub">Lelystad Airport &amp; Province Flevoland</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">12:00</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Panel: Towards the Electric Airport</div><div class="event-sched-sub">EFC &amp; PowerUp</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">13:00</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Arrival of Beta ALIA CX300</div><div class="event-sched-sub">Live landing at Lelystad Airport, with balcony viewing</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">13:10</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Experience sessions</div><div class="event-sched-sub">Aircraft viewing, Urban Sky Lab &amp; Fieldlab ROC</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">14:10</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Electric flight in operation</div><div class="event-sched-sub">Beta Technologies &amp; e-Smart Avia</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">14:30</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Powering the airport: electrification</div><div class="event-sched-sub">Lelystad Airport &amp; NRG2FLY</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">14:50</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Departure Beta ALIA CX300 to Schiphol Oost</div></div>
-            </div>
-            <div class="event-sched-item">
-              <div class="event-time">15:00</div>
-              <div class="ev-dot-wrap"><div class="ev-dot"></div></div>
-              <div><div class="event-sched-label">Networking</div><div class="event-sched-sub">European electric aviation community &amp; regional partners</div></div>
-            </div>
-            <hr class="reg-divider">
-            <div class="reg-label" style="color:var(--blue);">Lelystad Airport</div>
-            <div style="background:rgba(0,165,255,0.05);border:1px solid rgba(0,165,255,0.2);border-radius:12px;padding:24px 20px;text-align:center;">
-              <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,165,255,0.12);border:1px solid rgba(0,165,255,0.25);color:var(--blue);font-size:0.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:32px;margin-bottom:10px;">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Event Completed
-              </div>
-              <p style="font-size:0.84rem;color:rgba(255,255,255,0.35);line-height:1.6;">The Lelystad Airport event on 29 May was a great success. Thank you to all attendees!</p>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
 

@@ -2212,6 +2212,79 @@
 
     .event-loc-body .hs-form .hs-error-msgs label { color: #ff6b6b !important; }
 
+    /* ── JOIN / MEMBERSHIP MODAL ── */
+    .join-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-y: auto;
+      background: rgba(13, 11, 46, 0.72);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .join-modal.open { display: flex; opacity: 1; }
+    .join-modal-card {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      margin: auto;
+      background: var(--white);
+      border-radius: 4px;
+      padding: 48px 44px 40px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+      transform: translateY(16px);
+      transition: transform 0.28s ease;
+    }
+    .join-modal.open .join-modal-card { transform: translateY(0); }
+    .join-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+    }
+    .join-modal-close:hover { background: var(--off); color: var(--text); }
+    .join-modal-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .join-modal-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .join-modal-card > p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 26px;
+      line-height: 1.55;
+    }
+    body.modal-open { overflow: hidden; }
+    @media (max-width: 520px) {
+      .join-modal { padding: 20px 12px; }
+      .join-modal-card { padding: 40px 24px 32px; }
+    }
   </style>
   <script src="https://js-eu1.hsforms.net/forms/embed/26751098.js" defer></script>
 </head>
@@ -2239,7 +2312,7 @@
       <li><a href="#team-preview">Team</a></li>
       <li><a href="#members-showcase">Members</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#contact" class="nav-cta">Join EFC</a></li>
+      <li><a href="#join" class="nav-cta" data-join>Join EFC</a></li>
     </ul>
   </nav>
 
@@ -2260,7 +2333,7 @@
       <p>We connect the organisations, knowledge and infrastructure needed to build a complete value chain for electric flying.</p>
       <div class="hero-buttons">
         <a href="#mission" class="btn btn-primary">Our Mission</a>
-        <a href="#contact" class="btn btn-ghost">Join the Network</a>
+        <a href="#join" class="btn btn-ghost" data-join>Join the Network</a>
       </div>
     </div>
     <div class="hero-scroll">scroll<span></span></div>
@@ -2345,7 +2418,7 @@
         <p>
           By working together, we establish electric airlines, flying schools, and electric regional aviation across Europe.
         </p>
-        <a href="#contact" class="btn btn-primary">Become a Member</a>
+        <a href="#join" class="btn btn-primary" data-join>Become a Member</a>
       </div>
     </div>
   </section>
@@ -2741,7 +2814,7 @@
           <div class="member-price-main">€1,500 <span>/ year</span></div>
           <div class="member-price-sub">+ €750 starting fee <em>(one-time)</em></div>
         </div>
-        <a href="#contact" class="btn btn-primary">Apply for Full Membership</a>
+        <a href="#join" class="btn btn-primary" data-join>Apply for Full Membership</a>
       </div>
 
     </div>
@@ -2933,6 +3006,51 @@
         });
       });
     });
+
+    // ── Join / membership modal ──
+    // Wait for DOMContentLoaded so the modal markup (placed after this script) exists.
+    document.addEventListener('DOMContentLoaded', function() {
+      const modal = document.getElementById('join-modal');
+      if (!modal) return;
+      const closeEls = modal.querySelectorAll('[data-join-close]');
+
+      function openModal(e) {
+        if (e) e.preventDefault();
+        modal.classList.add('open');
+        document.body.classList.add('modal-open');
+      }
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.classList.remove('modal-open');
+        // clear #join from the URL so a refresh doesn't reopen it
+        if (location.hash === '#join') {
+          history.replaceState(null, '', location.pathname + location.search);
+        }
+      }
+
+      document.querySelectorAll('[data-join]').forEach(el => el.addEventListener('click', openModal));
+      closeEls.forEach(el => el.addEventListener('click', closeModal));
+      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      });
+
+      // Auto-open when arriving with #join (e.g. from the team page)
+      if (location.hash === '#join') openModal();
+    });
   </script>
+
+  <!-- JOIN / MEMBERSHIP MODAL -->
+  <div class="join-modal" id="join-modal" role="dialog" aria-modal="true" aria-labelledby="join-modal-title">
+    <div class="join-modal-card">
+      <button class="join-modal-close" data-join-close aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="join-modal-eyebrow">Membership</div>
+      <h3 id="join-modal-title">Join the Electric Flying Connection</h3>
+      <p>Leave your details and we'll get in touch about becoming part of the network shaping the future of electric aviation in Europe.</p>
+      <div class="hs-form-frame" data-region="eu1" data-portal-id="26751098" data-form-id="88e465a5-aae4-459c-90b6-19dead7808b3"></div>
+    </div>
+  </div>
 </body>
 </html>

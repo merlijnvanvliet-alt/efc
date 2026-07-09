@@ -192,10 +192,10 @@
       border: none;
     }
 
-    @media (max-width: 768px) {
-      .yt-bg iframe { display: none; }
-      #hero { background-color: #0d0b2e; }
-    }
+    /* Solid navy fallback behind the video (shown while it loads, and on any
+       device that blocks autoplay). The .yt-bg iframe cover rule above keeps
+       the 16:9 video filling the hero on mobile/portrait too. */
+    #hero { background-color: #0d0b2e; }
 
     .hero-overlay {
       position: absolute;

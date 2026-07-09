@@ -2239,15 +2239,23 @@
     .agenda-body h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); letter-spacing: -0.3px; margin-bottom: 8px; }
     .agenda-loc { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
     .agenda-body > p { font-size: 0.88rem; color: var(--muted); line-height: 1.55; max-width: 560px; }
-    .agenda-logo-slot { flex-shrink: 0; display: flex; align-items: center; gap: 22px; }
-    .agenda-logo-slot img { max-height: 52px; max-width: 108px; object-fit: contain; }
+    .agenda-logo-slot {
+      flex-shrink: 0; display: flex; align-items: center; gap: 26px;
+      padding-left: 28px; border-left: 1px solid var(--border);
+    }
+    .agenda-logo-slot img { max-height: 72px; max-width: 150px; object-fit: contain; }
     .agenda-arrow { flex-shrink: 0; color: var(--muted); transition: all 0.25s ease; }
     .agenda-item:hover .agenda-arrow { color: var(--green); transform: translateX(4px); }
     @media (max-width: 720px) {
       #agenda { padding: 64px 20px; }
-      .agenda-item { flex-wrap: wrap; gap: 16px 20px; padding: 22px; }
+      .agenda-item { flex-wrap: wrap; gap: 18px 20px; padding: 24px 22px; }
       .agenda-arrow { display: none; }
-      .agenda-logo-slot { order: 5; }
+      .agenda-logo-slot {
+        order: 5; width: 100%; justify-content: center; gap: 32px;
+        padding-left: 0; padding-top: 22px;
+        border-left: none; border-top: 1px solid var(--border);
+      }
+      .agenda-logo-slot img { max-height: 66px; max-width: 42%; }
     }
 
     /* ── JOIN / MEMBERSHIP MODAL ── */

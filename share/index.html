@@ -154,6 +154,9 @@
     .btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2); }
     .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.5); }
 
+    .btn-blue { background: var(--blue); color: var(--navy); border-color: var(--blue); }
+    .btn-blue:hover { background: #33b7ff; }
+
     .actions {
       margin-top: 14px;
       display: flex;
@@ -208,10 +211,14 @@
     </div>
 
     <div class="actions">
+      <a class="btn btn-blue" id="email" href="#">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Create email
+      </a>
       <a class="btn btn-ghost" id="open" href="#" target="_blank" rel="noopener">Open preview</a>
     </div>
 
-    <p class="hint">Tip: bookmark this page. Send the copied link to the prospect — they'll see a presentation that greets them by name.</p>
+    <p class="hint">Tip: bookmark this page. <strong>Create email</strong> opens a ready-to-send invitation in your mail app — just add the recipient. Or use <strong>Copy link</strong> to share the personalised presentation yourself.</p>
 
     <a class="board-back" href="../">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
@@ -225,12 +232,37 @@
     var linkEl  = document.getElementById('link');
     var openEl  = document.getElementById('open');
     var copyEl  = document.getElementById('copy');
+    var emailEl = document.getElementById('email');
 
     // Base URL of the presentation page, resolved relative to this tool.
     var base = new URL('../presentation/', window.location.href).href; // .../presentation/
 
     function esc(s) {
       return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function buildMailto(name, url) {
+      var who = name || 'there';
+      var subject = name
+        ? 'An invitation to the Electric Flying Connection — for ' + name
+        : 'An invitation to the Electric Flying Connection';
+      var body = [
+        'Hi ' + who + ',',
+        '',
+        'The Netherlands is the country with the most electric flight movements in the world — and the Electric Flying Connection (EFC) is the European network, founded here, that brings the whole ecosystem together: airlines, airports, OEMs, start-ups, governments, universities and consultants.',
+        '',
+        'I put together a short presentation especially for you:',
+        url,
+        '',
+        'It covers who we are, our members, the events we organise (at least three per year) and what membership brings (EUR 1,500 per year plus a one-time EUR 750 onboarding fee). If it sparks your interest, we would be delighted to welcome you to the network.',
+        '',
+        'Kind regards,',
+        '',
+        '[Your name]',
+        'Electric Flying Connection',
+        'www.efc.aero'
+      ].join('\r\n');
+      return 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     }
 
     function update() {
@@ -240,10 +272,12 @@
         var url = base + '?for=' + encodeURIComponent(name);
         linkEl.value = url;
         openEl.href = url;
+        emailEl.href = buildMailto(name, url);
       } else {
         preview.innerHTML = 'Hello potential <em>EFC member!</em>';
         linkEl.value = base;
         openEl.href = base;
+        emailEl.href = buildMailto('', base);
       }
     }
 

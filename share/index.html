@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Personalise presentation — EFC (board)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:  #00DA9D;
+      --blue:   #00A5FF;
+      --dark:   #30297F;
+      --navy:   #0d0b2e;
+      --white:  #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--white);
+      background: var(--navy);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 20px 60px;
+    }
+
+    .board-logo { height: 34px; margin-bottom: 36px; }
+
+    .board-card {
+      width: 100%;
+      max-width: 560px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 36px;
+    }
+
+    .board-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+
+    .board-card h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .board-card > p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 10px;
+    }
+
+    #name {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    #name:focus { outline: none; border-color: var(--green); }
+    #name::placeholder { color: rgba(255,255,255,0.3); }
+
+    .preview-label {
+      margin-top: 24px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .preview-greeting {
+      margin-top: 10px;
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: var(--white);
+    }
+    .preview-greeting em { font-style: normal; color: var(--green); }
+
+    .link-box {
+      margin-top: 22px;
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    #link {
+      flex: 1;
+      min-width: 0;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
+      border-radius: 10px;
+      padding: 13px 14px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 20px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary { background: var(--green); color: var(--navy); border-color: var(--green); }
+    .btn-primary:hover { background: #00f0ae; }
+
+    .btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2); }
+    .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.5); }
+
+    .actions {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .actions .btn { flex: 1; }
+
+    .board-back {
+      margin-top: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.45);
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+    .board-back:hover { color: var(--green); }
+
+    .hint {
+      margin-top: 20px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 520px) {
+      .board-card { padding: 26px; }
+      .link-box { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <img class="board-logo" src="../images/01_EFC-logo-diap-RGB.png" alt="Electric Flying Connection" />
+
+  <div class="board-card">
+    <span class="board-tag">Board tool</span>
+    <h1>Personalise the presentation</h1>
+    <p>Type the name of the organisation or person you want to send the New Members presentation to. We'll generate a personal link with a tailored greeting.</p>
+
+    <label for="name">Organisation or contact name</label>
+    <input id="name" type="text" placeholder="e.g. KLM, Lelystad Airport, John…" autocomplete="off" autofocus />
+
+    <div class="preview-label">Greeting preview</div>
+    <div class="preview-greeting" id="preview">Hello potential <em>EFC member!</em></div>
+
+    <div class="preview-label" style="margin-top:24px;">Shareable link</div>
+    <div class="link-box">
+      <input id="link" type="text" readonly />
+      <button class="btn btn-primary" id="copy" type="button">Copy link</button>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-ghost" id="open" href="#" target="_blank" rel="noopener">Open preview</a>
+    </div>
+
+    <p class="hint">Tip: bookmark this page. Send the copied link to the prospect — they'll see a presentation that greets them by name.</p>
+
+    <a class="board-back" href="../">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to EFC
+    </a>
+  </div>
+
+  <script>
+    var input   = document.getElementById('name');
+    var preview = document.getElementById('preview');
+    var linkEl  = document.getElementById('link');
+    var openEl  = document.getElementById('open');
+    var copyEl  = document.getElementById('copy');
+
+    // Base URL of the presentation page, resolved relative to this tool.
+    var base = new URL('../presentation/', window.location.href).href; // .../presentation/
+
+    function esc(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function update() {
+      var name = input.value.replace(/[<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 80);
+      if (name) {
+        preview.innerHTML = 'Hello <em>' + esc(name) + '!</em>';
+        var url = base + '?for=' + encodeURIComponent(name);
+        linkEl.value = url;
+        openEl.href = url;
+      } else {
+        preview.innerHTML = 'Hello potential <em>EFC member!</em>';
+        linkEl.value = base;
+        openEl.href = base;
+      }
+    }
+
+    copyEl.addEventListener('click', function () {
+      linkEl.select();
+      var done = function () {
+        var prev = copyEl.textContent;
+        copyEl.textContent = 'Copied!';
+        setTimeout(function () { copyEl.textContent = prev; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(linkEl.value).then(done, function () { document.execCommand('copy'); done(); });
+      } else {
+        document.execCommand('copy');
+        done();
+      }
+    });
+
+    input.addEventListener('input', update);
+    update();
+  </script>
+
+</body>
+</html>

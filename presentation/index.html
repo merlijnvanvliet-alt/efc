@@ -186,6 +186,24 @@
     .btn-ghost { background: transparent; color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.2); }
     .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
 
+    .deck-forward {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 22px;
+      padding: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.86rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+    }
+    .deck-forward:hover { color: var(--green); }
+    .deck-forward svg { flex-shrink: 0; }
+
     /* ── STATS BAR ── */
     .deck-stats {
       max-width: 1160px;
@@ -507,6 +525,10 @@
       </a>
       <a href="../#join" class="btn btn-ghost">Become a member</a>
     </div>
+    <button type="button" class="deck-forward" id="forward-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      Know a colleague who'd find this interesting? Forward it
+    </button>
   </header>
 
   <!-- STATS BAR -->
@@ -651,6 +673,30 @@
       // Weave the name into the FAQ questions/answers and the board intro.
       document.querySelectorAll('.pers-org').forEach(function (el) { el.textContent = name; });
       document.title = 'For ' + name + ' — EFC';
+    })();
+
+    // "Forward it" — let the recipient share this page with a colleague.
+    (function () {
+      var btn = document.getElementById('forward-btn');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var url = window.location.href;
+        var text = 'The European network for electric aviation — thought this might interest you.';
+        if (navigator.share) {
+          navigator.share({ title: 'Electric Flying Connection', text: text, url: url }).catch(function () {});
+          return;
+        }
+        var subject = 'Might be interesting for you — Electric Flying Connection';
+        var body = [
+          'Hi,',
+          '',
+          'I came across the Electric Flying Connection — the European network for electric aviation — and thought this could be interesting for you or someone in our organisation:',
+          url,
+          '',
+          'It is a short presentation about who they are, their members and the events they organise.'
+        ].join('\r\n');
+        window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      });
     })();
   </script>
 

@@ -116,7 +116,7 @@
       align-items: stretch;
     }
 
-    #link {
+    #link, #subject {
       flex: 1;
       min-width: 0;
       background: rgba(255,255,255,0.05);
@@ -130,6 +130,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+    #subject:focus { outline: none; border-color: var(--green); }
 
     .btn {
       display: inline-flex;
@@ -164,6 +165,33 @@
       flex-wrap: wrap;
     }
     .actions .btn { flex: 1; }
+
+    .btn-sm { padding: 9px 16px; font-size: 0.8rem; }
+
+    .email-head {
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    textarea#emailBody {
+      width: 100%;
+      margin-top: 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-family: inherit;
+      font-size: 0.86rem;
+      line-height: 1.6;
+      resize: vertical;
+    }
+    textarea#emailBody:focus { outline: none; border-color: var(--green); }
 
     .board-back {
       margin-top: 28px;
@@ -211,14 +239,27 @@
     </div>
 
     <div class="actions">
-      <a class="btn btn-blue" id="email" href="#">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        Create email
-      </a>
       <a class="btn btn-ghost" id="open" href="#" target="_blank" rel="noopener">Open preview</a>
     </div>
 
-    <p class="hint">Tip: bookmark this page. <strong>Create email</strong> opens a ready-to-send invitation in your mail app — just add the recipient. Or use <strong>Copy link</strong> to share the personalised presentation yourself.</p>
+    <div class="email-head">
+      <div class="preview-label" style="margin:0;">Email template</div>
+      <button class="btn btn-blue btn-sm" id="copyEmail" type="button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy email
+      </button>
+    </div>
+
+    <label for="subject" style="margin-top:14px;">Subject</label>
+    <div class="link-box">
+      <input id="subject" type="text" readonly />
+      <button class="btn btn-ghost btn-sm" id="copySubject" type="button">Copy</button>
+    </div>
+
+    <label for="emailBody" style="margin-top:14px;">Message</label>
+    <textarea id="emailBody" readonly rows="13"></textarea>
+
+    <p class="hint">Tip: bookmark this page. <strong>Copy email</strong> copies the subject and message so you can paste them straight into your mail app — just fill in your name and add the recipient.</p>
 
     <a class="board-back" href="../">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
@@ -227,12 +268,15 @@
   </div>
 
   <script>
-    var input   = document.getElementById('name');
-    var preview = document.getElementById('preview');
-    var linkEl  = document.getElementById('link');
-    var openEl  = document.getElementById('open');
-    var copyEl  = document.getElementById('copy');
-    var emailEl = document.getElementById('email');
+    var input       = document.getElementById('name');
+    var preview     = document.getElementById('preview');
+    var linkEl      = document.getElementById('link');
+    var openEl      = document.getElementById('open');
+    var copyEl      = document.getElementById('copy');
+    var subjectEl   = document.getElementById('subject');
+    var bodyEl      = document.getElementById('emailBody');
+    var copyEmailEl = document.getElementById('copyEmail');
+    var copySubjectEl = document.getElementById('copySubject');
 
     // Base URL of the presentation page, resolved relative to this tool.
     var base = new URL('../presentation/', window.location.href).href; // .../presentation/
@@ -241,7 +285,7 @@
       return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
-    function buildMailto(name, url) {
+    function buildEmail(name, url) {
       var who = name || 'there';
       var subject = name
         ? 'An invitation to the Electric Flying Connection — for ' + name
@@ -261,39 +305,51 @@
         '[Your name]',
         'Electric Flying Connection',
         'www.efc.aero'
-      ].join('\r\n');
-      return 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      ].join('\n');
+      return { subject: subject, body: body };
     }
 
     function update() {
       var name = input.value.replace(/[<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 80);
+      var url;
       if (name) {
         preview.innerHTML = 'Hello <em>' + esc(name) + '!</em>';
-        var url = base + '?for=' + encodeURIComponent(name);
-        linkEl.value = url;
-        openEl.href = url;
-        emailEl.href = buildMailto(name, url);
+        url = base + '?for=' + encodeURIComponent(name);
       } else {
         preview.innerHTML = 'Hello potential <em>EFC member!</em>';
-        linkEl.value = base;
-        openEl.href = base;
-        emailEl.href = buildMailto('', base);
+        url = base;
+      }
+      linkEl.value = url;
+      openEl.href = url;
+      var email = buildEmail(name, url);
+      subjectEl.value = email.subject;
+      bodyEl.value = email.body;
+    }
+
+    // Copy `text` to the clipboard and flash confirmation on `btn`.
+    function copyText(text, btn, okLabel) {
+      var prev = btn.textContent;
+      var done = function () {
+        btn.textContent = okLabel || 'Copied!';
+        setTimeout(function () { btn.textContent = prev; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, done);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        done();
       }
     }
 
-    copyEl.addEventListener('click', function () {
-      linkEl.select();
-      var done = function () {
-        var prev = copyEl.textContent;
-        copyEl.textContent = 'Copied!';
-        setTimeout(function () { copyEl.textContent = prev; }, 1600);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(linkEl.value).then(done, function () { document.execCommand('copy'); done(); });
-      } else {
-        document.execCommand('copy');
-        done();
-      }
+    copyEl.addEventListener('click', function () { copyText(linkEl.value, copyEl); });
+    copySubjectEl.addEventListener('click', function () { copyText(subjectEl.value, copySubjectEl); });
+    copyEmailEl.addEventListener('click', function () {
+      copyText('Subject: ' + subjectEl.value + '\n\n' + bodyEl.value, copyEmailEl);
     });
 
     input.addEventListener('input', update);

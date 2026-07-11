@@ -2068,6 +2068,103 @@
       .event-connector-line { width: 40px; height: 2px; }
     }
 
+    /* ── PRESENTATION CTA ── */
+    #presentation-cta {
+      background: linear-gradient(160deg, #1a1460 0%, #0d0b2e 70%);
+      padding: 100px 64px;
+    }
+
+    .pcta-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .pcta-visual {
+      display: block;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    }
+
+    .pcta-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .pcta-visual:hover img { transform: scale(1.03); }
+
+    .pcta-play {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 66px; height: 66px;
+      border-radius: 50%;
+      background: rgba(0,218,157,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .pcta-visual:hover .pcta-play { transform: translate(-50%, -50%) scale(1.08); background: #00f0ae; }
+    .pcta-play svg { color: var(--navy); }
+
+    .pcta-badge {
+      position: absolute;
+      top: 16px; left: 16px;
+      background: rgba(13,11,46,0.85);
+      color: var(--white);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 32px;
+      backdrop-filter: blur(6px);
+    }
+
+    .pcta-text .eyebrow { color: var(--green); }
+
+    .pcta-text h2 {
+      color: var(--white);
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+    .pcta-text h2 em { font-style: normal; color: var(--green); }
+
+    .pcta-text p {
+      color: rgba(255,255,255,0.55);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    .pcta-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    @media (max-width: 960px) {
+      #presentation-cta { padding: 72px 28px; }
+      .pcta-inner { grid-template-columns: 1fr; gap: 36px; }
+      .pcta-visual { order: -1; }
+    }
+
+    @media (max-width: 600px) {
+      #presentation-cta { padding: 60px 20px; }
+      .pcta-buttons .btn { width: 100%; justify-content: center; }
+    }
+
     /* ── RESPONSIVE ── */
     /* ── LAPTOP: tighten nav so all items stay on one line ── */
     @media (max-width: 1300px) {
@@ -2636,7 +2733,7 @@
         <div class="tl-specs">
           <div class="tl-spec-row"><span class="tl-spec-key">Pilots</span><span class="tl-spec-val">1</span></div>
           <div class="tl-spec-row"><span class="tl-spec-key">Passengers</span><span class="tl-spec-val">5 pax</span></div>
-          <div class="tl-spec-row"><span class="tl-spec-key">Range</span><span class="tl-spec-val">500 km</span></div>
+          <div class="tl-spec-row"><span class="tl-spec-key">Range</span><span class="tl-spec-val">400 km</span></div>
           <div class="tl-spec-row"><span class="tl-spec-key">Battery</span><span class="tl-spec-val">250 kWh</span></div>
           <div class="tl-spec-row"><span class="tl-spec-key">Connector</span><span class="tl-spec-val">CCS</span></div>
           <div class="tl-spec-row"><span class="tl-spec-key">Energy &lt;45 min turnaround</span><span class="tl-spec-val">330 kW</span></div>
@@ -2776,6 +2873,28 @@
         <a href="#join" class="btn btn-primary" data-join>Apply for Full Membership</a>
       </div>
 
+    </div>
+  </section>
+
+  <!-- NEW MEMBERS PRESENTATION -->
+  <section id="presentation-cta">
+    <div class="pcta-inner">
+      <a class="pcta-visual reveal-left" href="presentation/" aria-label="Open the EFC New Members presentation">
+        <img src="images/presentation-cover.jpg" alt="EFC New Members presentation" />
+        <span class="pcta-badge">New Members</span>
+        <span class="pcta-play">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+      </a>
+      <div class="pcta-text reveal-right">
+        <div class="eyebrow">New to EFC?</div>
+        <h2>Discover EFC in a <em>short presentation</em></h2>
+        <p>Curious what the Electric Flying Connection is about? Our New Members presentation covers who we are, our members, the events we organise and what membership brings — perfect to explore yourself or share with a colleague in your organisation.</p>
+        <div class="pcta-buttons">
+          <a href="presentation/" class="btn btn-primary">View presentation</a>
+          <a href="presentation/EFC-New-Members.pdf" target="_blank" rel="noopener" class="btn btn-ghost">Download PDF</a>
+        </div>
+      </div>
     </div>
   </section>
 

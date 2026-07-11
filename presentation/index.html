@@ -186,6 +186,50 @@
     .btn-ghost { background: transparent; color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.2); }
     .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
 
+    /* ── STATS BAR ── */
+    .deck-stats {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 8px 64px 0;
+      width: 100%;
+    }
+
+    .deck-stats-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .deck-stat {
+      background: #14113a;
+      padding: 26px 18px;
+      text-align: center;
+    }
+
+    .deck-stat-num {
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      font-weight: 800;
+      color: var(--green);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .deck-stat-label {
+      margin-top: 9px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.35;
+    }
+
+    @media (max-width: 700px) {
+      .deck-stats-inner { grid-template-columns: 1fr 1fr; }
+    }
+
     /* ── PDF VIEWER ── */
     .deck-viewer-wrap {
       max-width: 1160px;
@@ -408,6 +452,7 @@
       nav { padding: 16px 28px; }
       nav ul { gap: 18px; }
       .deck-header { padding: 130px 28px 28px; }
+      .deck-stats { padding: 8px 28px 0; }
       .deck-viewer-wrap { padding: 16px 28px 0; }
       .deck-faq { padding: 40px 28px 60px; }
       .deck-close { padding: 20px 28px 70px; }
@@ -420,6 +465,7 @@
       .deck-header { padding: 120px 20px 24px; }
       .deck-actions { flex-direction: column; }
       .btn { width: 100%; justify-content: center; }
+      .deck-stats { padding: 8px 20px 0; }
       .deck-viewer-wrap { padding: 12px 20px 0; }
       .deck-faq { padding: 32px 20px 50px; }
       .deck-close { padding: 12px 20px 60px; }
@@ -462,6 +508,28 @@
       <a href="../#join" class="btn btn-ghost">Become a member</a>
     </div>
   </header>
+
+  <!-- STATS BAR -->
+  <div class="deck-stats">
+    <div class="deck-stats-inner">
+      <div class="deck-stat">
+        <div class="deck-stat-num">2021</div>
+        <div class="deck-stat-label">Founded</div>
+      </div>
+      <div class="deck-stat">
+        <div class="deck-stat-num">35</div>
+        <div class="deck-stat-label">Members</div>
+      </div>
+      <div class="deck-stat">
+        <div class="deck-stat-num">3+</div>
+        <div class="deck-stat-label">Events per year</div>
+      </div>
+      <div class="deck-stat">
+        <div class="deck-stat-num">Europe</div>
+        <div class="deck-stat-label">The network for electric aviation</div>
+      </div>
+    </div>
+  </div>
 
   <!-- PDF VIEWER -->
   <div class="deck-viewer-wrap">

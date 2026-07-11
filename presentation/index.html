@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Members Presentation — EFC</title>
+  <meta name="description" content="Hello potential EFC member! Discover what the Electric Flying Connection is, who our members are, and why the Netherlands leads the world in electric flight — in one short presentation." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="New Members Presentation — EFC" />
+  <meta property="og:description" content="Discover the Electric Flying Connection and why you should become a member." />
+  <meta property="og:image" content="https://www.efc.aero/images/EFC_logo_social_thumb.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.efc.aero/images/EFC_logo_social_thumb.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:   #00DA9D;
+      --blue:    #00A5FF;
+      --purple:  #B03DAA;
+      --dark:    #30297F;
+      --darker:  #1a1460;
+      --navy:    #0d0b2e;
+      --white:   #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      background: var(--navy);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--green); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 64px;
+      transition: padding 0.4s, background 0.4s, border-color 0.4s, box-shadow 0.4s;
+      border-bottom: 1px solid transparent;
+      background: rgba(13, 11, 46, 0.97);
+      backdrop-filter: blur(16px);
+      border-bottom-color: rgba(255,255,255,0.06);
+    }
+
+    nav img { height: 36px; width: auto; display: block; }
+
+    nav ul { list-style: none; display: flex; gap: 40px; align-items: center; }
+
+    nav a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--white); }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.5) !important;
+      font-size: 0.8rem !important;
+    }
+
+    .nav-back:hover { color: var(--green) !important; }
+
+    .nav-cta {
+      color: var(--white) !important;
+      background: var(--dark);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 9px 22px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--green) !important;
+      border-color: var(--green) !important;
+      color: var(--navy) !important;
+    }
+
+    /* ── PAGE HEADER ── */
+    .deck-header {
+      padding: 140px 64px 32px;
+      max-width: 1160px;
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before, .eyebrow::after {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .deck-header h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+
+    .deck-header h1 em { font-style: normal; color: var(--green); }
+
+    .deck-header p {
+      color: rgba(255,255,255,0.55);
+      font-size: 1.02rem;
+      line-height: 1.7;
+      max-width: 620px;
+      margin: 0 auto 28px;
+    }
+
+    .deck-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.22s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary { background: var(--green); color: var(--navy); border-color: var(--green); }
+    .btn-primary:hover { background: #00f0ae; border-color: #00f0ae; transform: translateY(-2px); }
+
+    .btn-ghost { background: transparent; color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.2); }
+    .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
+
+    /* ── PDF VIEWER ── */
+    .deck-viewer-wrap {
+      max-width: 1160px;
+      margin: 0 auto 40px;
+      padding: 20px 64px 0;
+      width: 100%;
+      flex: 1;
+    }
+
+    .deck-viewer {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .deck-viewer iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    /* Fallback shown when the browser can't embed the PDF (e.g. most mobile browsers) */
+    .deck-fallback {
+      display: none;
+      padding: 48px 28px;
+      text-align: center;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .deck-fallback svg { opacity: 0.4; margin-bottom: 18px; }
+    .deck-fallback h3 { color: var(--white); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .deck-fallback p { font-size: 0.9rem; margin-bottom: 22px; }
+
+    @media (max-width: 768px) {
+      .deck-viewer iframe { display: none; }
+      .deck-viewer { aspect-ratio: auto; }
+      .deck-fallback { display: block; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #070518;
+      padding: 28px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    footer img { height: 24px; opacity: 0.5; }
+    footer p { color: rgba(255,255,255,0.25); font-size: 0.78rem; }
+
+    @media (max-width: 960px) {
+      nav { padding: 16px 28px; }
+      nav ul { gap: 18px; }
+      .deck-header { padding: 130px 28px 28px; }
+      .deck-viewer-wrap { padding: 16px 28px 0; }
+      footer { flex-direction: column; text-align: center; padding: 24px 28px; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      nav ul li.nav-hide-mobile { display: none; }
+      .deck-header { padding: 120px 20px 24px; }
+      .deck-actions { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+      .deck-viewer-wrap { padding: 12px 20px 0; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="../" style="display:flex;align-items:center;line-height:0;"><img src="../images/01_EFC-logo-diap-RGB.png" alt="Electric Flying Connection" /></a>
+    <ul>
+      <li class="nav-hide-mobile">
+        <a href="../" class="nav-back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to EFC
+        </a>
+      </li>
+      <li>
+        <a href="EFC-New-Members.pdf" download class="nav-cta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="deck-header">
+    <div class="eyebrow">New Members</div>
+    <h1>Hello potential <em>EFC member!</em></h1>
+    <p>Discover who we are, meet the organisations already flying with us, and see why the Netherlands leads the world in electric flight — all in one short presentation.</p>
+    <div class="deck-actions">
+      <a href="EFC-New-Members.pdf" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+        Open fullscreen
+      </a>
+      <a href="../#join" class="btn btn-ghost">Become a member</a>
+    </div>
+  </header>
+
+  <!-- PDF VIEWER -->
+  <div class="deck-viewer-wrap">
+    <div class="deck-viewer">
+      <iframe src="EFC-New-Members.pdf#view=FitH" title="EFC New Members presentation"></iframe>
+      <div class="deck-fallback">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <h3>Open the presentation</h3>
+        <p>Your browser can't display the presentation inline. Tap below to open or download it.</p>
+        <a href="EFC-New-Members.pdf" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center;">Open presentation</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="../images/01_EFC-logo-diap-RGB.png" alt="EFC" />
+    <p>&copy; 2024 Electric Flying Connection &mdash; KVK 88739481 &mdash; Airport Teuge, The Netherlands</p>
+  </footer>
+
+</body>
+</html>

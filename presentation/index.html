@@ -276,6 +276,8 @@
 
     .faq-item summary::-webkit-details-marker { display: none; }
 
+    .faq-item summary .faq-q { flex: 1; }
+
     .faq-item summary .faq-icon {
       flex-shrink: 0;
       width: 22px; height: 22px;
@@ -295,9 +297,97 @@
 
     .faq-body strong { color: var(--green); font-weight: 700; }
 
-    .faq-cta {
+    .pers-org { color: var(--green); font-weight: 600; }
+
+    /* ── BOARD + CLOSING ── */
+    .deck-close {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 64px 90px;
+      width: 100%;
       text-align: center;
-      margin-top: 36px;
+    }
+
+    .deck-close h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .deck-close h2 em { font-style: normal; color: var(--green); }
+
+    .deck-close-intro {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.98rem;
+      margin-bottom: 44px;
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 56px;
+    }
+
+    .board-member {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.25s ease;
+    }
+    .board-member:hover { transform: translateY(-4px); }
+
+    .board-member img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.12);
+      margin-bottom: 16px;
+      transition: border-color 0.25s ease;
+    }
+    .board-member:hover img { border-color: var(--green); }
+
+    .board-name {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .board-role {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-top: 4px;
+    }
+
+    .deck-close-cta {
+      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(160deg, rgba(0,218,157,0.08), rgba(13,11,46,0.2));
+      border-radius: 18px;
+      padding: 44px 32px;
+    }
+
+    .deck-close-cta h3 {
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .deck-close-cta p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 26px;
+    }
+
+    @media (max-width: 700px) {
+      .board-grid { grid-template-columns: 1fr; gap: 32px; }
     }
 
     /* ── FOOTER ── */
@@ -319,6 +409,8 @@
       nav ul { gap: 18px; }
       .deck-header { padding: 130px 28px 28px; }
       .deck-viewer-wrap { padding: 16px 28px 0; }
+      .deck-faq { padding: 40px 28px 60px; }
+      .deck-close { padding: 20px 28px 70px; }
       footer { flex-direction: column; text-align: center; padding: 24px 28px; }
     }
 
@@ -329,6 +421,9 @@
       .deck-actions { flex-direction: column; }
       .btn { width: 100%; justify-content: center; }
       .deck-viewer-wrap { padding: 12px 20px 0; }
+      .deck-faq { padding: 32px 20px 50px; }
+      .deck-close { padding: 12px 20px 60px; }
+      .deck-close-cta { padding: 32px 22px; }
       footer { padding: 24px 20px; }
     }
   </style>
@@ -387,41 +482,81 @@
     <p>The most common questions from organisations considering EFC.</p>
 
     <details class="faq-item">
-      <summary>What is the Electric Flying Connection?
+      <summary><span class="faq-q">What is the Electric Flying Connection?</span>
+        
         <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </summary>
-      <div class="faq-body">EFC is the Dutch network that accelerates electric flight. We connect airlines, airports, OEMs, start-ups, governments, universities and consultants so that the Netherlands stays the world leader in electric flight movements — and turns that lead into real, sustainable aviation.</div>
+      <div class="faq-body">The EFC is a <strong>European network, founded in the Netherlands</strong> — the country with the highest number of electric flight movements in the world. We connect airlines, airports, OEMs, start-ups, governments, universities and consultants, and turn that lead into real, sustainable aviation.</div>
     </details>
 
     <details class="faq-item">
-      <summary>What do I get out of being a member?
+      <summary><span class="faq-q">What's in it for <span class="pers-org">you</span>?</span>
+        
         <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </summary>
-      <div class="faq-body">Membership gives you <strong>direct access to the entire electric-aviation ecosystem</strong>: the airlines, airports, manufacturers and authorities you need to move projects forward. You gain first-hand knowledge, new business and partnership opportunities, a seat at the table on policy and infrastructure, and visibility as a frontrunner in sustainable aviation.</div>
+      <div class="faq-body">Membership gives <span class="pers-org">you</span> <strong>direct access to the entire electric-aviation ecosystem</strong>: the airlines, airports, manufacturers and authorities you need to move projects forward. You gain first-hand knowledge, new business and partnership opportunities, a seat at the table on policy and infrastructure, and visibility as a frontrunner in sustainable aviation.</div>
     </details>
 
     <details class="faq-item">
-      <summary>How often do you organise events?
+      <summary><span class="faq-q">How often do you organise events?</span>
+        
         <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </summary>
       <div class="faq-body">We organise <strong>at least three events per year</strong> — from demonstration flights (such as the Beta ALIA CX300 flights in the Netherlands) to network gatherings and knowledge sessions. These are where members meet, share progress and start new collaborations.</div>
     </details>
 
     <details class="faq-item">
-      <summary>Who can become a member?
+      <summary><span class="faq-q">What does membership cost?</span>
+        
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </summary>
+      <div class="faq-body">Membership is <strong>&euro;1,500 per year</strong>, plus a <strong>one-time onboarding fee of &euro;750</strong>. That gives <span class="pers-org">your organisation</span> full access to the network, our events and everything membership brings.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><span class="faq-q">Who can become a member?</span>
+        
         <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </summary>
       <div class="faq-body">Any organisation active in — or serious about — electric flight is welcome: airlines, airports, aircraft manufacturers, start-ups, governments and provinces, universities and knowledge institutes, and specialised consultants. Our members already span all of these categories.</div>
     </details>
 
     <details class="faq-item">
-      <summary>How do I become a member?
+      <summary><span class="faq-q">How does <span class="pers-org">my organisation</span> become a member?</span>
+        
         <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </summary>
-      <div class="faq-body">Simple — let us know you're interested and we'll take it from there. Use the button below to apply, and a board member will reach out to welcome you into the network.</div>
+      <div class="faq-body">Simple — let us know you're interested and we'll take it from there. Use the button below to apply, and one of our board members will personally reach out to welcome <span class="pers-org">you</span> into the network.</div>
     </details>
+  </section>
 
-    <div class="faq-cta">
+  <!-- BOARD + CLOSING CTA -->
+  <section class="deck-close">
+    <div class="eyebrow" style="justify-content:center;">Your hosts</div>
+    <h2>Meet the <em>EFC board</em></h2>
+    <p class="deck-close-intro">The three of us would love to welcome <span class="pers-org">your organisation</span> to the network.</p>
+
+    <div class="board-grid">
+      <a class="board-member" href="https://www.linkedin.com/in/jurjendejong/" target="_blank" rel="noopener">
+        <img src="../images/JurendeJong.jpg" alt="Jurjen de Jong" />
+        <div class="board-name">Jurjen de Jong</div>
+        <div class="board-role">Chairman</div>
+      </a>
+      <a class="board-member" href="https://www.linkedin.com/in/gerbengroothuis/" target="_blank" rel="noopener">
+        <img src="../images/gerbengroothuis.jpeg" alt="Gerben Groothuis" />
+        <div class="board-name">Gerben Groothuis</div>
+        <div class="board-role">Secretary</div>
+      </a>
+      <a class="board-member" href="https://www.linkedin.com/in/merlijnvanvliet/" target="_blank" rel="noopener">
+        <img src="../images/MerlijnvanVliet.jpg" alt="Merlijn van Vliet" />
+        <div class="board-name">Merlijn van Vliet</div>
+        <div class="board-role">Treasurer</div>
+      </a>
+    </div>
+
+    <div class="deck-close-cta">
+      <h3>Ready to join the movement?</h3>
+      <p>Become a member of the Electric Flying Connection and help shape the future of electric flight in Europe.</p>
       <a href="../#join" class="btn btn-primary">Become a member</a>
     </div>
   </section>
@@ -445,6 +580,8 @@
       var esc = name.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       var greeting = document.getElementById('deck-greeting');
       if (greeting) greeting.innerHTML = 'Hello <em>' + esc + '!</em>';
+      // Weave the name into the FAQ questions/answers and the board intro.
+      document.querySelectorAll('.pers-org').forEach(function (el) { el.textContent = name; });
       document.title = 'For ' + name + ' — EFC';
     })();
   </script>

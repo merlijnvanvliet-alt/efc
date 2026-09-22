@@ -1,2 +1,7 @@
 video/
 .DS_Store
+
+# futureroutes: internal source files, not for the live site
+futureroutes/*.docx
+futureroutes/*.mov
+futureroutes/Placeholder_header.mp4

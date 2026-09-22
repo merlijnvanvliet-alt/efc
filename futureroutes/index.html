@@ -33,7 +33,21 @@
       --coral:   #ff6b4a;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;   /* stop iOS inflating text into overflow */
+      text-size-adjust: 100%;
+    }
+
+    img, video, iframe { max-width: 100%; }
+
+    /* Grid and flex children default to min-width:auto, so one wide child
+       (a long nowrap string, the HubSpot iframe) can push a track past the
+       screen. This is the standard guard against that. */
+    .reg-inner > *, .venue-inner > *, .travel-inner > *, .partners-inner > *,
+    .sched-item > *, .arrival-row > *, .prog-card, .reg-card, .travel-map {
+      min-width: 0;
+    }
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
@@ -1030,7 +1044,7 @@
 
       .prog-head { padding: 16px 18px; }
       .prog-body { padding: 22px 18px; }
-      .sched-item { grid-template-columns: 74px 12px 1fr; gap: 0 11px; }
+      .sched-item { grid-template-columns: max-content 12px 1fr; gap: 0 11px; }
       .sched-time { font-size: 0.72rem; }
       .sched-label { font-size: 0.85rem; }
       .members-tag, .public-tag { margin-left: 0; }
@@ -1390,6 +1404,32 @@
   </footer>
 
   <script>
+    // ── ?debug OVERLAY ──
+    // Open the page with ?debug on any device to see what, if anything,
+    // is sticking out past the right edge.
+    if (location.search.includes('debug')) {
+      document.documentElement.classList.remove('locked');
+      setTimeout(() => {
+        const W = document.documentElement.clientWidth, out = [];
+        document.querySelectorAll('*').forEach(el => {
+          const r = el.getBoundingClientRect();
+          if (r.right > W + 1 || r.width > W + 1) {
+            out.push((el.tagName + (typeof el.className === 'string' && el.className ? '.' + el.className.trim().split(/\s+/)[0] : '')) + ' w' + Math.round(r.width) + ' r' + Math.round(r.right));
+          }
+        });
+        const vv = window.visualViewport || {};
+        const box = document.createElement('div');
+        box.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#000;color:#0f0;font:11px/1.45 monospace;padding:10px;max-height:52vh;overflow:auto;white-space:pre-wrap;word-break:break-all';
+        box.textContent =
+          'innerWidth ' + window.innerWidth + '  clientWidth ' + W + '\n' +
+          'scrollWidth ' + document.documentElement.scrollWidth + '  bodyScrollW ' + document.body.scrollWidth + '\n' +
+          'visualViewport ' + Math.round(vv.width || 0) + ' scale ' + (vv.scale || '-') + '  dpr ' + window.devicePixelRatio + '\n' +
+          'UA ' + navigator.userAgent + '\n\n' +
+          'STICKING OUT (' + out.length + '):\n' + (out.slice(0, 25).join('\n') || 'none');
+        document.body.appendChild(box);
+      }, 4000);
+    }
+
     // ── PASSWORD GATE ──
     // Checks a SHA-256 hash so the password is not sitting in the source.
     // Client-side only: enough to keep the preview out of casual view,

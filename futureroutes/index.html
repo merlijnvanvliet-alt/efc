@@ -8,7 +8,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="The routes that will make history — EFC Event 29 October 2026" />
   <meta property="og:description" content="29 October 2026, Amsterdam in Motion. Which electric routes will fly first? Hosted by EFC in collaboration with Vlindair." />
-  <meta property="og:image" content="https://www.efc.aero/images/EFC_logo_social_thumb.png" />
+  <meta property="og:image" content="https://www.efc.aero/futureroutes/share-card.jpg?v=3" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:url" content="https://www.efc.aero/futureroutes/" />
@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The routes that will make history — EFC Event 29 October 2026" />
   <meta name="twitter:description" content="29 October 2026, Amsterdam in Motion. Which electric routes will fly first?" />
-  <meta name="twitter:image" content="https://www.efc.aero/images/EFC_logo_social_thumb.png" />
+  <meta name="twitter:image" content="https://www.efc.aero/futureroutes/share-card.jpg?v=3" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -183,7 +183,10 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
+      transition: opacity 0.45s ease;
     }
+
+    .hero-bg video.swapping { opacity: 0; }
 
     .hero-overlay {
       position: absolute;
@@ -1110,11 +1113,12 @@
 
   <!-- HERO -->
   <section id="hero">
-    <!-- PLACEHOLDER: swap Placeholder_header.mp4 for the final hero video (and add a poster image) -->
+    <!-- Hero clips rotate; add or reorder them in data-clips -->
     <div class="hero-bg">
-      <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="/futureroutes/hero-poster.jpg?v=2">
-        <source src="/futureroutes/Placeholder_header_hq.mp4?v=2" type="video/mp4">
-      </video>
+      <video id="hero-video" autoplay muted playsinline webkit-playsinline preload="auto"
+             poster="/futureroutes/hero-poster.jpg?v=3"
+             src="/futureroutes/hero-1-london.mp4?v=3"
+             data-clips="/futureroutes/hero-1-london.mp4?v=3,/futureroutes/hero-2-paris.mp4?v=3"></video>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -1510,12 +1514,54 @@
     });
 
     // ── HERO VIDEO ──
-    // Autoplay can be refused while the page is still behind the gate, so
-    // kick it off again on unlock and on the first interaction.
+    // Plays the clips in data-clips one after another, fading between them.
+    // Autoplay can be refused (behind the gate, iOS Low Power Mode), so it
+    // is retried on unlock, on tab focus and on the first interaction — and
+    // the poster keeps the hero looking right if it never starts.
     (function() {
-      const video = document.querySelector('.hero-bg video');
+      const video = document.getElementById('hero-video');
       if (!video) return;
+
+      const clips = (video.dataset.clips || '').split(',').filter(Boolean);
+      let index = 0, failures = 0;
+
       const play = () => { const p = video.play(); if (p) p.catch(() => {}); };
+
+      function show(next) {
+        index = (next + clips.length) % clips.length;
+        video.classList.add('swapping');
+        setTimeout(() => {
+          video.src = clips[index];
+          video.load();
+          play();
+          // Never leave the hero faded out if playback does not report back.
+          setTimeout(() => video.classList.remove('swapping'), 2000);
+        }, 450);
+      }
+
+      video.addEventListener('ended', () => { if (clips.length > 1) show(index + 1); else play(); });
+      ['playing', 'loadeddata', 'canplay'].forEach(ev =>
+        video.addEventListener(ev, () => { failures = 0; video.classList.remove('swapping'); }));
+
+      // If a clip cannot load, skip it rather than leave the hero empty.
+      video.addEventListener('error', () => {
+        if (clips.length > 1 && ++failures < clips.length) show(index + 1);
+        else video.classList.remove('swapping');
+      });
+
+      // Fetch the next clip while this one plays, so the swap has no gap.
+      video.addEventListener('playing', function prefetch() {
+        video.removeEventListener('playing', prefetch);
+        if (clips.length < 2) return;
+        setTimeout(() => {
+          const link = document.createElement('link');
+          link.rel = 'prefetch';
+          link.as = 'video';
+          link.href = clips[(index + 1) % clips.length];
+          document.head.appendChild(link);
+        }, 1200);
+      });
+
       play();
       window.addEventListener('efc-unlocked', play);
       document.addEventListener('visibilitychange', () => { if (!document.hidden) play(); });

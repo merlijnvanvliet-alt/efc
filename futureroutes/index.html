@@ -33,7 +33,7 @@
       --coral:   #ff6b4a;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
@@ -87,7 +87,7 @@
     /* ── NAV ── */
     nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 40px; left: 0; right: 0;
       z-index: 100;
       display: flex;
       align-items: center;
@@ -289,6 +289,11 @@
     .reveal-right { transform: translateX(26px); }
 
     .reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: none; }
+
+    /* Sideways reveals would stick out past the right edge on a phone */
+    @media (max-width: 760px) {
+      .reveal-left, .reveal-right { transform: translateY(24px); }
+    }
 
     .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
@@ -565,8 +570,12 @@
     .hs-form-frame, .hs-form-frame iframe { width: 100% !important; border: none; }
 
     .form-panel {
-      background: transparent;
+      /* Light panel so HubSpot's default dark labels stay readable.
+         Once the form's own text is set to white in HubSpot, change
+         `background` to `transparent` and the form sits on the dark card. */
+      background: var(--white);
       border-radius: 14px;
+      padding: 22px 22px 8px;
       min-height: 240px;
     }
 
@@ -575,14 +584,13 @@
        casual view, it is not real security) ── */
     #gate { display: none; }
 
-    html.locked body { overflow: hidden; }
-    html.locked body > *:not(#gate) { display: none !important; }
+    html.locked, html.locked body { overflow: hidden; height: 100%; }
 
     html.locked #gate {
       display: flex;
       position: fixed;
       inset: 0;
-      z-index: 999;
+      z-index: 9999;
       align-items: center;
       justify-content: center;
       padding: 24px;
@@ -990,7 +998,7 @@
 
     @media (max-width: 600px) {
       .ann-bar { padding: 9px 16px; font-size: 0.72rem; gap: 8px; }
-      nav { padding: 14px 20px; }
+      nav { top: 76px; padding: 14px 20px; }
       nav ul li:not(:last-child) { display: none; }
 
       .hero-content { padding: 120px 20px 60px; }
@@ -1390,6 +1398,7 @@
         if (await sha256(input.value.trim().toLowerCase()) === HASH) {
           sessionStorage.setItem('efc-fr', 'ok');
           document.documentElement.classList.remove('locked');
+          window.dispatchEvent(new Event('efc-unlocked'));
         } else {
           error.classList.add('show');
           input.value = '';
@@ -1409,6 +1418,8 @@
       setOffset();
       window.addEventListener('resize', setOffset);
       window.addEventListener('scroll', setOffset, { passive: true });
+      window.addEventListener('load', setOffset);
+      window.addEventListener('efc-unlocked', setOffset);
     })();
 
     // ── NAV SCROLL STATE ──
@@ -1427,8 +1438,12 @@
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger')
-      .forEach(el => observer.observe(el));
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger');
+    revealEls.forEach(el => observer.observe(el));
+
+    // Failsafe: if the observer never fires (hidden tab, unlock timing, an
+    // older browser), show everything rather than leave it faded and offset.
+    setTimeout(() => revealEls.forEach(el => el.classList.add('visible')), 2500);
 
     // ── SPAM-SAFE MAILTO ──
     // The address is base64 in a data attribute and only becomes a real
@@ -1439,6 +1454,19 @@
         window.location.href = 'mailto:' + atob(btn.dataset.mail) + '?subject=' + subject;
       });
     });
+
+    // ── HERO VIDEO ──
+    // Autoplay can be refused while the page is still behind the gate, so
+    // kick it off again on unlock and on the first interaction.
+    (function() {
+      const video = document.querySelector('.hero-bg video');
+      if (!video) return;
+      const play = () => { const p = video.play(); if (p) p.catch(() => {}); };
+      play();
+      window.addEventListener('efc-unlocked', play);
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) play(); });
+      document.addEventListener('click', play, { once: true });
+    })();
 
     // ── COUNTDOWN TO DOORS OPEN ──
     const eventStart = new Date('2026-10-29T08:30:00+01:00');

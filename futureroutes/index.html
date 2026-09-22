@@ -970,6 +970,93 @@
     .travel-list strong { color: rgba(255,255,255,0.85); font-weight: 600; }
     .travel-list em { font-style: normal; color: rgba(255,255,255,0.3); }
 
+
+    /* ── PREVIOUS EVENTS CAROUSEL ── */
+    #previous {
+      background: var(--darker);
+      padding: 80px 0 86px;
+      overflow: hidden;
+    }
+
+    #previous .section-header { padding: 0 64px; }
+
+    .carousel {
+      position: relative;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      padding: 4px 64px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    .slide {
+      flex: 0 0 340px;
+      scroll-snap-align: start;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.03);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .slide:hover { transform: translateY(-4px); border-color: rgba(0,218,157,0.35); }
+
+    .slide img {
+      width: 100%;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide-body { padding: 16px 18px 18px; }
+
+    .slide-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .slide-meta {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.45;
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .carousel-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: rgba(255,255,255,0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .carousel-btn:hover:not(:disabled) { background: var(--green); border-color: var(--green); color: var(--navy); }
+    .carousel-btn:disabled { opacity: 0.25; cursor: default; }
+
     /* ── CLOSING CTA ── */
     .closing {
       background: var(--darker);
@@ -1027,6 +1114,9 @@
       #travel { padding: 56px 28px 70px; }
       .travel-inner { grid-template-columns: 1fr; }
 
+      #previous { padding: 64px 0 70px; }
+      #previous .section-header { padding: 0 28px; }
+      .carousel-track { padding: 4px 28px; }
       .closing { padding: 48px 28px; }
       footer { flex-direction: column; text-align: center; padding: 22px 28px; }
     }
@@ -1060,6 +1150,10 @@
 
       .venue-stats { gap: 22px; }
       .travel-card { padding: 18px 18px; }
+      #previous { padding: 56px 0 60px; }
+      #previous .section-header { padding: 0 20px; }
+      .carousel-track { padding: 4px 20px; gap: 14px; }
+      .slide { flex: 0 0 78%; }
       .closing { padding: 42px 20px; }
       footer { padding: 22px 20px; }
     }
@@ -1106,6 +1200,7 @@
       <li><a href="#programme">Programme</a></li>
       <li><a href="#venue">Venue</a></li>
       <li><a href="#travel">Getting there</a></li>
+      <li><a href="#previous">Previously</a></li>
       <li><a href="#register" class="nav-cta">Register now</a></li>
       <li>
         <a href="/" class="nav-back">
@@ -1402,6 +1497,77 @@
     </div>
   </section>
 
+  <!-- PREVIOUS EVENTS -->
+  <section id="previous">
+    <div class="section-header reveal">
+      <div class="eyebrow">Previously</div>
+      <h2>Where the network<br>has <em>already been</em></h2>
+      <p>Demo flights, partnerships and sessions that got electric aviation in Europe this far.</p>
+    </div>
+
+    <div class="carousel">
+      <div class="carousel-track" id="carousel-track">
+        <figure class="slide">
+          <img src="/futureroutes/events/beta-lelystad-1.jpg" alt="Beta ALIA CX300 demo flights" loading="lazy">
+          <figcaption class="slide-body">
+            <div class="slide-title">Beta ALIA CX300 demo flights</div>
+            <div class="slide-meta">Lelystad Airport · May 2026</div>
+          </figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="/futureroutes/events/beta-lelystad-2.jpg" alt="Up close with the ALIA CX300" loading="lazy">
+          <figcaption class="slide-body">
+            <div class="slide-title">Up close with the ALIA CX300</div>
+            <div class="slide-meta">Lelystad Airport · May 2026</div>
+          </figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="/futureroutes/events/schiphol-electric-flight.jpg" alt="Electric flight at Schiphol" loading="lazy">
+          <figcaption class="slide-body">
+            <div class="slide-title">Electric flight at Schiphol</div>
+            <div class="slide-meta">Amsterdam Airport Schiphol</div>
+          </figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="/futureroutes/events/klm-tour.jpg" alt="The EFC Tour, with KLM" loading="lazy">
+          <figcaption class="slide-body">
+            <div class="slide-title">The EFC Tour, with KLM</div>
+            <div class="slide-meta">Electric Flying Connection Tour</div>
+          </figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="/futureroutes/events/elaad-signing.jpg" alt="Signing the partnership with ElaadNL" loading="lazy">
+          <figcaption class="slide-body">
+            <div class="slide-title">Signing the partnership with ElaadNL</div>
+            <div class="slide-meta">ElaadNL Testlab, Arnhem</div>
+          </figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="/futureroutes/events/schiphol-session.jpg" alt="Industry session at Schiphol" loading="lazy">
+          <figcaption class="slide-body">
+            <div class="slide-title">Industry session at Schiphol</div>
+            <div class="slide-meta">With the EFC network</div>
+          </figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="/futureroutes/events/nlr-powerup.jpg" alt="Electrifying the skies" loading="lazy">
+          <figcaption class="slide-body">
+            <div class="slide-title">Electrifying the skies</div>
+            <div class="slide-meta">With NLR and PowerUp</div>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-btn" id="carousel-prev" aria-label="Previous events" aria-controls="carousel-track">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="carousel-btn" id="carousel-next" aria-label="More events" aria-controls="carousel-track">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
   <!-- CLOSING CTA -->
   <div class="closing">
     <h3>The map gets drawn on <em>29 October</em></h3>
@@ -1576,6 +1742,33 @@
       window.addEventListener('efc-unlocked', play);
       document.addEventListener('visibilitychange', () => { if (!document.hidden) play(); });
       document.addEventListener('click', play, { once: true });
+    })();
+
+    // ── PREVIOUS EVENTS CAROUSEL ──
+    // Native scrolling does the work (so swipe and trackpad just work);
+    // the buttons scroll by one card and disable at either end.
+    (function() {
+      const track = document.getElementById('carousel-track');
+      if (!track) return;
+      const prev = document.getElementById('carousel-prev');
+      const next = document.getElementById('carousel-next');
+
+      function step() {
+        const card = track.querySelector('.slide');
+        return card ? card.getBoundingClientRect().width + 20 : track.clientWidth;
+      }
+
+      function sync() {
+        const max = track.scrollWidth - track.clientWidth - 2;
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= max;
+      }
+
+      prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+      track.addEventListener('scroll', sync, { passive: true });
+      window.addEventListener('resize', sync);
+      sync();
     })();
 
     // ── COUNTDOWN TO DOORS OPEN ──

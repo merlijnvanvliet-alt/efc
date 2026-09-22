@@ -759,7 +759,7 @@
     .sched-by { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
     .sched-by b { color: rgba(0,165,255,0.85); font-weight: 600; }
 
-    .members-tag {
+    .members-tag, .public-tag {
       display: inline-block;
       background: rgba(176,61,170,0.16);
       border: 1px solid rgba(176,61,170,0.35);
@@ -772,6 +772,12 @@
       border-radius: 32px;
       margin-left: 8px;
       vertical-align: middle;
+    }
+
+    .public-tag {
+      background: rgba(0,165,255,0.14);
+      border-color: rgba(0,165,255,0.35);
+      color: #6fcbff;
     }
 
     .prog-notes {
@@ -1027,7 +1033,7 @@
       .sched-item { grid-template-columns: 74px 12px 1fr; gap: 0 11px; }
       .sched-time { font-size: 0.72rem; }
       .sched-label { font-size: 0.85rem; }
-      .members-tag { margin-left: 0; }
+      .members-tag, .public-tag { margin-left: 0; }
 
       .venue-stats { gap: 22px; }
       .travel-card { padding: 18px 18px; }
@@ -1222,7 +1228,7 @@
           <div class="sched-time">09:45 – 10:00</div>
           <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
           <div>
-            <div class="sched-label">Walk-in other guests</div>
+            <div class="sched-label">Walk-in other guests <span class="public-tag">Public part</span></div>
             <div class="sched-by">With a surprise viewing of the projection show <sup style="color:var(--green);">*</sup></div>
           </div>
         </div>

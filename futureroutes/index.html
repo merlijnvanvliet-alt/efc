@@ -649,7 +649,9 @@
     .gate-form input {
       flex: 1;
       font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
+      /* Must stay at 16px: iOS Safari zooms the whole page in when a
+         focused input is smaller, and does not zoom back out afterwards. */
+      font-size: 16px;
       color: var(--white);
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.18);

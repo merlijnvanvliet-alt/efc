@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Future Routes stats — EFC</title>
+  <title>Real-time event dashboard — Future Routes · EFC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -49,10 +49,43 @@
     .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
     .btn.ghost:hover { border-color: var(--green); }
 
+    /* ── Key visual ── */
+    .kv {
+      position: relative; overflow: hidden;
+      min-height: 300px; margin-bottom: 28px;
+      border-radius: 22px; border: 1px solid var(--line);
+      display: flex; align-items: flex-end;
+      background:
+        linear-gradient(90deg, rgba(13,11,46,0.92) 0%, rgba(13,11,46,0.55) 45%, rgba(13,11,46,0) 75%),
+        linear-gradient(0deg, rgba(13,11,46,0.75) 0%, rgba(13,11,46,0) 45%),
+        url('/futureroutes/hero-poster.jpg') right 50% / cover no-repeat,
+        var(--navy);
+    }
+    .kv-body { padding: 34px 36px; max-width: 560px; }
+    .kv-eyebrow {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green);
+      margin-bottom: 12px;
+    }
+    .kv-eyebrow::before { content: ''; width: 26px; height: 2px; background: var(--green); }
+    .kv-live {
+      display: inline-flex; align-items: center; gap: 6px; margin-left: 4px;
+      padding: 3px 9px; border-radius: 20px; letter-spacing: 1.4px;
+      color: var(--white); background: rgba(0,218,157,0.18); border: 1px solid rgba(0,218,157,0.45);
+    }
+    .kv-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: live 1.8s ease-out infinite; }
+    @keyframes live {
+      0%   { box-shadow: 0 0 0 0 rgba(0,218,157,0.6); }
+      70%  { box-shadow: 0 0 0 8px rgba(0,218,157,0); }
+      100% { box-shadow: 0 0 0 0 rgba(0,218,157,0); }
+    }
+    .kv-title { font-size: 3rem; font-weight: 800; letter-spacing: -1.5px; line-height: 1.02; margin-bottom: 12px; }
+    .kv-title em { font-style: normal; color: var(--green); }
+    .kv-sub { font-size: 0.92rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+
     /* ── Password gate ── */
-    .gate { max-width: 380px; margin: 12vh auto 0; text-align: center; }
-    .gate h1 { font-size: 1.3rem; }
-    .gate form { display: flex; gap: 10px; margin-top: 22px; }
+    .gate { max-width: 400px; margin: 36px auto 0; text-align: center; }
+    .gate form { display: flex; gap: 10px; margin-top: 4px; }
     .gate input {
       flex: 1; min-width: 0; font-family: inherit;
       font-size: 16px; /* 16px stops iOS zooming in on focus */
@@ -138,6 +171,9 @@
       .hero-num { font-size: 3.2rem; }
       .kpis { grid-template-columns: 1fr 1fr; }
       header img { height: 28px; }
+      .kv { min-height: 360px; background-position: 0 0, 0 0, 70% 0%, 0 0; }
+      .kv-body { padding: 24px 22px; }
+      .kv-title { font-size: 2.3rem; }
     }
   </style>
 </head>
@@ -151,10 +187,18 @@
       </div>
     </header>
 
+    <!-- Key visual -->
+    <section class="kv">
+      <div class="kv-body">
+        <div class="kv-eyebrow">EFC event team · Future Routes <span class="kv-live"><span class="kv-dot"></span>Live</span></div>
+        <h1 class="kv-title">Real-time<br><em>event dashboard</em></h1>
+        <p class="kv-sub">The routes that will make history · Thursday 29 October 2026 · Amsterdam in Motion</p>
+      </div>
+    </section>
+
     <!-- Password gate: the password is verified by /api/stats, not in this page -->
     <section class="gate" id="gate">
-      <h1>Future Routes stats</h1>
-      <p class="sub">For the EFC event team.</p>
+      <p class="sub">Enter the team password to see the registrations.</p>
       <form id="gate-form">
         <input type="password" id="pw" placeholder="Password" autocomplete="current-password" autofocus>
         <button class="btn" type="submit">Open</button>
@@ -163,8 +207,7 @@
     </section>
 
     <main id="dash" hidden>
-      <h1>Future Routes registrations</h1>
-      <p class="sub">29 October 2026 · Amsterdam in Motion · refreshes every minute</p>
+      <p class="sub">Registrations · refreshes every minute</p>
       <div class="alert" id="alert" hidden></div>
 
       <div class="grid">

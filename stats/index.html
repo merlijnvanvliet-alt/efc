@@ -175,6 +175,10 @@
     th { text-align: left; font-size: 0.68rem; letter-spacing: 1.2px; text-transform: uppercase; color: var(--faint); font-weight: 700; padding: 0 0 10px; }
     td { padding: 9px 0; border-top: 1px solid var(--line); }
     td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+    .idx { width: 2.2em; padding-right: 14px; color: var(--faint); }
+    td.when { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; padding-right: 12px; }
+    th.when { padding-right: 12px; }
+    .sm { display: none; }
 
     .empty { color: var(--faint); font-size: 0.85rem; }
     .note { margin-top: 26px; font-size: 0.75rem; color: var(--faint); line-height: 1.6; }
@@ -202,6 +206,18 @@
       .kv-eyebrow { gap: 8px; }
       .kv-title { font-size: 2.3rem; }
       .kv-sub { font-size: 0.85rem; }
+      .lg { display: none; }
+      .sm { display: inline; }
+      table { font-size: 0.8rem; }
+      th { letter-spacing: 0.8px; }
+      .idx { padding-right: 8px; }
+      .card { padding: 20px 16px 18px; }
+      td { padding-right: 8px; }
+      td.n { padding-right: 0; }
+      td.n.idx, th.n.idx { padding-right: 10px; }
+    }
+    @media (max-width: 360px) {
+      .idx { display: none; }
     }
   </style>
 </head>
@@ -271,7 +287,7 @@
         </div>
 
         <div class="card span-12">
-          <h2>Registrations by organisation</h2>
+          <h2>Organisations · in order of registration</h2>
           <div id="companies"><div class="empty">No registrations yet.</div></div>
         </div>
       </div>
@@ -354,8 +370,8 @@
 
       const companies = d.companies || [];
       $('companies').innerHTML = companies.length ? `
-        <table><thead><tr><th>Organisation</th><th class="n">Registrations</th></tr></thead><tbody>
-        ${companies.map(c => `<tr><td>${esc(c.name)}</td><td class="n">${c.count}</td></tr>`).join('')}
+        <table><thead><tr><th class="n idx">#</th><th>Organisation</th><th class="when"><span class="lg">First registered</span><span class="sm">First</span></th><th class="n"><span class="lg">Registrations</span><span class="sm">Count</span></th></tr></thead><tbody>
+        ${companies.map((c, i) => `<tr><td class="n idx">${i + 1}</td><td>${esc(c.name)}</td><td class="when">${c.firstAt ? fmtTime(c.firstAt) : '–'}</td><td class="n">${c.count}</td></tr>`).join('')}
         </tbody></table>` : '<div class="empty">No registrations yet.</div>';
     }
 

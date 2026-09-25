@@ -55,10 +55,16 @@ module.exports = async (req, res) => {
       for (const a of answers) members[a] = (members[a] || 0) + 1;
     }
 
+    // Organisations in order of their first registration.
     const companies = {};
     for (const r of regs) {
       const c = (r.values.company || '').trim();
-      if (c) companies[c] = (companies[c] || 0) + 1;
+      if (!c) continue;
+      const email = (r.values.email || '').trim().toLowerCase();
+      const first = (email && firstSeen.get(email)) || r.submittedAt;
+      if (!companies[c]) companies[c] = { name: c, count: 0, firstAt: first };
+      companies[c].count++;
+      if (first < companies[c].firstAt) companies[c].firstAt = first;
     }
 
     const count = regs.length;
@@ -72,7 +78,7 @@ module.exports = async (req, res) => {
       latest: submissions.reduce((m, s) => Math.max(m, s.submittedAt || 0), 0) || null,
       perDay,
       members: Object.entries(members).map(([answer, n]) => ({ answer, count: n })).sort((a, b) => b.count - a.count),
-      companies: Object.entries(companies).map(([name, n]) => ({ name, count: n })).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name)),
+      companies: Object.values(companies).sort((a, b) => (a.firstAt || 0) - (b.firstAt || 0)),
       updated: Date.now()
     });
   } catch (err) {

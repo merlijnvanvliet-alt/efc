@@ -1033,6 +1033,7 @@
       align-items: center;
       gap: 12px;
       cursor: default;
+      position: relative;
       transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
       animation: mf-appear 0.3s ease both;
     }
@@ -1116,6 +1117,32 @@
       width: auto;
       object-fit: contain;
       flex-shrink: 0;
+    }
+
+    .newest-member-logos { display: flex; align-items: center; gap: 22px; flex-shrink: 0; }
+    .newest-member-logos .newest-member-logo { max-width: 150px; }
+
+    .mf-card.mf-new { border-color: var(--green); }
+    .mf-new-tag {
+      position: absolute; top: 10px; right: 10px;
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--navy); background: var(--green);
+      padding: 3px 8px; border-radius: 20px;
+    }
+
+    .hero-event {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 28px; padding: 10px 18px;
+      font-size: 0.88rem; color: var(--white); text-decoration: none;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 32px; backdrop-filter: blur(6px);
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .hero-event:hover { border-color: var(--green); background: rgba(0,218,157,0.12); }
+    .hero-event strong { color: var(--green); font-weight: 700; }
+    .hero-event-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0;
+      animation: nm-pulse 1.8s ease-out infinite;
     }
 
     .newest-member-text {
@@ -2447,12 +2474,12 @@
 <body>
 
   <!-- TICKER -->
-  <a href="#agenda" class="ticker-bar">
+  <a href="futureroutes/" class="ticker-bar">
     <div class="ticker-label">News</div>
     <div class="ticker-track">
       <div class="ticker-inner">
-        <span>EFC is at the Farnborough International Airshow — 20–24 July 2026, Farnborough (UK). Come and meet us on-site!&nbsp;&nbsp;·&nbsp;&nbsp;The Beta Demonstration Flights on 29 May were a great success — thank you to all participants at Den Helder Airport and Lelystad Airport!</span>
-        <span>EFC is at the Farnborough International Airshow — 20–24 July 2026, Farnborough (UK). Come and meet us on-site!&nbsp;&nbsp;·&nbsp;&nbsp;The Beta Demonstration Flights on 29 May were a great success — thank you to all participants at Den Helder Airport and Lelystad Airport!</span>
+        <span>Future Routes — 29 October 2026, Amsterdam in Motion: the EFC event where the first electric routes get put on the map. Registration is open!&nbsp;&nbsp;·&nbsp;&nbsp;The Beta Demonstration Flights on 29 May were a great success — thank you to all participants at Den Helder Airport and Lelystad Airport!</span>
+        <span>Future Routes — 29 October 2026, Amsterdam in Motion: the EFC event where the first electric routes get put on the map. Registration is open!&nbsp;&nbsp;·&nbsp;&nbsp;The Beta Demonstration Flights on 29 May were a great success — thank you to all participants at Den Helder Airport and Lelystad Airport!</span>
       </div>
     </div>
   </a>
@@ -2493,6 +2520,11 @@
         <a href="#mission" class="btn btn-primary">Our Mission</a>
         <a href="#join" class="btn btn-ghost" data-join>Join the Network</a>
       </div>
+      <a href="futureroutes/" class="hero-event">
+        <span class="hero-event-dot"></span>
+        <span><strong>Future Routes</strong> · 29 Oct 2026, Amsterdam · Register now</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
     <div class="hero-scroll">scroll<span></span></div>
   </section>
@@ -2523,15 +2555,20 @@
 
     <div class="showcase-grid-wrap section-inner">
       <div class="newest-member reveal">
-        <span class="newest-member-badge">New Member</span>
-        <img class="newest-member-logo" src="images/members/denhelderairport.png" alt="Den Helder Airport">
-        <div class="newest-member-text">We welcome <strong>Den Helder Airport</strong> as our newest member.</div>
-        <span class="newest-member-date">May 2026</span>
+        <span class="newest-member-badge">New Members</span>
+        <span class="newest-member-logos">
+          <img class="newest-member-logo" src="images/members/mdaircraft.svg" alt="MD Aircraft">
+          <img class="newest-member-logo" src="images/members/esmartavia.png" alt="e-Smart Avia">
+        </span>
+        <div class="newest-member-text">We welcome <strong>MD Aircraft</strong> and <strong>e-Smart Avia</strong> as our newest members.</div>
+        <span class="newest-member-date">Sep 2026</span>
       </div>
       <div class="mf-grid">
+        <div class="mf-card mf-new" data-cat="oem">        <img src="images/members/mdaircraft.svg"               alt="MD Aircraft"><span class="mf-cat-tag">OEM</span><span class="mf-new-tag">New</span></div>
         <div class="mf-card" data-cat="oem">        <img src="images/members/elysian.jpg"                  alt="Elysian"><span class="mf-cat-tag">OEM</span></div>
         <div class="mf-card" data-cat="oem">        <img src="images/members/vaeridion.jpg"                alt="VAERIDION"><span class="mf-cat-tag">OEM</span></div>
         <div class="mf-card" data-cat="oem">        <img src="images/members/hangarone.png"                alt="Hangar One"><span class="mf-cat-tag">OEM</span></div>
+        <div class="mf-card mf-new" data-cat="airlines">   <img src="images/members/esmartavia.png"               alt="e-Smart Avia"><span class="mf-cat-tag">Airline</span><span class="mf-new-tag">New</span></div>
         <div class="mf-card" data-cat="airlines">   <img src="images/members/transavia.png"                alt="Transavia"><span class="mf-cat-tag">Airline</span></div>
         <div class="mf-card" data-cat="airlines">   <img src="images/members/vlindair.jpg"                 alt="Vlindair"><span class="mf-cat-tag">Airline</span></div>
         <div class="mf-card" data-cat="startups">   <img src="images/members/eflight.webp"                 alt="eFlight Academy"><span class="mf-cat-tag">Start-up</span></div>
@@ -2592,23 +2629,23 @@
     </div>
     <div class="agenda-list stagger">
 
-      <a href="https://www.farnboroughairshow.com/" target="_blank" rel="noopener" class="agenda-item">
+      <a href="futureroutes/" class="agenda-item">
         <div class="agenda-date">
-          <span class="agenda-day">20–24</span>
-          <span class="agenda-month">Jul 2026</span>
+          <span class="agenda-day">29</span>
+          <span class="agenda-month">Oct 2026</span>
         </div>
         <div class="agenda-body">
-          <span class="agenda-badge">EFC present</span>
-          <h3>Farnborough International Airshow</h3>
+          <span class="agenda-badge">EFC event · registration open</span>
+          <h3>Future Routes: the routes that will make history</h3>
           <div class="agenda-loc">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Farnborough, United Kingdom
+            Amsterdam in Motion, Westergasterrein · 09:00–13:00
           </div>
-          <p>One of the world's leading aerospace events. Find EFC at the <strong>NAG (Netherlands Aerospace Group)</strong> stand to talk electric aviation, membership and the European value chain.</p>
+          <p>One morning above the largest city maquette in the world, mapping the passenger and cargo routes for Europe's first electric connections — with <strong>Transavia</strong>, <strong>Vlindair</strong> and <strong>e-Smart Avia</strong>. Limited seats.</p>
         </div>
         <div class="agenda-logo-slot">
-          <img src="images/fanboroughlogo.webp" alt="Farnborough International Airshow">
-          <img src="images/NAG%20logo.jpg" alt="Netherlands Aerospace Group (NAG)">
+          <img src="images/members/vlindair.jpg" alt="Vlindair">
+          <img src="images/members/esmartavia.png" alt="e-Smart Avia">
         </div>
         <div class="agenda-arrow">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>

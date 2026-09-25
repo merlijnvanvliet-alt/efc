@@ -221,7 +221,7 @@
         <div class="kv-eyebrow"><span class="kv-team">EFC event team ·&nbsp;</span>Future Routes <span class="kv-live"><span class="kv-dot"></span>Live</span></div>
         <h1 class="kv-title">Real-time<br><em>event dashboard</em></h1>
         <p class="kv-sub">The routes that will make history · Thursday 29 October 2026 · Amsterdam in Motion</p>
-        <a class="btn kv-btn" href="/futureroutes/">
+        <a class="btn kv-btn" id="kv-btn" href="/futureroutes/" hidden>
           View the event page
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -306,7 +306,7 @@
 
       if (r.status === 401) {
         try { sessionStorage.removeItem(KEY); } catch (e) {}
-        $('gate').hidden = false; $('dash').hidden = true; $('hdr-actions').hidden = true;
+        $('gate').hidden = false; $('dash').hidden = true; $('hdr-actions').hidden = true; $('kv-btn').hidden = true;
         err.textContent = fromForm ? 'Incorrect password' : '';
         return;
       }
@@ -317,7 +317,7 @@
       }
 
       store(pw);
-      $('gate').hidden = true; $('dash').hidden = false; $('hdr-actions').hidden = false;
+      $('gate').hidden = true; $('dash').hidden = false; $('hdr-actions').hidden = false; $('kv-btn').hidden = false;
       $('alert').hidden = true;
       render(r.data);
       clearInterval(timer);

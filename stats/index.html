@@ -182,9 +182,21 @@
       .hero-num { font-size: 3.2rem; }
       .kpis { grid-template-columns: 1fr 1fr; }
       header img { height: 28px; }
-      .kv { min-height: 360px; background-position: 0 0, 0 0, 70% 0%, 0 0; }
-      .kv-body { padding: 24px 22px; }
+      /* Phone: plane in the top band, text below it on a darkened base.
+         The card is (100vw - 40px) wide; sizes are derived from that. */
+      .kv {
+        display: block; min-height: 0; padding-top: 165px;
+        background:
+          linear-gradient(180deg, rgba(13,11,46,0) 35%, rgba(13,11,46,0.92) 62%),
+          url('/futureroutes/hero-poster.jpg')
+            calc(-0.47 * (100vw - 40px)) calc(100px - 0.735 * (100vw - 40px)) / 150% auto no-repeat,
+          var(--navy);
+      }
+      .kv-body { padding: 0 22px 24px; }
+      .kv-team { display: none; }
+      .kv-eyebrow { gap: 8px; }
       .kv-title { font-size: 2.3rem; }
+      .kv-sub { font-size: 0.85rem; }
     }
   </style>
 </head>
@@ -201,7 +213,7 @@
     <!-- Key visual -->
     <section class="kv">
       <div class="kv-body">
-        <div class="kv-eyebrow">EFC event team · Future Routes <span class="kv-live"><span class="kv-dot"></span>Live</span></div>
+        <div class="kv-eyebrow"><span class="kv-team">EFC event team ·&nbsp;</span>Future Routes <span class="kv-live"><span class="kv-dot"></span>Live</span></div>
         <h1 class="kv-title">Real-time<br><em>event dashboard</em></h1>
         <p class="kv-sub">The routes that will make history · Thursday 29 October 2026 · Amsterdam in Motion</p>
       </div>

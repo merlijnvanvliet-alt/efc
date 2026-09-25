@@ -142,6 +142,11 @@
     .meter { margin-top: 22px; height: 12px; border-radius: 12px; background: rgba(255,255,255,0.08); overflow: hidden; }
     .meter span { display: block; height: 100%; border-radius: 12px; background: var(--green); transition: width 0.6s ease; }
     .meter.full span { background: var(--coral); }
+    .hero-side { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+    .pct { display: flex; align-items: baseline; gap: 8px; }
+    .pct b { font-size: 2.4rem; font-weight: 800; letter-spacing: -1px; line-height: 1; color: var(--green); font-variant-numeric: tabular-nums; }
+    .pct span { font-size: 0.8rem; color: var(--muted); }
+    .pct.full b { color: var(--coral); }
     .meter-lbls { display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.75rem; color: var(--faint); font-variant-numeric: tabular-nums; }
 
     .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
@@ -189,6 +194,8 @@
       .span-7, .span-5 { grid-column: span 12; }
       .hero-num { font-size: 3.2rem; }
       .kpis { grid-template-columns: 1fr 1fr; }
+      .hero-side { align-items: flex-start; }
+      .pct b { font-size: 2rem; }
       header img { height: 28px; }
       /* Phone: plane in the top band, text below it on a darkened base.
          The card is (100vw - 40px) wide; sizes are derived from that. */
@@ -259,7 +266,10 @@
               <div class="hero-num"><span id="count">–</span> <small>/ <span id="cap">70</span></small></div>
               <div class="hero-lbl">unique registrations (one per email address)</div>
             </div>
-            <span class="status open" id="status">Open</span>
+            <div class="hero-side">
+              <div class="pct"><b id="pct">–</b><span>of seats taken</span></div>
+              <span class="status open" id="status">Open</span>
+            </div>
           </div>
           <div class="meter" id="meter" role="progressbar" aria-valuemin="0"><span id="meter-fill" style="width:0"></span></div>
           <div class="meter-lbls"><span>0</span><span id="meter-cap">70</span></div>
@@ -351,6 +361,9 @@
       $('meter').setAttribute('aria-valuemax', d.cap);
       $('meter').setAttribute('aria-valuenow', d.count);
       $('meter-fill').style.width = pct + '%';
+      // Round down so 69/70 never reads as 100%.
+      $('pct').textContent = Math.floor(d.cap ? d.count / d.cap * 100 : 0) + '%';
+      $('pct').parentElement.classList.toggle('full', d.full);
 
       renderChart(d.perDay || []);
 

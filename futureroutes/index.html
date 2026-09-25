@@ -1274,6 +1274,7 @@
           <div class="cd-box"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">days</span></div>
           <div class="cd-box"><span class="cd-num" id="cd-hours">--</span><span class="cd-lbl">hours</span></div>
           <div class="cd-box"><span class="cd-num" id="cd-mins">--</span><span class="cd-lbl">min</span></div>
+          <div class="cd-box"><span class="cd-num" id="cd-secs">--</span><span class="cd-lbl">sec</span></div>
         </div>
 
         <div class="arrival">
@@ -1389,7 +1390,7 @@
           <div class="sched-dot-wrap"><div class="sched-dot"></div></div>
           <div>
             <div class="sched-label">Pressure cooker brainstorm session</div>
-            <div class="sched-by">Facilitated by <b>Roxanne van Rijn</b></div>
+            <div class="sched-by">Moderator <b>to be announced</b></div>
           </div>
         </div>
 
@@ -1777,13 +1778,14 @@
     function tick() {
       const diff = eventStart - new Date();
       const vals = diff <= 0
-        ? ['00', '00', '00']
+        ? ['00', '00', '00', '00']
         : [
             String(Math.floor(diff / 86400000)).padStart(2, '0'),
             String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0'),
-            String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0')
+            String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0'),
+            String(Math.floor((diff % 60000) / 1000)).padStart(2, '0')
           ];
-      ['cd-days', 'cd-hours', 'cd-mins'].forEach((id, i) => {
+      ['cd-days', 'cd-hours', 'cd-mins', 'cd-secs'].forEach((id, i) => {
         const el = document.getElementById(id);
         if (el) el.textContent = vals[i];
       });

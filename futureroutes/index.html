@@ -606,6 +606,17 @@
       min-height: 240px;
     }
 
+    /* ── FULLY BOOKED (shown by the registration cap check) ── */
+    .full-panel {
+      text-align: center;
+      padding: 36px 20px 30px;
+      border: 1px dashed rgba(255,255,255,0.18);
+      border-radius: 14px;
+    }
+    .full-panel[hidden] { display: none; }
+    .full-title { font-size: 1.5rem; font-weight: 800; color: var(--white); letter-spacing: -0.5px; margin-bottom: 10px; }
+    .full-panel p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 22px; }
+
     /* ── PROGRAMME ── */
     #programme {
       background: var(--navy);
@@ -1094,7 +1105,7 @@
 
   <!-- ANNOUNCEMENT BAR -->
   <div class="ann-bar" id="ann-bar">
-    <span><strong>Thursday 29 October 2026</strong> — Amsterdam in Motion, Westergasterrein · limited seats</span>
+    <span><strong>Thursday 29 October 2026</strong> — Amsterdam in Motion, Westergasterrein · <span id="ann-seats">limited seats</span></span>
     <a class="ann-bar-cta" href="#register">
       Register
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1175,9 +1186,9 @@
     <div class="reg-inner">
 
       <div class="reveal-left">
-        <div class="urgency"><span class="pulse"></span> Registration open · limited seats</div>
+        <div class="urgency"><span class="pulse"></span> <span id="urgency-text">Registration open · limited seats</span></div>
         <h2>Be in the <em>room</em></h2>
-        <p class="reg-lead">Amsterdam in Motion holds a limited number of guests, and this morning is where the first electric routes get put on the map. Register now and tell us about any dietary requirements while you are at it.</p>
+        <p class="reg-lead" id="reg-lead">Amsterdam in Motion holds a limited number of guests, and this morning is where the first electric routes get put on the map. Register now and tell us about any dietary requirements while you are at it.</p>
 
         <div class="countdown">
           <div class="cd-box"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">days</span></div>
@@ -1205,7 +1216,15 @@
 
       <div class="reg-card reveal-right">
         <!-- HubSpot registration form (portal 26751098 · eu1) -->
-        <div class="form-panel">
+        <div class="full-panel" id="full-panel" hidden>
+          <div class="full-title">Fully booked</div>
+          <p>All seats at Amsterdam in Motion have been taken. Email Sietse to join the waitlist — if a seat opens up, we will let you know.</p>
+          <button type="button" class="mail-btn" data-mail="c2lldHNlQHZsaW5kYWlyLmV1" data-subject="Waitlist — The routes that will make history (29 October 2026)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Join the waitlist
+          </button>
+        </div>
+        <div class="form-panel" id="form-panel">
           <div class="hs-form-frame" data-region="eu1" data-form-id="62c142a2-4fc1-4182-821d-de28dd85a315" data-portal-id="26751098"></div>
         </div>
 
@@ -1562,10 +1581,37 @@
     // mailto: when someone clicks, so it never sits in the page as plain text.
     document.querySelectorAll('.mail-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const subject = encodeURIComponent('Registration — The routes that will make history (29 October 2026)');
+        const subject = encodeURIComponent(btn.dataset.subject || 'Registration — The routes that will make history (29 October 2026)');
         window.location.href = 'mailto:' + atob(btn.dataset.mail) + '?subject=' + subject;
       });
     });
+
+    // ── REGISTRATION CAP ──
+    // /api/registrations (Vercel function) counts HubSpot registrations.
+    // Once the cap is reached the form makes way for a waitlist; with only a
+    // few seats left the badge says how many. Any failure keeps the form.
+    (function() {
+      fetch('/api/registrations', { cache: 'no-store' })
+        .then(r => r.ok ? r.json() : null)
+        .then(data => {
+          if (!data) return;
+          const urgency = document.getElementById('urgency-text');
+          const ann = document.getElementById('ann-seats');
+          if (data.full) {
+            document.getElementById('form-panel').hidden = true;
+            document.getElementById('full-panel').hidden = false;
+            if (urgency) urgency.textContent = 'Fully booked · waitlist open';
+            if (ann) ann.textContent = 'fully booked';
+            const lead = document.getElementById('reg-lead');
+            if (lead) lead.textContent = 'Amsterdam in Motion holds a limited number of guests, and every seat for this morning has been taken. Join the waitlist and we will let you know if a place opens up.';
+          } else if (typeof data.remaining === 'number' && data.remaining <= 10) {
+            const seats = data.remaining === 1 ? '1 seat left' : data.remaining + ' seats left';
+            if (urgency) urgency.textContent = 'Registration open · only ' + seats;
+            if (ann) ann.textContent = 'only ' + seats;
+          }
+        })
+        .catch(() => {});
+    })();
 
     // ── HERO VIDEO ──
     // Plays the clips in data-clips one after another, fading between them.

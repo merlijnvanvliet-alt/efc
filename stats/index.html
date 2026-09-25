@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Future Routes stats — EFC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:  #00DA9D;
+      --blue:   #00A5FF;
+      --coral:  #FF6B4A;
+      --navy:   #0d0b2e;
+      --card:   rgba(255,255,255,0.04);
+      --line:   rgba(255,255,255,0.1);
+      --text:   rgba(255,255,255,0.92);
+      --muted:  rgba(255,255,255,0.55);
+      --faint:  rgba(255,255,255,0.35);
+    }
+
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 50% 0%, #1a1460 0%, var(--navy) 60%) fixed, var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .wrap { max-width: 980px; margin: 0 auto; padding: 32px 20px 64px; }
+
+    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 36px; }
+    header img { height: 34px; }
+    .hdr-actions { display: flex; align-items: center; gap: 12px; font-size: 0.78rem; color: var(--faint); }
+
+    h1 { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.6px; margin-bottom: 6px; }
+    .sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 28px; }
+
+    .btn {
+      font-family: inherit; font-size: 0.8rem; font-weight: 700;
+      color: var(--navy); background: var(--green); border: 1px solid var(--green);
+      border-radius: 32px; padding: 9px 18px; cursor: pointer;
+    }
+    .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+    .btn.ghost:hover { border-color: var(--green); }
+
+    /* ── Password gate ── */
+    .gate { max-width: 380px; margin: 12vh auto 0; text-align: center; }
+    .gate h1 { font-size: 1.3rem; }
+    .gate form { display: flex; gap: 10px; margin-top: 22px; }
+    .gate input {
+      flex: 1; min-width: 0; font-family: inherit;
+      font-size: 16px; /* 16px stops iOS zooming in on focus */
+      color: var(--text); background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.18); border-radius: 32px;
+      padding: 11px 18px; outline: none;
+    }
+    .gate input:focus { border-color: var(--green); }
+    .gate .err { color: var(--coral); font-size: 0.8rem; font-weight: 600; margin-top: 12px; min-height: 1.2em; }
+
+    /* ── Dashboard ── */
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+      padding: 22px 22px 20px; min-width: 0;
+    }
+    .span-12 { grid-column: span 12; }
+    .span-7  { grid-column: span 7; }
+    .span-5  { grid-column: span 5; }
+    .card h2 {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase;
+      color: var(--faint); margin-bottom: 16px;
+    }
+
+    .hero { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px; }
+    .hero-num { font-size: 4rem; font-weight: 800; letter-spacing: -2px; line-height: 1; font-variant-numeric: tabular-nums; }
+    .hero-num small { font-size: 1.5rem; color: var(--faint); letter-spacing: -0.5px; font-weight: 700; }
+    .hero-lbl { color: var(--muted); font-size: 0.88rem; margin-top: 6px; }
+
+    .status {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase;
+      padding: 7px 14px; border-radius: 32px; border: 1px solid;
+    }
+    .status.open { color: var(--green); border-color: rgba(0,218,157,0.4); background: rgba(0,218,157,0.08); }
+    .status.full { color: var(--coral); border-color: rgba(255,107,74,0.4); background: rgba(255,107,74,0.1); }
+
+    .meter { margin-top: 22px; height: 12px; border-radius: 12px; background: rgba(255,255,255,0.08); overflow: hidden; }
+    .meter span { display: block; height: 100%; border-radius: 12px; background: var(--green); transition: width 0.6s ease; }
+    .meter.full span { background: var(--coral); }
+    .meter-lbls { display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.75rem; color: var(--faint); font-variant-numeric: tabular-nums; }
+
+    .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+    .kpi { border-top: 1px solid var(--line); padding-top: 14px; }
+    .kpi b { display: block; font-size: 1.35rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .kpi span { font-size: 0.75rem; color: var(--muted); }
+
+    /* Per-day bar chart */
+    .chart { position: relative; }
+    .chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .chart .axis { font-size: 10px; fill: var(--faint); }
+    .chart .gridline { stroke: rgba(255,255,255,0.07); stroke-width: 1; }
+    .chart .bar { fill: var(--green); }
+    .chart .hit { fill: transparent; cursor: default; }
+    .chart .hit:hover + .bar, .chart g.active .bar { fill: #5cf0c4; }
+    .tip {
+      position: absolute; pointer-events: none; transform: translate(-50%, -100%);
+      background: #1f1a6b; border: 1px solid var(--line); border-radius: 8px;
+      padding: 6px 10px; font-size: 0.75rem; white-space: nowrap; opacity: 0; transition: opacity 0.12s;
+    }
+    .tip b { font-variant-numeric: tabular-nums; }
+
+    /* Horizontal breakdown bars */
+    .hbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; align-items: center; margin-bottom: 14px; }
+    .hbar-lbl { font-size: 0.85rem; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .hbar-val { font-size: 0.85rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .hbar-track { grid-column: 1 / -1; height: 8px; border-radius: 8px; background: rgba(255,255,255,0.07); }
+    .hbar-track span { display: block; height: 100%; border-radius: 8px; background: var(--blue); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th { text-align: left; font-size: 0.68rem; letter-spacing: 1.2px; text-transform: uppercase; color: var(--faint); font-weight: 700; padding: 0 0 10px; }
+    td { padding: 9px 0; border-top: 1px solid var(--line); }
+    td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+
+    .empty { color: var(--faint); font-size: 0.85rem; }
+    .note { margin-top: 26px; font-size: 0.75rem; color: var(--faint); line-height: 1.6; }
+    .alert { color: var(--coral); font-size: 0.85rem; margin-bottom: 16px; }
+
+    [hidden] { display: none !important; }
+
+    @media (max-width: 760px) {
+      .span-7, .span-5 { grid-column: span 12; }
+      .hero-num { font-size: 3.2rem; }
+      .kpis { grid-template-columns: 1fr 1fr; }
+      header img { height: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a href="/"><img src="/images/01_EFC-logo-diap-RGB.png" alt="Electric Flying Connection"></a>
+      <div class="hdr-actions" id="hdr-actions" hidden>
+        <span id="updated"></span>
+        <button class="btn ghost" id="refresh" type="button">Refresh</button>
+      </div>
+    </header>
+
+    <!-- Password gate: the password is verified by /api/stats, not in this page -->
+    <section class="gate" id="gate">
+      <h1>Future Routes stats</h1>
+      <p class="sub">For the EFC event team.</p>
+      <form id="gate-form">
+        <input type="password" id="pw" placeholder="Password" autocomplete="current-password" autofocus>
+        <button class="btn" type="submit">Open</button>
+      </form>
+      <div class="err" id="gate-err"></div>
+    </section>
+
+    <main id="dash" hidden>
+      <h1>Future Routes registrations</h1>
+      <p class="sub">29 October 2026 · Amsterdam in Motion · refreshes every minute</p>
+      <div class="alert" id="alert" hidden></div>
+
+      <div class="grid">
+        <div class="card span-12">
+          <div class="hero">
+            <div>
+              <div class="hero-num"><span id="count">–</span> <small>/ <span id="cap">70</span></small></div>
+              <div class="hero-lbl">unique registrations (one per email address)</div>
+            </div>
+            <span class="status open" id="status">Open</span>
+          </div>
+          <div class="meter" id="meter" role="progressbar" aria-valuemin="0"><span id="meter-fill" style="width:0"></span></div>
+          <div class="meter-lbls"><span>0</span><span id="meter-cap">70</span></div>
+          <div class="kpis">
+            <div class="kpi"><b id="remaining">–</b><span>seats left</span></div>
+            <div class="kpi"><b id="subs">–</b><span>form submissions (incl. duplicates)</span></div>
+            <div class="kpi"><b id="latest">–</b><span>latest registration</span></div>
+          </div>
+        </div>
+
+        <div class="card span-7">
+          <h2>Registrations per day</h2>
+          <div class="chart" id="chart"><div class="empty">No registrations yet.</div></div>
+        </div>
+
+        <div class="card span-5">
+          <h2>EFC member?</h2>
+          <div id="members"><div class="empty">No answers yet.</div></div>
+        </div>
+
+        <div class="card span-12">
+          <h2>Registrations by organisation</h2>
+          <div id="companies"><div class="empty">No registrations yet.</div></div>
+        </div>
+      </div>
+
+      <p class="note">Names and email addresses are not shown here; find them in HubSpot under the Future Routes form. Seats are capped at <span id="note-cap">70</span>; at the cap the event page swaps the form for a waitlist.</p>
+    </main>
+  </div>
+
+  <script>
+    const KEY = 'efc-stats-pw';
+    const $ = id => document.getElementById(id);
+    let timer;
+
+    function store(pw) { try { sessionStorage.setItem(KEY, pw); } catch (e) {} }
+    function stored() { try { return sessionStorage.getItem(KEY); } catch (e) { return null; } }
+
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const fmtDay = d => new Date(d + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    const fmtTime = ts => new Date(ts).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+
+    async function load(pw) {
+      const res = await fetch('/api/stats', { headers: { 'x-stats-password': pw }, cache: 'no-store' });
+      const data = await res.json().catch(() => ({}));
+      return { status: res.status, data };
+    }
+
+    async function open(pw, fromForm) {
+      const err = $('gate-err');
+      err.textContent = fromForm ? 'Checking…' : '';
+      let r;
+      try { r = await load(pw); } catch (e) { r = { status: 0, data: {} }; }
+
+      if (r.status === 401) {
+        try { sessionStorage.removeItem(KEY); } catch (e) {}
+        $('gate').hidden = false; $('dash').hidden = true; $('hdr-actions').hidden = true;
+        err.textContent = fromForm ? 'Incorrect password' : '';
+        return;
+      }
+      if (r.status !== 200) {
+        if ($('dash').hidden) { err.textContent = r.data.error ? 'Not available: ' + r.data.error : 'Could not reach the stats service.'; }
+        else { $('alert').hidden = false; $('alert').textContent = 'Last refresh failed — showing earlier numbers.'; }
+        return;
+      }
+
+      store(pw);
+      $('gate').hidden = true; $('dash').hidden = false; $('hdr-actions').hidden = false;
+      $('alert').hidden = true;
+      render(r.data);
+      clearInterval(timer);
+      timer = setInterval(() => open(pw, false), 60000);
+    }
+
+    function render(d) {
+      $('count').textContent = d.count;
+      ['cap', 'meter-cap', 'note-cap'].forEach(id => $(id).textContent = d.cap);
+      $('remaining').textContent = d.remaining;
+      $('subs').textContent = d.submissions;
+      $('latest').textContent = d.latest ? fmtTime(d.latest) : '–';
+      $('updated').textContent = 'Updated ' + new Date(d.updated).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+
+      const st = $('status');
+      st.className = 'status ' + (d.full ? 'full' : 'open');
+      st.textContent = (d.full ? '● Fully booked' : '● Registration open') + (d.forced ? ' (manual)' : '');
+
+      const pct = Math.min(100, d.cap ? d.count / d.cap * 100 : 0);
+      $('meter').classList.toggle('full', d.full);
+      $('meter').setAttribute('aria-valuemax', d.cap);
+      $('meter').setAttribute('aria-valuenow', d.count);
+      $('meter-fill').style.width = pct + '%';
+
+      renderChart(d.perDay || []);
+
+      const members = d.members || [];
+      const mMax = Math.max(1, ...members.map(m => m.count));
+      $('members').innerHTML = members.length ? members.map(m => `
+        <div class="hbar">
+          <span class="hbar-lbl">${esc(m.answer)}</span><span class="hbar-val">${m.count}</span>
+          <div class="hbar-track"><span style="width:${m.count / mMax * 100}%"></span></div>
+        </div>`).join('') : '<div class="empty">No answers yet.</div>';
+
+      const companies = d.companies || [];
+      $('companies').innerHTML = companies.length ? `
+        <table><thead><tr><th>Organisation</th><th class="n">Registrations</th></tr></thead><tbody>
+        ${companies.map(c => `<tr><td>${esc(c.name)}</td><td class="n">${c.count}</td></tr>`).join('')}
+        </tbody></table>` : '<div class="empty">No registrations yet.</div>';
+    }
+
+    // Single-series bar chart: one bar per day with registrations, hover tooltip.
+    function renderChart(days) {
+      const el = $('chart');
+      if (!days.length) { el.innerHTML = '<div class="empty">No registrations yet.</div>'; return; }
+
+      const W = 600, H = 200, padL = 26, padB = 22, padT = 8;
+      const max = Math.max(1, ...days.map(d => d.count));
+      const step = max <= 5 ? 1 : Math.ceil(max / 4);
+      const top = Math.ceil(max / step) * step;
+      const plotW = W - padL, plotH = H - padB - padT;
+      const slot = plotW / days.length;
+      const bw = Math.max(3, Math.min(28, slot - 4));
+      const y = v => padT + plotH - v / top * plotH;
+
+      let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Registrations per day">`;
+      for (let v = 0; v <= top; v += step) {
+        svg += `<line class="gridline" x1="${padL}" x2="${W}" y1="${y(v)}" y2="${y(v)}"/>`;
+        svg += `<text class="axis" x="${padL - 6}" y="${y(v) + 3}" text-anchor="end">${v}</text>`;
+      }
+      const labelEvery = Math.ceil(days.length / 8);
+      days.forEach((d, i) => {
+        const cx = padL + slot * i + slot / 2;
+        const h = Math.max(0, y(0) - y(d.count));
+        const r = Math.min(4, bw / 2, h);
+        const x0 = cx - bw / 2, yTop = y(d.count), yBase = y(0);
+        // Bar with 4px rounded top, square on the baseline.
+        const path = `M${x0},${yBase} V${yTop + r} Q${x0},${yTop} ${x0 + r},${yTop} H${x0 + bw - r} Q${x0 + bw},${yTop} ${x0 + bw},${yTop + r} V${yBase} Z`;
+        svg += `<g data-i="${i}"><rect class="hit" x="${padL + slot * i}" y="${padT}" width="${slot}" height="${plotH}"/><path class="bar" d="${path}"/></g>`;
+        if (i % labelEvery === 0) svg += `<text class="axis" x="${cx}" y="${H - 6}" text-anchor="middle">${fmtDay(d.date)}</text>`;
+      });
+      svg += '</svg><div class="tip" id="tip"></div>';
+      el.innerHTML = svg;
+
+      const tip = $('tip'), svgEl = el.querySelector('svg');
+      el.querySelectorAll('g[data-i]').forEach(g => {
+        const d = days[+g.dataset.i];
+        const show = () => {
+          el.querySelectorAll('g.active').forEach(a => a.classList.remove('active'));
+          g.classList.add('active');
+          const box = g.querySelector('.bar').getBoundingClientRect(), host = el.getBoundingClientRect();
+          tip.innerHTML = `${fmtDay(d.date)} · <b>${d.count}</b> registration${d.count === 1 ? '' : 's'}`;
+          tip.style.left = (box.left - host.left + box.width / 2) + 'px';
+          tip.style.top = (box.top - host.top - 6) + 'px';
+          tip.style.opacity = 1;
+        };
+        g.addEventListener('mouseenter', show);
+        g.addEventListener('click', show);
+        g.addEventListener('mouseleave', () => { tip.style.opacity = 0; g.classList.remove('active'); });
+      });
+    }
+
+    $('gate-form').addEventListener('submit', e => { e.preventDefault(); open($('pw').value.trim(), true); });
+    $('refresh').addEventListener('click', () => { const pw = stored(); if (pw) open(pw, false); });
+
+    const saved = stored();
+    if (saved) open(saved, false);
+  </script>
+</body>
+</html>

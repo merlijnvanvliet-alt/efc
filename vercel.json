@@ -1,5 +1,6 @@
 {
   "redirects": [
-    { "source": "/futureroutes", "destination": "/futureroutes/", "permanent": true }
+    { "source": "/futureroutes", "destination": "/futureroutes/", "permanent": true },
+    { "source": "/stats", "destination": "/stats/", "permanent": true }
   ]
 }

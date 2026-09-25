@@ -17,7 +17,6 @@ Static website for Electric Flying Connection (EFC), live at https://www.efc.aer
 - `index.html`: main homepage (long, ~3000 lines). `team.html`: team page.
 - `beta/`: page about the Beta aircraft.
 - `futureroutes/`: event page for "Future Routes" (29 Oct 2026). Notes:
-  - Behind a **client-side password gate**. It compares the SHA-256 of the lowercased, trimmed input with `HASH` in the script and stores `sessionStorage['efc-fr']`. This only keeps the page out of casual view; it is not real security. To change the password, replace the hash.
   - Uses **absolute asset paths** and `?v=N` cache-busting query strings on media. Bump `?v=` when replacing a file under the same name (iOS/social caches are sticky).
   - `?debug` in the URL shows an overlay that finds elements causing horizontal overflow. Mobile/iOS overflow has been a recurring issue here.
   - `og:image` is a `share-card*.jpg` with a `?v=` param. Bump it when changing the share card.

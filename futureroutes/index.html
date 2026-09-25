@@ -606,77 +606,6 @@
       min-height: 240px;
     }
 
-
-    /* ── SIMPLE PASSWORD GATE (client-side only — keeps the page out of
-       casual view, it is not real security) ── */
-    #gate { display: none; }
-
-    html.locked, html.locked body { overflow: hidden; height: 100%; }
-
-    html.locked #gate {
-      display: flex;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: radial-gradient(circle at 50% 30%, #1a1460 0%, #0d0b2e 70%);
-    }
-
-    .gate-card {
-      width: 100%;
-      max-width: 380px;
-      text-align: center;
-    }
-
-    .gate-card img { height: 40px; margin-bottom: 30px; opacity: 0.9; }
-
-    .gate-card h1 {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: -0.4px;
-      margin-bottom: 8px;
-    }
-
-    .gate-card p {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 24px;
-    }
-
-    .gate-form { display: flex; gap: 10px; }
-
-    .gate-form input {
-      flex: 1;
-      font-family: 'Inter', sans-serif;
-      /* Must stay at 16px: iOS Safari zooms the whole page in when a
-         focused input is smaller, and does not zoom back out afterwards. */
-      font-size: 16px;
-      color: var(--white);
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 32px;
-      padding: 12px 20px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .gate-form input:focus { border-color: var(--green); }
-    .gate-form input::placeholder { color: rgba(255,255,255,0.3); }
-
-    .gate-error {
-      margin-top: 14px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--coral);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .gate-error.show { opacity: 1; }
-
     /* ── PROGRAMME ── */
     #programme {
       background: var(--navy);
@@ -1158,30 +1087,10 @@
       footer { padding: 22px 20px; }
     }
   </style>
-  <script>
-    // Lock the page before it paints, unless this browser already unlocked it.
-    if (sessionStorage.getItem('efc-fr') !== 'ok') {
-      document.documentElement.className += ' locked';
-    }
-  </script>
   <!-- HubSpot embed script (EFC portal 26751098, region eu1) -->
   <script src="https://js-eu1.hsforms.net/forms/embed/26751098.js" defer></script>
 </head>
 <body>
-
-  <!-- PASSWORD GATE -->
-  <div id="gate">
-    <div class="gate-card">
-      <img src="/images/01_EFC-logo-diap-RGB.png" alt="Electric Flying Connection">
-      <h1>The routes that will make history</h1>
-      <p>This preview is password protected.</p>
-      <form class="gate-form" id="gate-form">
-        <input type="password" id="gate-input" placeholder="Password" autocomplete="current-password" autofocus>
-        <button type="submit" class="btn btn-primary">Enter</button>
-      </form>
-      <div class="gate-error" id="gate-error">Incorrect password</div>
-    </div>
-  </div>
 
   <!-- ANNOUNCEMENT BAR -->
   <div class="ann-bar" id="ann-bar">
@@ -1590,7 +1499,6 @@
     // Open the page with ?debug on any device to see what, if anything,
     // is sticking out past the right edge.
     if (location.search.includes('debug')) {
-      document.documentElement.classList.remove('locked');
       setTimeout(() => {
         const W = document.documentElement.clientWidth, out = [];
         document.querySelectorAll('*').forEach(el => {
@@ -1612,36 +1520,6 @@
       }, 4000);
     }
 
-    // ── PASSWORD GATE ──
-    // Checks a SHA-256 hash so the password is not sitting in the source.
-    // Client-side only: enough to keep the preview out of casual view,
-    // not a substitute for real access control.
-    (function() {
-      const form = document.getElementById('gate-form');
-      if (!form) return;
-      const HASH = 'fb48b003272e5f0891233870aceeff78038c32e6d6e52e05e477e7d28680450e';
-
-      async function sha256(text) {
-        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-      }
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const input = document.getElementById('gate-input');
-        const error = document.getElementById('gate-error');
-        if (await sha256(input.value.trim().toLowerCase()) === HASH) {
-          sessionStorage.setItem('efc-fr', 'ok');
-          document.documentElement.classList.remove('locked');
-          window.dispatchEvent(new Event('efc-unlocked'));
-        } else {
-          error.classList.add('show');
-          input.value = '';
-          input.focus();
-        }
-      });
-    })();
-
     // ── NAV OFFSET FOR ANNOUNCEMENT BAR ──
     (function() {
       const bar = document.getElementById('ann-bar');
@@ -1654,7 +1532,6 @@
       window.addEventListener('resize', setOffset);
       window.addEventListener('scroll', setOffset, { passive: true });
       window.addEventListener('load', setOffset);
-      window.addEventListener('efc-unlocked', setOffset);
     })();
 
     // ── NAV SCROLL STATE ──
@@ -1692,8 +1569,8 @@
 
     // ── HERO VIDEO ──
     // Plays the clips in data-clips one after another, fading between them.
-    // Autoplay can be refused (behind the gate, iOS Low Power Mode), so it
-    // is retried on unlock, on tab focus and on the first interaction — and
+    // Autoplay can be refused (e.g. iOS Low Power Mode), so it
+    // is retried on tab focus and on the first interaction — and
     // the poster keeps the hero looking right if it never starts.
     (function() {
       const video = document.getElementById('hero-video');
@@ -1740,7 +1617,6 @@
       });
 
       play();
-      window.addEventListener('efc-unlocked', play);
       document.addEventListener('visibilitychange', () => { if (!document.hidden) play(); });
       document.addEventListener('click', play, { once: true });
     })();

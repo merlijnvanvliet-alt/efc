@@ -55,16 +55,18 @@ module.exports = async (req, res) => {
       for (const a of answers) members[a] = (members[a] || 0) + 1;
     }
 
-    // Organisations in order of their first registration.
+    // Organisations, most recent registration first. Each person counts by
+    // their first submission, so a resubmission does not bump the organisation.
     const companies = {};
     for (const r of regs) {
       const c = (r.values.company || '').trim();
       if (!c) continue;
       const email = (r.values.email || '').trim().toLowerCase();
       const first = (email && firstSeen.get(email)) || r.submittedAt;
-      if (!companies[c]) companies[c] = { name: c, count: 0, firstAt: first };
+      if (!companies[c]) companies[c] = { name: c, count: 0, firstAt: first, lastAt: first };
       companies[c].count++;
       if (first < companies[c].firstAt) companies[c].firstAt = first;
+      if (first > companies[c].lastAt) companies[c].lastAt = first;
     }
 
     const count = regs.length;
@@ -78,7 +80,7 @@ module.exports = async (req, res) => {
       latest: submissions.reduce((m, s) => Math.max(m, s.submittedAt || 0), 0) || null,
       perDay,
       members: Object.entries(members).map(([answer, n]) => ({ answer, count: n })).sort((a, b) => b.count - a.count),
-      companies: Object.values(companies).sort((a, b) => (a.firstAt || 0) - (b.firstAt || 0)),
+      companies: Object.values(companies).sort((a, b) => (b.lastAt || 0) - (a.lastAt || 0)),
       updated: Date.now()
     });
   } catch (err) {

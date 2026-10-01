@@ -2,7 +2,7 @@
 // Files starting with "_" are not exposed as routes by Vercel.
 
 const FORM_ID = process.env.HUBSPOT_FORM_ID || '62c142a2-4fc1-4182-821d-de28dd85a315';
-const CAP = parseInt(process.env.REGISTRATION_CAP, 10) || 70;
+const CAP = parseInt(process.env.REGISTRATION_CAP, 10) || 95;
 const FORCE = (process.env.REGISTRATION_FORCE || '').toLowerCase();
 
 // All submissions of the form, newest first, as { submittedAt, values: {name: value} }.

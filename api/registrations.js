@@ -4,7 +4,7 @@
 //
 // Environment variables (Vercel → Project → Settings → Environment Variables):
 //   HUBSPOT_TOKEN       HubSpot private app token with the `forms` scope (required)
-//   REGISTRATION_CAP    number of seats, default 70
+//   REGISTRATION_CAP    number of seats, default 95 (70 + 25 extra seats added 1 Oct 2026)
 //   REGISTRATION_FORCE  optional manual override: "open" or "full"
 //   HUBSPOT_FORM_ID     optional, defaults to the Future Routes form
 

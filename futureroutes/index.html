@@ -168,6 +168,34 @@
       overflow: hidden;
     }
 
+    /* ── EXTRA SEATS STICKER ── */
+    .sticker {
+      position: absolute; z-index: 3;
+      top: 21%; right: 9%;
+      width: 176px; height: 176px; border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; text-decoration: none;
+      color: var(--navy); background: var(--green);
+      border: 3px dashed rgba(13,11,46,0.35); outline: 6px solid var(--green);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+      transform: rotate(9deg);
+      transition: transform 0.25s ease;
+    }
+    .sticker:hover { transform: rotate(4deg) scale(1.05); }
+    .sticker[hidden] { display: none; }
+    .sticker-top { font-size: 0.6rem; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; opacity: 0.75; }
+    .sticker-num { font-size: 3.1rem; font-weight: 800; letter-spacing: -2px; line-height: 1; margin: 2px 0 1px; }
+    .sticker-main { font-size: 1rem; font-weight: 800; letter-spacing: -0.2px; line-height: 1.1; }
+    .sticker-sub { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.4px; margin-top: 4px; opacity: 0.75; }
+    @media (max-width: 760px) {
+      .sticker { top: 78px; right: 20px; width: 112px; height: 112px; outline-width: 4px; border-width: 2px; }
+      #hero .hero-content { padding-top: 214px; }
+      .sticker-top { font-size: 0.46rem; letter-spacing: 1.1px; }
+      .sticker-num { font-size: 2.1rem; letter-spacing: -1.2px; }
+      .sticker-main { font-size: 0.72rem; }
+      .sticker-sub { font-size: 0.46rem; margin-top: 2px; }
+    }
+
     .hero-bg {
       position: absolute;
       inset: 0;
@@ -1109,7 +1137,7 @@
 
   <!-- ANNOUNCEMENT BAR -->
   <div class="ann-bar" id="ann-bar">
-    <span><strong>Thursday 29 October 2026</strong> — Amsterdam in Motion, Westergasterrein · <span id="ann-seats">limited seats</span></span>
+    <span><strong>Thursday 29 October 2026</strong> — Amsterdam in Motion, Westergasterrein · <span id="ann-seats">25 extra seats added</span></span>
     <a class="ann-bar-cta" href="#register">
       Register
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1145,6 +1173,13 @@
              data-clips="/futureroutes/hero-2-paris.mp4?v=4"></video>
     </div>
     <div class="hero-overlay"></div>
+    <!-- Sticker: extra seats released (hidden by the cap check once fully booked) -->
+    <a href="#register" class="sticker" id="sticker" aria-label="25 extra seats added due to high demand — register now">
+      <span class="sticker-top">Just added</span>
+      <span class="sticker-num">+25</span>
+      <span class="sticker-main">extra seats</span>
+      <span class="sticker-sub">due to high demand</span>
+    </a>
     <div class="hero-content">
       <div class="hero-tag">EFC Event · 29 October 2026 · Amsterdam</div>
       <h1>The routes that<br>will make <em>history</em></h1>
@@ -1190,7 +1225,7 @@
     <div class="reg-inner">
 
       <div class="reveal-left">
-        <div class="urgency"><span class="pulse"></span> <span id="urgency-text">Registration open · limited seats</span></div>
+        <div class="urgency"><span class="pulse"></span> <span id="urgency-text">Registration open · 25 extra seats added</span></div>
         <h2>Be in the <em>room</em></h2>
         <p class="reg-lead" id="reg-lead">Amsterdam in Motion holds a limited number of guests, and this morning is where the first electric routes get put on the map. Register now and tell us about any dietary requirements while you are at it.</p>
 
@@ -1607,6 +1642,8 @@
             document.getElementById('full-panel').hidden = false;
             if (urgency) urgency.textContent = 'Fully booked · waitlist open';
             if (ann) ann.textContent = 'fully booked';
+            const sticker = document.getElementById('sticker');
+            if (sticker) sticker.hidden = true;
             const lead = document.getElementById('reg-lead');
             if (lead) lead.textContent = 'Amsterdam in Motion holds a limited number of guests, and every seat for this morning has been taken. Join the waitlist and we will let you know if a place opens up.';
           } else if (typeof data.remaining === 'number' && data.remaining <= 10) {
